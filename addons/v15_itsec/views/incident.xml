@@ -1,0 +1,151 @@
+<odoo>
+  <data>
+
+    <!-- incident_cat -->
+    <record model="ir.ui.view" id="list_incident_cat">
+      <field name="name">incident.incident_cat.tree</field>
+      <field name="model">incident.incident_cat</field>
+      <field name="arch" type="xml">
+        <tree string="Incident Category">
+          <field name="name"      string="Name"/>
+          <field name="description" string="Description"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="incident_cat_window">
+      <field name="name">Incident Category</field>
+      <field name="res_model">incident.incident_cat</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="incident_cat_form">
+        <field name="name">incident.incident_cat.form</field>
+        <field name="model">incident.incident_cat</field>
+        <field name="arch" type="xml">
+            <form >
+                <sheet>
+                    <group col="4">
+                      <field name="name"      string="Name"/>
+                      <field name="description" string="Description"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Incident Report -->
+    <record model="ir.ui.view" id="list_incident">
+      <field name="name">incident.incident.tree</field>
+      <field name="model">incident.incident</field>
+      <field name="arch" type="xml">
+        <tree string="Incident List">
+          <field name="name"          string="No"/>
+          <field name="kpi_what"      string="What"/>
+          <field name="kpi_who"       string="Who"/>
+          <field name="kpi_when"      string="When"/>
+          <field name="kpi_how"       string="How"/>
+          <field name="category"      string="Category"/>
+          <field name="kpi_status"    string="Status"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="incident_window">
+      <field name="name">Incident Report</field>
+      <field name="res_model">incident.incident</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="incident_form">
+        <field name="name">incident.incident.form</field>
+        <field name="model">incident.incident</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="name"          string="No"/>
+                      <field name="kpi_what"      string="What"/>
+                      <field name="kpi_who"       string="Who"/>
+                      <field name="kpi_when"      string="When"/>
+                      <field name="kpi_how"       string="How"/>
+                      <field name="category"      string="Category"/>
+                      <field name="kpi_status"    string="Status"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   <!-- NONCONFORMITIES  -->
+    <record model="ir.ui.view" id="list_audit_nonconform">
+      <field name="name">incident.nonconform.tree</field>
+      <field name="model">incident.nonconform</field>
+      <field name="arch" type="xml">
+        <tree string="Nonconformities List">
+          <field name="nomor"         string="No"/>
+          <field name="tanggal"       string="Date"/>
+          <field name="auditor_id"    string="Initiator"/>
+          <field name="auditee_id"    string="PIC"/>
+          <field name="kategori"      string="Category"/>
+          <field name="kriteria"      string="Criteria"/>
+          <field name="close_date"    string="Closing Date"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="audit_nonconform_window">
+      <field name="name">Nonconformities</field>
+      <field name="res_model">incident.nonconform</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="audit_nonconform_form">
+        <field name="name">incident.nonconform.form</field>
+        <field name="model">incident.nonconform</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="nomor"         string="No"/>
+                      <field name="tanggal"       string="Date"/>
+                      <field name="auditor_id"    string="Initiator / Auditor"/>
+                      <field name="auditee_id"    string="PIC / Auditee"/>
+                      <field name="kategori"      string="Categori"/>
+                      <field name="kriteria"      string="Kriteria"/>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                          <group>
+                            <field name="identifikasi"  string="Identifikasi"/>
+                          </group>
+                        </page>
+                        <page string="Root Cause Analysis">
+                          <group>
+                            <field name="analisa"         string="Root Cause Analysis"/>
+                            <field name="close_date"      string="Closing Date"/>
+                          </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   </data>
+</odoo>

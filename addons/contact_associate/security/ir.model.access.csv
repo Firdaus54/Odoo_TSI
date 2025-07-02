@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_contact,access.res.partner.custom.contact,model_res_partner_custom_contact,base.group_user,1,1,1,1
+access_custom_contacts,access.res.partner.custom.contacts,model_res_partner_custom_contacts,base.group_user,1,1,1,1
+access_custom_contact_wizard,access_custom_contact_wizard,model_custom_contact_wizard,base.group_user,1,1,1,1
+access_custom_contact_wizards,access_custom_contact_wizards,model_custom_contact_wizards,base.group_user,1,1,1,1

@@ -1,0 +1,276 @@
+<odoo>
+  <data>
+
+    <!-- incident -->
+    <record model="ir.actions.act_window" id="act_incident_window">
+      <field name="name">Incident Report</field>
+      <field name="res_model">cis.incident</field>
+      <field name="view_mode">tree,form,pivot,graph</field>
+    </record>
+
+    <record model="ir.ui.view" id="incident_pivot_view">
+        <field name="name">cis.incident.pivot</field>
+        <field name="model">cis.incident</field>
+        <field name="arch" type="xml">
+            <pivot string="incident" disable_linking="True" display_quantity="true">
+                <field name="name"  type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="incident_graph_view">
+        <field name="name">cis.incident.graph</field>
+        <field name="model">cis.incident</field>
+        <field name="arch" type="xml">
+            <graph string="incident" type="pie">
+                <field name="name"  type="row"/>
+                <field name="state" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="incident_tree">
+      <field name="name">cis.incident.tree</field>
+      <field name="model">cis.incident</field>
+      <field name="arch" type="xml">
+        <tree string="Form">
+            <field name="name"/>
+            <field name="description"/>
+            <field name="state"/>
+            <field name="create_uid"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_incident_form">
+        <field name="name">cis.incident.form</field>
+        <field name="model">cis.incident</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>            
+                    <button  name="set_to_process"  states="new"      string="Set to Process" type="object" class="oe_highlight" />
+                    <button  name="set_to_new"    states="process"    string="Reset"          type="object" />
+                    <button  name="set_to_done"   states="process"    string="Set to Done"  type="object" />
+                    <field   name="state" widget="statusbar" statusbar_visible="new,process,done"/>
+                </header>            
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nama incident"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <field name="project_name"/>
+                        <field name="description"/>
+                        <field name='file_bin' class="oe_inline" filename='file_name' widget="image"/>
+                        <field name='file_name' class="oe_inline" invisible='1' />
+                    </group>             
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- job order -->
+    <record model="ir.actions.act_window" id="act_job_order_window">
+      <field name="name">Job Order</field>
+      <field name="res_model">cis.job_order</field>
+      <field name="view_mode">tree,form,pivot,graph</field>
+    </record>
+
+    <record model="ir.ui.view" id="job_order_pivot_view">
+        <field name="name">cis.job_order.pivot</field>
+        <field name="model">cis.job_order</field>
+        <field name="arch" type="xml">
+            <pivot string="job_order" disable_linking="True" display_quantity="true">
+                <field name="name"  type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="job_order_graph_view">
+        <field name="name">cis.job_order.graph</field>
+        <field name="model">cis.job_order</field>
+        <field name="arch" type="xml">
+            <graph string="job_order" type="pie">
+                <field name="name"  type="row"/>
+                <field name="state" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="job_order_tree">
+      <field name="name">cis.job_order.tree</field>
+      <field name="model">cis.job_order</field>
+      <field name="arch" type="xml">
+        <tree string="Form">
+            <field name="name"/>
+            <field name="description"/>
+            <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_job_order_form">
+        <field name="name">cis.job_order.form</field>
+        <field name="model">cis.job_order</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>            
+                    <button  name="set_to_process"  states="new"      string="Set to Process" type="object" class="oe_highlight" />
+                    <button  name="set_to_new"    states="process"    string="Reset"          type="object" />
+                    <button  name="set_to_done"   states="process"    string="Set to Done"  type="object" />
+                    <field   name="state" widget="statusbar" statusbar_visible="new,process,done"/>
+                </header>            
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nama Job Order"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <field name="project_name"/>
+                        <field name="description"/>
+                        <field name='file_bin' class="oe_inline" filename='file_name' widget="image"/>
+                        <field name='file_name' class="oe_inline" invisible='1' />
+                    </group>             
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tapscan -->
+    <record model="ir.actions.act_window" id="act_tapscan_window">
+      <field name="name">Security</field>
+      <field name="res_model">cis.tapscan</field>
+      <field name="view_mode">tree,form,pivot,graph</field>
+    </record>
+
+    <record model="ir.ui.view" id="tapscan_pivot_view">
+        <field name="name">cis.tapscan.pivot</field>
+        <field name="model">cis.tapscan</field>
+        <field name="arch" type="xml">
+            <pivot string="tapscan" disable_linking="True" display_quantity="true">
+                <field name="project_name"  type="row"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="tapscan_graph_view">
+        <field name="name">cis.tapscan.graph</field>
+        <field name="model">cis.tapscan</field>
+        <field name="arch" type="xml">
+            <graph string="tapscan" type="pie">
+                <field name="project_name"  type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="tapscan_tree">
+      <field name="name">cis.tapscan.tree</field>
+      <field name="model">cis.tapscan</field>
+      <field name="arch" type="xml">
+        <tree string="Form">
+            <field name="project_name"/>
+            <field name="object_ssid"/>
+            <field name="description"/>
+            <field name="tap_date"/>
+            <field name="create_uid"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_tapscan_form">
+        <field name="name">cis.tapscan.form</field>
+        <field name="model">cis.tapscan</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                        <field name="project_name"/>
+                        <field name="object_ssid"/>
+                        <field name="tap_date"/>
+                        <field name="description"/>
+                        <field name='file_bin' class="oe_inline" filename='file_name' widget="image"/>
+                        <field name='file_name' class="oe_inline" invisible='1' />
+                    </group>             
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Cleaning -->
+    <record model="ir.actions.act_window" id="act_cleaning_activity_window">
+      <field name="name">Cleaning</field>
+      <field name="res_model">cis.cleaning_activity</field>
+      <field name="view_mode">tree,form,pivot,graph</field>
+    </record>
+
+    <record model="ir.ui.view" id="cleaning_activity_pivot_view">
+        <field name="name">cis.cleaning_activity.pivot</field>
+        <field name="model">cis.cleaning_activity</field>
+        <field name="arch" type="xml">
+            <pivot string="cleaning_activity" disable_linking="True" display_quantity="true">
+                <field name="project_name"  type="row"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="cleaning_activity_graph_view">
+        <field name="name">cis.cleaning_activity.graph</field>
+        <field name="model">cis.cleaning_activity</field>
+        <field name="arch" type="xml">
+            <graph string="cleaning_activity" type="pie">
+                <field name="project_name"  type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="cleaning_activity_tree">
+      <field name="name">cis.cleaning_activity.tree</field>
+      <field name="model">cis.cleaning_activity</field>
+      <field name="arch" type="xml">
+        <tree string="Form">
+            <field name="project_name"/>
+            <field name="activity_id"/>
+            <field name="description"/>
+            <field name="activity_date"/>
+            <field name="create_uid"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_cleaning_activity_form">
+        <field name="name">cis.cleaning_activity.form</field>
+        <field name="model">cis.cleaning_activity</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                        <field name="project_name"/>
+                        <field name="object_ssid"/>
+                        <field name="activity_id"/>
+                        <field name="description"/>
+                        <field name="activity_date"/>
+                        <field name='pic_before'    class="oe_inline" widget="image"/>
+                        <field name='pic_progress'  class="oe_inline" widget="image"/>
+                        <field name='pic_after'     class="oe_inline" widget="image"/>
+                    </group>             
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+  </data>
+</odoo>

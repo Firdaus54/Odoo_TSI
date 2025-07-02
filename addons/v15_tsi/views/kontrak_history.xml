@@ -1,0 +1,266 @@
+<odoo>
+    <data>
+        <!-- tsi.kontrak_history action window -->
+        <record id="tsi_kontrak_history_action" model="ir.actions.act_window">
+            <field name="name">History Kontrak</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.kontrak_history</field>
+            <field name="view_mode">tree,pivot,graph,kanban</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+
+                </p>
+            </field>
+        </record>
+
+        <record id="kontrak_history_view_pivot" model="ir.ui.view">
+            <field name="name">history.kontrak.view.pivot</field>
+            <field name="model">tsi.kontrak_history</field>
+            <field name="arch" type="xml">
+                <pivot string="Pivot">
+                    <!-- Add your fields here -->
+
+                </pivot>
+            </field>
+        </record>
+
+        <record id="kontrak_history_view_kanban" model="ir.ui.view">
+            <field name="name">history.kontrak.view.kanban</field>
+            <field name="model">tsi.kontrak_history</field>
+            <field name="arch" type="xml">
+                <pivot string="Kanban">
+                    <!-- Add your fields here -->
+
+                </pivot>
+            </field>
+        </record>
+
+        <!-- tsi.iso graph view -->
+        <record id="kontrak_history_view_graph" model="ir.ui.view">
+            <field name="name">history.kontrak.view.graph</field>
+            <field name="model">tsi.kontrak_history</field>
+            <field name="arch" type="xml">
+                <graph string="Graph Description">
+                    <!-- Add your fields here -->
+
+                </graph>
+            </field>
+        </record>
+
+        <record id="tsi_kontrak_history_view_search" model="ir.ui.view">
+			<field name="name">tsi.kontrak_history.view.search</field>
+			<field name="model">tsi.kontrak_history</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<search string="History Kontrak Filter">
+					<!-- <field name="nama_klien"/> -->
+                    <field name="partner_id"/>
+					<field name="no_kontrak"/>
+					<field name="sales"/>
+					<field name="associate"/>
+					<field name="status_tahun_aktif"/>
+					<field name="level"/>
+				</search>
+			</field>
+		</record>
+
+        <!-- tsi.kontrak_history tree view -->
+        <record id="tsi_kontrak_history_view_tree" model="ir.ui.view">
+            <field name="name">tsi.kontrak_history.view.tree</field>
+            <field name="model">tsi.kontrak_history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- <field name="nama_klien"/> -->
+                    <field name="partner_id"/>
+                    <field name="no_kontrak" />
+                    <field name="tanggal_kontrak" />
+                    <field name="tahapan_audit_ids" widget="many2many_tags"/>
+                    <!-- <field name="iso_standard_ids" widget="many2many_tags" /> -->
+                    <field name="amount_untaxed" sum="Total Tax Excluded" widget="monetary" optional="hide"/>
+                    <field name="amount_tax" sum="Tax Total" widget="monetary" optional="hide"/>
+                    <field name="amount_total" sum="Total Tax Included" widget="monetary" decoration-bf="1" string="Initial Audit" attrs="{'invisible':[('show_initial', '=', False)]}"/>
+                    <field name="amount_total_s1" sum="Total Tax Included" widget="monetary" decoration-bf="1" attrs="{'invisible':[('show_survilance1', '=', False)]}"/>
+                    <field name="amount_total_s2" sum="Total Tax Included" widget="monetary" decoration-bf="1"  attrs="{'invisible':[('show_survilance2', '=', False)]}"/>
+                    <field name="amount_total_s3" sum="Total Tax Included" widget="monetary" decoration-bf="1"  attrs="{'invisible':[('show_survilance3', '=', False)]}"/>
+                    <field name="amount_total_s4" sum="Total Tax Included" widget="monetary" decoration-bf="1"  attrs="{'invisible':[('show_survilance4', '=', False)]}"/>
+                    <field name="amount_total_re" sum="Total Tax Included" widget="monetary" decoration-bf="1"  attrs="{'invisible':[('show_recertification', '=', False)]}"/>
+                    <!-- <field name="nilai_kontrak" /> -->
+                    <field name="sales" />
+                    <field name="associate" />
+                    <field name="pic" />
+                    <field name="status_tahun_aktif" />
+                    <field name="level" />
+                    <field name="segment" />
+                    <field name="show_initial" attrs="{'invisible':True}" optional="hide"/>
+                    <field name="show_survilance1" attrs="{'invisible':True}" optional="hide"/>
+                    <field name="show_survilance2" attrs="{'invisible':True}" optional="hide"/>
+                    <field name="show_survilance3" attrs="{'invisible':True}" optional="hide"/>
+                    <field name="show_survilance4" attrs="{'invisible':True}" optional="hide"/>
+                    <field name="show_recertification" attrs="{'invisible':True}" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.kontrak_history form view -->
+        <record id="tsi_kontrak_history_view_form" model="ir.ui.view">
+            <field name="name">tsi.kontrak_history.view.form</field>
+            <field name="model">tsi.kontrak_history</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <!-- <field name="nama_klien" /> -->
+                            <field name="partner_id"/>
+                            <field name="partner_id" attrs="{'invisible':True}"/>
+                            <field name="company_id" attrs="{'invisible':True}"/>
+                            <field name="no_kontrak" />
+                            <field name="tanggal_kontrak" />
+                            <field name="tahapan_audit_ids" widget="many2many_tags" />
+                            <!-- <field name="iso_standard_ids" widget="many2many_tags" /> -->
+                            <!-- <field name="nilai_kontrak" /> -->
+                            <field name="level" />
+                            <field name="segment" />
+                            <field name="pic" />
+                            <field name="sales" />
+                            <field name="associate" />
+                            <field name="status_tahun_aktif" />
+                            <field name="show_tahapan" attrs="{'invisible':True}"/>
+                            <field name="show_initial" attrs="{'invisible':True}"/>
+                            <field name="show_survilance1" attrs="{'invisible':True}"/>
+                            <field name="show_survilance2" attrs="{'invisible':True}"/>
+                            <field name="show_survilance3" attrs="{'invisible':True}"/>
+                            <field name="show_survilance4" attrs="{'invisible':True}"/>
+                            <field name="show_recertification" attrs="{'invisible':True}"/>
+                        </group>
+                        <notebook>
+                                <page name="mandays" string="Initial Audit" attrs="{'invisible':[('show_initial', '=', False)]}">
+                                    <group>
+                                        <field name="tahapan_ori_lines" nolabel="1">
+                                            <tree editable="bottom">
+                                                <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                <field name="tanggal_sertifikat"/>
+                                                <field name="mandays" string="Nilai Kontrak"/>
+                                            </tree>
+                                            <form>
+                                                <group>
+                                                    <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat"/>
+                                                <field name="mandays" string="Nilai Kontrak"/>
+                                                </group>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </page>
+                                 <page name="mandays_s1" string="Survilance 1" attrs="{'invisible':[('show_survilance1', '=', False)]}">
+                                    <group>
+                                        <field name="tahapan_ori_lines1" nolabel="1">
+                                            <tree editable="bottom">
+                                                <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat_s1"/>
+                                                <field name="mandays_s1" string="Nilai Kontrak"/>
+                                            </tree>
+                                            <form>
+                                                <group>
+                                                    <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat_s1"/>
+                                                <field name="mandays_s1" string="Nilai Kontrak"/>
+                                                </group>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </page>
+                                 <page name="mandays_s2" string="Survilance 2" attrs="{'invisible':[('show_survilance2', '=', False)]}">
+                                    <group>
+                                        <field name="tahapan_ori_lines2" nolabel="1">
+                                            <tree editable="bottom">
+                                                <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                <field name="tanggal_sertifikat_s2"/>
+                                                <field name="mandays_s2" string="Nilai Kontrak"/>
+                                            </tree>
+                                            <form>
+                                                <group>
+                                                    <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat_s2"/>
+                                                <field name="mandays_s2" string="Nilai Kontrak"/>
+                                                </group>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </page>
+                                <page name="mandays_s3" string="Survilance 3" attrs="{'invisible':[('show_survilance3', '=', False)]}">
+                                    <group>
+                                        <field name="tahapan_ori_lines3" nolabel="1">
+                                            <tree editable="bottom">
+                                                <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat_s3"/>
+                                                <field name="mandays_s3" string="Nilai Kontrak"/>
+                                            </tree>
+                                            <form>
+                                                <group>
+                                                    <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat_s3"/>
+                                                <field name="mandays_s3" string="Nilai Kontrak"/>
+                                                </group>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </page>
+                                <page name="mandays_s4" string="Survilance 4" attrs="{'invisible':[('show_survilance4', '=', False)]}">
+                                    <group>
+                                        <field name="tahapan_ori_lines4" nolabel="1">
+                                            <tree editable="bottom">
+                                                <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat_s4"/>
+                                                <field name="mandays_s4" string="Nilai Kontrak"/>
+                                            </tree>
+                                            <form>
+                                                <group>
+                                                    <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat_s4"/>
+                                                <field name="mandays_s4" string="Nilai Kontrak"/>
+                                                </group>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </page>
+                                <page name="mandays_rs" string="Recertification" attrs="{'invisible':[('show_recertification', '=', False)]}">
+                                    <group>
+                                        <field name="tahapan_ori_lines_re" nolabel="1">
+                                            <tree editable="bottom">
+                                                <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat_rs"/>
+                                                <field name="mandays_rs" string="Nilai Kontrak"/>
+                                            </tree>
+                                            <form>
+                                                <group>
+                                                    <field name="standard"/>
+                                                <field name="accreditation"/>
+                                                 <field name="tanggal_sertifikat_rs"/>
+                                                <field name="mandays_rs" string="Nilai Kontrak"/>
+                                                </group>
+                                            </form>
+                                        </field>
+                                    </group>
+                                </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

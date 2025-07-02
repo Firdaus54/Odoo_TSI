@@ -1,0 +1,944 @@
+<odoo>
+    <data>
+
+        <!-- res.partner inherit form view -->
+        <record id="view_id" model="ir.ui.view">
+            <field name="name">res.partner.inherit.view.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+
+                <button name="action_view_sale_order" position="after">
+
+                    <button class="oe_stat_button" type="object" name="get_iso_review"
+                        string="Audit" icon="fa-dot-circle-o" attrs="{'invisible':['|',('is_company', '=', False),('show_internal_notes', '=', False)]}">
+                    </button>
+                    <button class="oe_stat_button" type="object" name="get_feedback"
+                        string="Feedback" icon="fa-dot-circle-o" attrs="{'invisible':['|',('is_company', '=', False),('show_internal_notes', '=', False)]}">
+                    </button>
+                    
+
+                </button>
+
+                <xpath expr="//form/sheet" position="before">
+                    <header>
+                        <button name="action_valid_partner" string="Valid Klien" type="object" class="oe_highlight"/>
+                        <button name="action_lanjut_partner" string="Lanjut" type="object" class="oe_highlight"/>
+                        <button name="action_lost_partner" string="Lost" type="object" class="oe_highlight"/>
+                        <button name="action_suspen_partner" string="Suspen" type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="belum_valid,sudah_valid"/>
+                    </header>
+                </xpath>
+
+                <!-- <field name="state" position="after">
+                    <field name="state_2" widget='statusbar' options="{'colors': {'draft': 'blue', 'active': 'green', 'suspend': 'red', 'withdrawn': 'grey'}}"/>
+                </field> -->
+                <xpath expr="//page[@name='followup_tab']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='accounting']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='sales_purchases']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//page[@name='internal_notes']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}</attribute>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <field name="show_internal_notes" invisible="1"/>
+                </xpath>
+
+
+                <field name="l10n_id_pkp" position="attributes">
+                <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="type" position="attributes">
+                <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="street" position="attributes">
+                <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="street2" position="attributes">
+                <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="city" position="attributes">
+                <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="state_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="zip" position="attributes">
+                <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="country_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+                </field>
+
+                <field name="vat" position="before">
+                    <field name="office_address" />
+                    <field name="invoice_address" />
+                </field>
+
+                <!-- <field name="name" position="after"><br/>
+                    <field name="customer_id" string="Customer ID"/>
+                </field> -->
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <group>
+                        <field name="nomor_customer" string="Customer ID"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <group>
+                        <field name="status_klien" string="Status Klien"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='mobile']" position="after">
+                    <button icon="fa-whatsapp" style="color:#25D366;border:none" help="Send WhatsApp Message" name="action_send_whatsapp" type="object" attrs="{'invisible': [('mobile', '=', False)]}"/>
+                </xpath>
+
+                <!-- <xpath expr="//sheet" position="inside">
+                    <button name="send_whatsapp_message" string="Send to WhatsApp" data-hotkey="w" icon="fa-whatsapp"/>
+                </xpath> -->
+
+                <field name="website" position="after">
+                    <field name="contact_person" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <field name="jabatan" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                </field>
+
+                <field name="vat" position="after">
+                    <field name="code" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <field name="ea_code_ids" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" widget="many2many_tags" />
+                    <field name="is_associate" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <field name="associate_id" attrs="{'invisible':[('is_associate', '=', False)]}"/>
+                    <field name="is_franchise" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <field name="kategori" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <!-- <field name="scope" attrs="{'invisible': True, ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" /> -->
+                    <field name="boundaries" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <field name="number_site" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <field name="total_emp" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <!-- <field name="mandays" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <field name="tgl_sertifikat" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <field name="harga" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" />
+                    <field name="tahun_masuk" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notes', '=', False)]}" /> -->
+                </field>
+                <field name="category_id" position="replace">
+                    <field name="category_id" string="Segment" widget="many2many_tags" />
+                </field>
+                <field name="category_id" position="after">
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                </field>
+                <field name="category_id" position="after">
+                    <field name="food_category"/>
+                </field>
+                <field name="food_category" position="after">
+                    <button name="action_valid_partner" string="Valid Klien" type="object" class="oe_highlight"/>
+                </field>
+                <notebook position="inside">
+                    <page string="Associates" name="Associates" attrs="{'invisible':['|', ('is_company', '=', False), ('is_company', '=', True)]}">
+                        <field name="associate_lines">
+                            <tree string="Associates">
+                                <field name="associate_id" />
+                                <field name="associate_code" />
+                                <field name="keterangan" />
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="associate_id" />
+                                    <field name="associate_code" />
+                                    <field name="keterangan" />
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="certificate" name="Certificate" attrs="{'invisible':['|',('is_company', '=', False),('show_internal_notes', '=', False)]}">
+                        <field name="certification_lines">
+                            <tree string="Certificate">
+                                <field name="sertifikat_reference" />
+                                <field name="no_sertifikat" />
+                                <field name="tahapan_audit" />
+                                <field name="initial_date" />
+                                <field name="issue_date" />
+                                <field name="validity_date" />
+                                <field name="expiry_date"/>
+                                <field name="scope" />
+                                <field name="boundaries" />
+                                <!-- <field name="state"/> -->
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="sertifikat_reference" />
+                                    <field name="no_sertifikat" />
+                                    <field name="tahapan_audit" />
+                                    <field name="initial_date" />
+                                    <field name="issue_date" />
+                                    <field name="validity_date" />
+                                    <field name="expiry_date"/>
+                                    <field name="scope" />
+                                    <field name="boundaries" />
+                                    <!-- <field name="state"/> -->
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="Tahun Masuk" name="Tahun Masuk" attrs="{'invisible':['|',('is_company', '=', False),('show_internal_notes', '=', False)]}">
+                        <field name="tahun_masuk_lines">
+                            <tree string="Tahun Masuk">
+                                <field name="sertifikat_reference"/>
+                                <field name="iso_standard_ids" widget="many2many_tags"/>
+                                <!-- <field name="issue_date"/> -->
+                                <field name="certification_year"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="sertifikat_reference"/>
+                                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                                    <!-- <field name="issue_date"/> -->
+                                    <field name="certification_year"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+
+                    <page string="Sites" name="Site" attrs="{'invisible':['|',('is_company', '=', False),('show_internal_notes', '=', False)]}">
+                        <field name="site_lines">
+                            <tree string="Sites">
+                                <field name="jenis" />
+                                <field name="alamat" />
+                                <field name="telp" />
+                                <field name="jumlah_karyawan" />
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="jenis" />
+                                    <field name="alamat" />
+                                    <field name="telp" />
+                                    <field name="jumlah_karyawan" />
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="Feedback" name="feedback" attrs="{'invisible':['|',('is_company', '=', False),('show_internal_notes', '=', False)]}">
+                        <field name="feedback_lines">
+                            <tree string="Feedback">
+                                <field name="name" />
+                                <field name="nama_perusahaan" />
+                                <field name="nama_pic" />
+                                <field name="tgl_keluhan" />
+                                <field name="media_keluhan" />
+                                <field name="standar" widget="many2many_tags"/>
+                                <field name="tahap_audit" /> 
+                                <field name="tgl_selesai" /> 
+                                <field name="diterima_oleh" /> 
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <group> 
+                                            <field name="name" />
+                                            <field name="nama_perusahaan" />
+                                            <field name="nama_pic" />
+                                            <field name="email" />
+                                            <field name="telepon" />
+                                            <field name="tgl_keluhan" />
+                                            <field name="media_keluhan" />
+                                        </group>
+                                        <group>
+                                            <field name="jabatan" />
+                                            <field name="standar" widget="many2many_tags"/>
+                                            <field name="alamat" />
+                                            <field name="tahap_audit" /> 
+                                            <field name="tgl_selesai" /> 
+                                            <field name="diterima_oleh" /> 
+                                        </group>
+                                    </group>
+
+                                    <notebook>
+                                        <page string="Deskripsi">
+                                            <group>
+                                                <field name="deskripsi" />
+                                            </group>
+                                        </page>
+                                    </notebook>
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="views_id" model="ir.ui.view">
+            <field name="name">res.partner.inherit.view.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree" />
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="state" widget="badge"/>
+                </field>
+                <field name="state" position="after">
+                    <field name="state_2" widget="badge" decoration-success = "state_2 == 'active'" decoration-danger = "state_2 == 'withdraw'" decoration-info = "state_2 == 'suspend'"/>
+                </field>
+                <field name="state" position="after">
+                    <field name="status_klien" widget="badge"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- tsi.crm tree view -->
+        <record id="tsi_crm_view_tree" model="ir.ui.view">
+            <field name="name">tsi.crm.view.tree</field>
+            <field name="model">tsi.crm</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button name="create_audit" string="Create Audit" type="object" />
+                    </header>
+
+                    <field name="partner_id" />
+                    <field name="contract_number" />
+                    <field name="contract_date" />
+                    <field name="tahapan_audit" />
+                    <field name="iso_standard_ids" widget="many2many_tags" />
+                    <field name="nilai_ia" />
+                    <field name="level" />
+                    <field name="segment" widget="many2many_tags" />
+                    <field name="accreditation" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.crm form view -->
+        <record id="tsi_crm_view_form" model="ir.ui.view">
+            <field name="name">tsi.crm.view.form</field>
+            <field name="model">tsi.crm</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="set_to_lanjut" states="draft" string="Lanjut" type="object"
+                            class="oe_highlight" />
+                        <button name="set_to_lost" states="draft" string="Lost" type="object"
+                            class="oe_highlight" />
+                        <button name="set_to_suspend" states="draft" string="Suspend" type="object"
+                            class="oe_highlight" />
+                        <!-- <button name="generate_sales_order" string="Create Project"
+                        type="object"/> -->
+                        <button name="create_audit" string="Audit Request" states="lanjut"
+                            type="object" />
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="draft,suspend,lost,lanjut" />
+                    </header>
+
+                    <sheet>
+                        <group col="4">
+                            <!-- <field name="partner_id" />
+                            <field name="contract_number"/>
+                            <field name="tahapan_audit"/>
+                            <field name="level"/>
+                            <field name="segment_id" widget="many2many_tags"/>
+                            <field name="nilai_ia"/>
+                            <field name="nilai_sv1"/>
+                            <field name="nilai_sv2"/>
+                            <field name="nilai_recert"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/> -->
+
+                            <field name="partner_id" />
+                            <field name="contract_number" />
+                            <field name="contract_date" />
+                            <field name="sales"/>
+                            <!-- <field name="tahapan_audit"/> -->
+                            <!-- <field name="iso_standard_ids" widget="many2many_tags"/> -->
+                            <!-- <field name="nilai_ia"/> -->
+                            <field name="level" />
+                            <field name="segment" />
+                            <field name="template_kontrak" />
+
+                            <!-- <field name="accreditation"/> -->
+                        </group>
+                        <notebook>
+                            <!-- <page string="Accreditation" name="accreditation">
+                                <field name="crm_accreditation">
+                                    <tree string="Accreditation">
+                                        <field name="iso_standard_ids" widget="many2many_tags" />
+                                        <field name="accreditation" />
+                                        <field name="tahapan_audit" />
+                                        <field name="nilai_ia" />
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="iso_standard_ids" widget="many2many_tags" />
+                                            <field name="accreditation" />
+                                            <field name="tahapan_audit" />
+                                            <field name="nilai_ia" />
+                                        </group>
+                                    </form>
+                                </field>
+                            </page> -->
+                            <page name="Reference" string="Reference">
+                                <group col="4">
+                                    <field name="iso_reference" />
+                                    <field name="sales_reference" />
+                                    <field name="review_reference" widget="many2many_tags" />
+                                </group>
+
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.crm action window -->
+        <record id="tsi_crm_action" model="ir.actions.act_window">
+            <field name="name">TSI CRM</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.crm</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.partner_feedback form view -->
+        <!-- sequence feedback -->
+        <record id="partner_feedback_seq" model="ir.sequence">
+            <field name="name">Partner Feedback</field>
+            <field name="code">seq.partner_feedback</field>
+            <field name="padding">3</field>
+            <field eval="1" name="number_increment" />
+        </record>
+
+        <!-- tsi.partner_feedback tree view -->
+        <record id="tsi_partner_feedback_view_tree" model="ir.ui.view">
+            <field name="name">tsi.partner_feedback.view.tree</field>
+            <field name="model">tsi.partner_feedback</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="nama_pic" />
+                    <field name="nama_perusahaan" />
+                    <field name="tgl_keluhan" />
+                    <field name="media_keluhan" />
+                    <field name="standar" widget="many2many_tags"/>
+                    <field name="tahap_audit" widget="many2many_tags"/> 
+                    <field name="tgl_selesai" /> 
+                    <field name="diterima_oleh" /> 
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.partner_feedback form view -->
+        <record id="tsi_partner_feedback_view_form" model="ir.ui.view">
+            <field name="name">tsi.partner_feedback.view.form</field>
+            <field name="model">tsi.partner_feedback</field>
+            <field name="arch" type="xml">
+                 <form string="Partner Feedback">
+                    <header>
+                        <button name="action_send_mail" type="object" string="Send by Email" class="oe_highlight" icon="fa-envelope"/>
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="name" />
+                            <field name="jabatan" />
+                            <field name="nama_perusahaan" />
+                            <field name="standar" widget="many2many_tags"/>
+                            <field name="nama_pic" />
+                            <field name="alamat" />
+                            <field name="email" />
+                            <field name="tahap_audit" widget="many2many_tags"/> 
+                            <field name="telepon" />
+                            <field name="tgl_selesai" /> 
+                            <field name="tgl_keluhan" />
+                            <field name="diterima_oleh" /> 
+                            <field name="media_keluhan" />
+                        </group>
+
+                        <notebook>
+                            <page string="Deskripsi">
+                                <group>
+                                    <field name="deskripsi" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_tsi_partner_feedback" model="ir.actions.act_window">
+            <field name="name">Partner Feedback</field> 
+            <field name="res_model">tsi.partner_feedback</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- tsi.crm.lanjut tree view -->
+        <record id="tsi_crm_lanjut_view_tree" model="ir.ui.view">
+            <field name="name">tsi.crm.lanjut.view.tree</field>
+            <field name="model">tsi.crm.lanjut</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id" />
+                    <field name="contract_number" />
+                    <field name="contract_date" />
+                    <!-- <field name="tahapan_audit" /> -->
+                    <field name="iso_standard_ids" widget="many2many_tags" />
+                    <field name="segment" widget="many2many_tags" />
+                    <field name="nilai_initial_audit" attrs="{'invisible': [('nilai_initial_audit', '=', False)]}"/>
+                    <field name="nilai_s1" attrs="{'invisible': [('nilai_s1', '=', False)]}"/>
+                    <field name="nilai_s2" attrs="{'invisible': [('nilai_s2', '=', False)]}"/>
+                    <field name="nilai_s3" attrs="{'invisible': [('nilai_s3', '=', False)]}"/>
+                    <field name="nilai_s4" attrs="{'invisible': [('nilai_s4', '=', False)]}"/>
+                    <field name="nilai_recertification" attrs="{'invisible': [('nilai_recertification', '=', False)]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.crm.lanjut form view -->
+        <record id="tsi_crm_lanjut_view_form" model="ir.ui.view">
+            <field name="name">tsi.crm.lanjut.view.form</field>
+            <field name="model">tsi.crm.lanjut</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="partner_id" />
+                            <field name="contract_number" />
+                            <field name="contract_date" />
+                            <field name="level" />
+                            <!-- <field name="iso_standard_ids" widget="many2many_tags" /> -->
+                            <field name="segment" widget="many2many_tags" />
+                            <field name="sales"/>
+                        </group>
+                        <notebook>
+                            <page string="Accreditation" name="accreditation">
+                                    <field name="crm_accreditations">
+                                        <tree string="Accreditation">
+                                            <field name="iso_standard_ids" widget="many2many_tags" />
+                                            <field name="accreditation" />
+                                            <field name="tahapan_audit" />
+                                            <field name="nilai_ia" />
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="iso_standard_ids" widget="many2many_tags" />
+                                                <field name="accreditation" />
+                                                <field name="tahapan_audit" />
+                                                <field name="nilai_ia" />
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.crm.lanjut action view -->
+        <record id="tsi_crm_lanjut_action" model="ir.actions.act_window">
+            <field name="name">CRM Lanjut</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.crm.lanjut</field>
+            <field name="view_mode">tree,form,pivot,graph,kanban</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.crm.lanjut view graph -->
+        <record id="tsi_crm_lanjut_view_graph" model="ir.ui.view">
+            <field name="name">tsi.crm.lanjut.view.graph</field>
+            <field name="model">tsi.crm.lanjut</field>
+            <field name="arch" type="xml">
+                <graph string="CRM Lanjut Analysis">
+                    <!-- ISO 9001 -->
+                    <field name="price_baru_9001" type="measure" />
+                    <field name="price_lama_9001" type="measure" />
+                    <field name="up_value_9001" type="measure" />
+                    <field name="loss_value_9001" type="measure" />
+                    <!-- ISO 14001 -->
+                    <field name="price_baru_14001" type="measure" />
+                    <field name="price_lama_14001" type="measure" />
+                    <field name="up_value_14001" type="measure" />
+                    <field name="loss_value_14001" type="measure" />
+                    <!-- ISO 22000 -->
+                    <field name="price_baru_22000" type="measure" />
+                    <field name="price_lama_22000" type="measure" />
+                    <field name="up_value_22000" type="measure" />
+                    <field name="loss_value_22000" type="measure" />
+                    <!-- ISO 27001 -->
+                    <field name="price_baru_27001" type="measure" />
+                    <field name="price_lama_27001" type="measure" />
+                    <field name="up_value_27001" type="measure" />
+                    <field name="loss_value_27001" type="measure" />
+                    <!-- ISO 45001 -->
+                    <field name="price_baru_45001" type="measure" />
+                    <field name="price_lama_45001" type="measure" />
+                    <field name="up_value_45001" type="measure" />
+                    <field name="loss_value_45001" type="measure" />
+                    <!-- ISO 37001 -->
+                    <field name="price_baru_37001" type="measure" />
+                    <field name="price_lama_37001" type="measure" />
+                    <field name="up_value_37001" type="measure" />
+                    <field name="loss_value_37001" type="measure" />
+                    <!-- ISO 21001 -->
+                    <field name="price_baru_21001" type="measure" />
+                    <field name="price_lama_21001" type="measure" />
+                    <field name="up_value_21001" type="measure" />
+                    <field name="loss_value_21001" type="measure" />
+                    <!-- ISO 13485 -->
+                    <field name="price_baru_13485" type="measure" />
+                    <field name="price_lama_13485" type="measure" />
+                    <field name="up_value_13485" type="measure" />
+                    <field name="loss_value_13485" type="measure" />
+                    <!-- ISO 9994 -->
+                    <field name="price_baru_9994" type="measure" />
+                    <field name="price_lama_9994" type="measure" />
+                    <field name="up_value_9994" type="measure" />
+                    <field name="loss_value_9994" type="measure" />
+                    <!-- ISPO -->
+                    <field name="price_baru_ispo" type="measure" />
+                    <field name="price_lama_ispo" type="measure" />
+                    <field name="up_value_ispo" type="measure" />
+                    <field name="loss_value_ispo" type="measure" />
+                    
+                    <field name="contract_date" type="row" />
+                </graph>
+            </field>
+        </record>
+
+        <!-- tsi.crm.loss tree view -->
+        <record id="tsi_crm_loss_view_tree" model="ir.ui.view">
+            <field name="name">tsi.crm.loss.view.tree</field>
+            <field name="model">tsi.crm.loss</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id" />
+                    <field name="contract_number" />
+                    <field name="contract_date" />
+                    <!-- <field name="tahapan_audit" /> -->
+                    <field name="iso_standard_ids" widget="many2many_tags" />
+                    <field name="segment" widget="many2many_tags" />
+                    <field name="nilai_initial_audit" attrs="{'invisible': [('nilai_initial_audit', '=', False)]}"/>
+                    <field name="nilai_s1" attrs="{'invisible': [('nilai_s1', '=', False)]}"/>
+                    <field name="nilai_s2" attrs="{'invisible': [('nilai_s2', '=', False)]}"/>
+                    <field name="nilai_s3" attrs="{'invisible': [('nilai_s3', '=', False)]}"/>
+                    <field name="nilai_s4" attrs="{'invisible': [('nilai_s4', '=', False)]}"/>
+                    <field name="nilai_recertification" attrs="{'invisible': [('nilai_recertification', '=', False)]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.crm.loss form view -->
+        <record id="tsi_crm_loss_view_form" model="ir.ui.view">
+            <field name="name">tsi.crm.loss.view.form</field>
+            <field name="model">tsi.crm.loss</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="partner_id" />
+                            <field name="contract_number" />
+                            <field name="contract_date" />
+                            <field name="level" />
+                            <!-- <field name="iso_standard_ids" widget="many2many_tags" /> -->
+                            <field name="segment" widget="many2many_tags" />
+                            <field name="sales"/>
+                        </group>
+                        <notebook>
+                            <page string="Accreditation" name="accreditation">
+                                    <field name="crm_accreditations">
+                                        <tree string="Accreditation">
+                                            <field name="iso_standard_ids" widget="many2many_tags" />
+                                            <field name="accreditation" />
+                                            <field name="tahapan_audit" />
+                                            <field name="nilai_ia" />
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="iso_standard_ids" widget="many2many_tags" />
+                                                <field name="accreditation" />
+                                                <field name="tahapan_audit" />
+                                                <field name="nilai_ia" />
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.crm.loss action view -->
+        <record id="tsi_crm_loss_action" model="ir.actions.act_window">
+            <field name="name">CRM Lost</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.crm.loss</field>
+            <field name="view_mode">tree,form,pivot,graph,kanban</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.crm.loss view graph -->
+        <record id="tsi_crm_loss_view_graph" model="ir.ui.view">
+            <field name="name">tsi.crm.loss.view.graph</field>
+            <field name="model">tsi.crm.loss</field>
+            <field name="arch" type="xml">
+                <graph string="CRM Loss Analysis">
+                    <!-- ISO 9001 -->
+                    <field name="price_baru_9001" type="measure" />
+                    <field name="price_lama_9001" type="measure" />
+                    <field name="up_value_9001" type="measure" />
+                    <field name="loss_value_9001" type="measure" />
+                    <!-- ISO 14001 -->
+                    <field name="price_baru_14001" type="measure" />
+                    <field name="price_lama_14001" type="measure" />
+                    <field name="up_value_14001" type="measure" />
+                    <field name="loss_value_14001" type="measure" />
+                    <!-- ISO 22000 -->
+                    <field name="price_baru_22000" type="measure" />
+                    <field name="price_lama_22000" type="measure" />
+                    <field name="up_value_22000" type="measure" />
+                    <field name="loss_value_22000" type="measure" />
+                    <!-- ISO 27001 -->
+                    <field name="price_baru_27001" type="measure" />
+                    <field name="price_lama_27001" type="measure" />
+                    <field name="up_value_27001" type="measure" />
+                    <field name="loss_value_27001" type="measure" />
+                    <!-- ISO 45001 -->
+                    <field name="price_baru_45001" type="measure" />
+                    <field name="price_lama_45001" type="measure" />
+                    <field name="up_value_45001" type="measure" />
+                    <field name="loss_value_45001" type="measure" />
+                    <!-- ISO 37001 -->
+                    <field name="price_baru_37001" type="measure" />
+                    <field name="price_lama_37001" type="measure" />
+                    <field name="up_value_37001" type="measure" />
+                    <field name="loss_value_37001" type="measure" />
+                    <!-- ISO 21001 -->
+                    <field name="price_baru_21001" type="measure" />
+                    <field name="price_lama_21001" type="measure" />
+                    <field name="up_value_21001" type="measure" />
+                    <field name="loss_value_21001" type="measure" />
+                    <!-- ISO 13485 -->
+                    <field name="price_baru_13485" type="measure" />
+                    <field name="price_lama_13485" type="measure" />
+                    <field name="up_value_13485" type="measure" />
+                    <field name="loss_value_13485" type="measure" />
+                    <!-- ISO 9994 -->
+                    <field name="price_baru_9994" type="measure" />
+                    <field name="price_lama_9994" type="measure" />
+                    <field name="up_value_9994" type="measure" />
+                    <field name="loss_value_9994" type="measure" />
+                    <!-- ISPO -->
+                    <field name="price_baru_ispo" type="measure" />
+                    <field name="price_lama_ispo" type="measure" />
+                    <field name="up_value_ispo" type="measure" />
+                    <field name="loss_value_ispo" type="measure" />
+                    
+                    <field name="contract_date" type="row" />
+                </graph>
+            </field>
+        </record>
+
+        <!-- tsi.crm.suspen tree view -->
+        <record id="tsi_crm_suspen_view_tree" model="ir.ui.view">
+            <field name="name">tsi.crm.suspen.view.tree</field>
+            <field name="model">tsi.crm.suspen</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id" />
+                    <field name="contract_number" />
+                    <field name="contract_date" />
+                    <!-- <field name="tahapan_audit" /> -->
+                    <field name="iso_standard_ids" widget="many2many_tags" />
+                    <field name="segment" widget="many2many_tags" />
+                    <field name="nilai_initial_audit" attrs="{'invisible': [('nilai_initial_audit', '=', False)]}"/>
+                    <field name="nilai_s1" attrs="{'invisible': [('nilai_s1', '=', False)]}"/>
+                    <field name="nilai_s2" attrs="{'invisible': [('nilai_s2', '=', False)]}"/>
+                    <field name="nilai_s3" attrs="{'invisible': [('nilai_s3', '=', False)]}"/>
+                    <field name="nilai_s4" attrs="{'invisible': [('nilai_s4', '=', False)]}"/>
+                    <field name="nilai_recertification" attrs="{'invisible': [('nilai_recertification', '=', False)]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.crm.suspen form view -->
+        <record id="tsi_crm_suspen_view_form" model="ir.ui.view">
+            <field name="name">tsi.crm.suspen.view.form</field>
+            <field name="model">tsi.crm.suspen</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="create_lanjut" string="Lanjut" type="object" class="oe_highlight"/>
+                        <button name="create_loss" string="Lost" type="object" />
+                    </header>
+                    <sheet>
+                        <group col="4">
+                            <field name="partner_id" />
+                            <field name="contract_number" />
+                            <field name="contract_date" />
+                            <field name="level" />
+                            <!-- <field name="iso_standard_ids" widget="many2many_tags" /> -->
+                            <field name="segment" widget="many2many_tags" />
+                            <field name="sales"/>
+                        </group>
+                        <notebook>
+                            <page string="Accreditation" name="accreditation">
+                                    <field name="crm_accreditations">
+                                        <tree string="Accreditation">
+                                            <field name="iso_standard_ids" widget="many2many_tags" />
+                                            <field name="accreditation" />
+                                            <field name="tahapan_audit" />
+                                            <field name="nilai_ia" />
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="iso_standard_ids" widget="many2many_tags" />
+                                                <field name="accreditation" />
+                                                <field name="tahapan_audit" />
+                                                <field name="nilai_ia" />
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.crm.suspen action view -->
+        <record id="tsi_crm_suspen_action" model="ir.actions.act_window">
+            <field name="name">CRM Suspen</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.crm.suspen</field>
+            <field name="view_mode">tree,form,pivot,graph,kanban</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.crm.suspen view graph -->
+        <record id="tsi_crm_suspen_view_graph" model="ir.ui.view">
+            <field name="name">tsi.crm.suspen.view.graph</field>
+            <field name="model">tsi.crm.suspen</field>
+            <field name="arch" type="xml">
+                <graph string="CRM Suspen Analysis">
+                    <!-- ISO 9001 -->
+                    <field name="price_baru_9001" type="measure" />
+                    <field name="price_lama_9001" type="measure" />
+                    <field name="up_value_9001" type="measure" />
+                    <field name="loss_value_9001" type="measure" />
+                    <!-- ISO 14001 -->
+                    <field name="price_baru_14001" type="measure" />
+                    <field name="price_lama_14001" type="measure" />
+                    <field name="up_value_14001" type="measure" />
+                    <field name="loss_value_14001" type="measure" />
+                    <!-- ISO 22000 -->
+                    <field name="price_baru_22000" type="measure" />
+                    <field name="price_lama_22000" type="measure" />
+                    <field name="up_value_22000" type="measure" />
+                    <field name="loss_value_22000" type="measure" />
+                    <!-- ISO 27001 -->
+                    <field name="price_baru_27001" type="measure" />
+                    <field name="price_lama_27001" type="measure" />
+                    <field name="up_value_27001" type="measure" />
+                    <field name="loss_value_27001" type="measure" />
+                    <!-- ISO 45001 -->
+                    <field name="price_baru_45001" type="measure" />
+                    <field name="price_lama_45001" type="measure" />
+                    <field name="up_value_45001" type="measure" />
+                    <field name="loss_value_45001" type="measure" />
+                    <!-- ISO 37001 -->
+                    <field name="price_baru_37001" type="measure" />
+                    <field name="price_lama_37001" type="measure" />
+                    <field name="up_value_37001" type="measure" />
+                    <field name="loss_value_37001" type="measure" />
+                    <!-- ISO 21001 -->
+                    <field name="price_baru_21001" type="measure" />
+                    <field name="price_lama_21001" type="measure" />
+                    <field name="up_value_21001" type="measure" />
+                    <field name="loss_value_21001" type="measure" />
+                    <!-- ISO 13485 -->
+                    <field name="price_baru_13485" type="measure" />
+                    <field name="price_lama_13485" type="measure" />
+                    <field name="up_value_13485" type="measure" />
+                    <field name="loss_value_13485" type="measure" />
+                    <!-- ISO 9994 -->
+                    <field name="price_baru_9994" type="measure" />
+                    <field name="price_lama_9994" type="measure" />
+                    <field name="up_value_9994" type="measure" />
+                    <field name="loss_value_9994" type="measure" />
+                    <!-- ISPO -->
+                    <field name="price_baru_ispo" type="measure" />
+                    <field name="price_lama_ispo" type="measure" />
+                    <field name="up_value_ispo" type="measure" />
+                    <field name="loss_value_ispo" type="measure" />
+                    
+                    <field name="contract_date" type="row" />
+                </graph>
+            </field>
+        </record>
+
+        <record id="report_feedbanck_customer" model="ir.actions.report">
+            <field name="name">Report Keluhan Pelanggan</field>
+            <field name="model">tsi.partner_feedback</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.report_feedbanck_customer</field>
+            <field name="report_file">v15_tsi.report_feedbanck_customer</field>
+            <field name="binding_model_id" ref="model_tsi_partner_feedback"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

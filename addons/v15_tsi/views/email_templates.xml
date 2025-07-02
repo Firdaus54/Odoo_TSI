@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="email_template_tsi_partner_feedback" model="mail.template">
+           <field name="name">Partner Feedback Email Template</field>
+           <field name="model_id" ref="model_tsi_partner_feedback"/>
+           <field name="email_from">{{object.email}}</field>
+           <field name="email_to">{{object.email}}</field>
+           <field name="subject">Partner Feedback (Nomor Tiket {{object.name}})</field>
+           <field name="body_html">
+                <![CDATA[
+                <p>Hello,</p>
+                <p>Your feedback with reference number <strong> <t t-out="object.name or ''" contenteditable="false" data-oe-t-inline="true"></t></strong> has been received.</p>
+                <p>Thank you for your input.</p>
+                ]]>
+            </field>
+       </record>
+    </data>
+</odoo>

@@ -1,0 +1,116 @@
+<odoo>
+  <data>
+
+    <!-- Tender -->
+    <record model="ir.actions.act_window" id="act_tender_window">
+      <field name="name">Tender</field>
+      <field name="res_model">tad.tender</field>
+      <field name="view_mode">tree,form,pivot,graph</field>
+    </record>
+
+    <record model="ir.ui.view" id="tender_pivot_view">
+        <field name="name">tad.tender.pivot</field>
+        <field name="model">tad.tender</field>
+        <field name="arch" type="xml">
+            <pivot string="tender" display_quantity="true">
+                <field name="name"  type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="tender_graph_view">
+        <field name="name">tad.tender.graph</field>
+        <field name="model">tad.tender</field>
+        <field name="arch" type="xml">
+            <graph string="tender" type="pie">
+                <field name="name"  type="row"/>
+                <field name="state" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="tender_tree">
+      <field name="name">tad.tender.tree</field>
+      <field name="model">tad.tender</field>
+      <field name="arch" type="xml">
+        <tree string="Form">
+            <field name="name"/>
+            <field name="customer"/>
+            <field name="from_date"/>
+            <field name="to_date"/>
+            <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_tender_form">
+        <field name="name">tad.tender.form</field>
+        <field name="model">tad.tender</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>            
+                    <button  name="set_to_running"  states="draft"      string="Set to Running" type="object" class="oe_highlight" />
+                    <button  name="set_to_draft"    states="running"    string="Reset"          type="object" />
+                    <button  name="set_to_closed"   states="running"    string="Set to Closed"  type="object" />
+                    <field   name="state" widget="statusbar" statusbar_visible="draft,running,closed"/>
+                </header>            
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nama Tender"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <field name="customer"/>
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="pic"/>
+                        <field name="user_contact"/>
+                        <field name="description"/>
+                    </group>
+                    <notebook position="inside">
+                        <page string="Jadwal">
+                            <field name="jadwal_lines">
+                                <tree string="Jadwal">
+                                    <field name="name"/>
+                                    <field name="from_date"/>
+                                    <field name="to_date"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="from_date"/>
+                                        <field name="to_date"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Lampiran">
+                            <field name="lampiran_lines">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name='file_name' class="oe_inline" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name='file_name' class="oe_inline" invisible='1' />
+                                        <field name='file_bin' class="oe_inline" filename='file_name' />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+
+                    </notebook>                     
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+  </data>
+</odoo>

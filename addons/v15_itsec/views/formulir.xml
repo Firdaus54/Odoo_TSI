@@ -1,0 +1,235 @@
+<odoo>
+    <data>
+        <!-- itsec.kehilangan action window -->
+        <record id="itsec_kehilangan_action" model="ir.actions.act_window">
+            <field name="name">Formulir Kehilangan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">itsec.kehilangan</field>
+            <field name="view_mode">tree,form</field>
+            
+        </record>
+
+        <!-- itsec.kehilangan tree view -->
+        <record id="itsec_kehilangan_view_tree" model="ir.ui.view">
+            <field name="name">itsec.kehilangan.view.tree</field>
+            <field name="model">itsec.kehilangan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_no"/>
+                    <field name="nomor"/>
+                    <field name="tanggal"/>
+                    <field name="pegawai"/>
+                    <field name="lokasi"/>                    
+                </tree>
+            </field>
+        </record>
+
+        <!-- itsec.kehilangan form view -->
+        <record id="itsec_kehilangan_view_form" model="ir.ui.view">
+            <field name="name">itsec.kehilangan.view.form</field>
+            <field name="model">itsec.kehilangan</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group col="4">
+                            <field name="doc_no"/>
+                            <field name="rev_no"/>
+                            <field name="nomor"/>
+                            <field name="hari"/>
+                            <field name="tanggal"/>                            
+                        </group>
+                        <group col="4">
+                            <field name="pegawai"/>
+                            <field name="nip"/>
+                            <field name="jabatan"/>
+                            <field name="bagian"/>
+                        </group>
+                        <group col="4">
+                            <field name="saat"/>
+                            <field name="tanggal_event"/>
+                            <field name="pukul"/>
+                            <field name="lokasi"/>
+                            <field name="kondisi"/>
+                        </group>
+                        <group>
+                            <field name="keterangan"/>
+                        </group>
+                        <group col="4">
+                            <field name="kepala_bagian"/>
+                            <field name="kepala_asset"/>
+                            <field name="kepala_admin"/>
+                        </group>
+                        <notebook>
+                            <page string="Asset">
+                                <field name="barang_line">
+                                    <tree editable="bottom">
+                                        <field name="nama"/>
+                                        <field name="nomor"/>
+                                        <field name="merk"/>
+                                        <field name="qty"/>
+                                        <field name="keterangan"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>                    
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- itsec.peminjaman action window -->
+        <record id="itsec_peminjaman_action" model="ir.actions.act_window">
+            <field name="name">Formulir Peminjaman</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">itsec.peminjaman</field>
+            <field name="view_mode">tree,form</field>
+            
+        </record>
+
+        <!-- itsec.peminjaman tree view -->
+        <record id="itsec_peminjaman_view_tree" model="ir.ui.view">
+            <field name="name">itsec.peminjaman.view.tree</field>
+            <field name="model">itsec.peminjaman</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_no"/>
+                    <field name="nomor"/>
+                    <field name="tanggal"/>
+                    <field name="pegawai"/>
+                    <field name="nip"/>                    
+                </tree>
+            </field>
+        </record>
+
+        <!-- itsec.peminjaman form view -->
+        <record id="itsec_peminjaman_view_form" model="ir.ui.view">
+            <field name="name">itsec.peminjaman.view.form</field>
+            <field name="model">itsec.peminjaman</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group col="4">
+                            <field name="doc_no"/>
+                            <field name="rev_no"/>
+                            <field name="nomor"/>
+                            <field name="hari"/>
+                            <field name="tanggal"/>                            
+                        </group>
+                        <group col="4">
+                            <field name="pegawai"/>
+                            <field name="nip"/>
+                        </group>
+                        <group col="4">
+                            <field name="pegawai_2"/>
+                            <field name="nip_2"/>
+                            <field name="bagian_2"/>
+                            <field name="referensi_2"/>
+                        </group>
+                        <group>
+                            <field name="keterangan"/>
+                        </group>
+                        <group col="4">
+                            <field name="kondisi"/>
+                            <field name="kepala_bagian"/>
+                        </group>
+                        <notebook>
+                            <page string="Asset">
+                                <field name="barang_line">
+                                    <tree editable="bottom">
+                                        <field name="nama"/>
+                                        <field name="qty"/>
+                                        <field name="keterangan"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>                    
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- itsec.permintaan action window -->
+        <record id="itsec_permintaan_action" model="ir.actions.act_window">
+            <field name="name">Formulir Permintaan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">itsec.permintaan</field>
+            <field name="view_mode">tree,form</field>
+            
+        </record>
+
+        <!-- itsec.permintaan tree view -->
+        <record id="itsec_permintaan_view_tree" model="ir.ui.view">
+            <field name="name">itsec.permintaan.view.tree</field>
+            <field name="model">itsec.permintaan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="doc_no"/>
+                    <field name="nomor"/>
+                    <field name="tanggal"/>
+                    <field name="pegawai"/>
+                    <field name="bagian"/>                    
+                </tree>
+            </field>
+        </record>
+
+        <!-- itsec.permintaan form view -->
+        <record id="itsec_permintaan_view_form" model="ir.ui.view">
+            <field name="name">itsec.permintaan.view.form</field>
+            <field name="model">itsec.permintaan</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group col="4">
+                            <field name="doc_no"/>
+                            <field name="rev_no"/>
+                            <field name="nomor"/>
+                            <field name="hari"/>
+                            <field name="tanggal"/>                            
+                        </group>
+                        <group col="4">
+                            <field name="pegawai"/>
+                            <field name="nip"/>
+                            <field name="bagian"/>
+                            <field name="nomor_perminta"/>
+                        </group>
+                        <group>
+                            <field name="keterangan"/>
+                        </group>
+                        <group col="4">
+                            <field name="kepala_bagian"/>
+                            <field name="kepala_asset"/>
+                            <field name="kepala_admin"/>
+                        </group>
+                        <notebook>
+                            <page string="Asset">
+                                <field name="barang_line">
+                                    <tree editable="bottom">
+                                        <field name="nama"/>
+                                        <field name="merk"  string="Jenis Asset"/>
+                                        <field name="tanggal"/>
+                                        <field name="untuk"/>
+                                        <field name="keterangan"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>                    
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

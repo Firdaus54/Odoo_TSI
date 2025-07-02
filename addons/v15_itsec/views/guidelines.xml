@@ -1,0 +1,369 @@
+<odoo>
+  <data>
+
+    <!-- MANUAL -->
+    <record model="ir.ui.view" id="itsec_list_manual">
+      <field name="name">itsec.manual.tree</field>
+      <field name="model">itsec.manual</field>
+      <field name="arch" type="xml">
+        <tree string="Manual List">
+          <field name="name"          string="Name"/>
+          <field name="doc_no"        string="Doc No"/>
+          <field name="rev_no"        string="Rev No"/>
+          <field name="description"   string="Description"/>
+          <field name="issued_date"   string="Issued"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_manual_window">
+      <field name="name">Manual</field>
+      <field name="res_model">itsec.manual</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_manual_form">
+        <field name="name">itsec.manual.form</field>
+        <field name="model">itsec.manual</field>
+        <field name="arch" type="xml">
+            <form string="Manual Form">
+                <sheet>
+                    <group>
+                      <field name="name"          string="Name"/>
+                      <field name="doc_no"        string="Doc No"/>
+                      <field name="rev_no"        string="Rev No"/>
+                      <field name="issued_date"   string="Issued"/>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                          <field name="description"   string="Description"/>
+                        </page>
+                        <page string="Upload">
+                          <field name="file_bin"      filename="file_name" string="Upload" />
+                          <field name="file_name"     invisible="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   <!-- COMPANY POLICY  -->
+    <record model="ir.ui.view" id="itsec_list_compolicy">
+      <field name="name">itsec.compolicy.tree</field>
+      <field name="model">itsec.compolicy</field>
+      <field name="arch" type="xml">
+        <tree string="Policy List">
+          <field name="name"          string="Name"/>
+          <field name="doc_no"        string="Doc No"/>
+          <field name="rev_no"        string="Rev No"/>
+          <field name="description"   string="Description"/>
+          <field name="issued_date"   string="Issued"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_policy_window">
+      <field name="name">Policy</field>
+      <field name="res_model">itsec.compolicy</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <record model="ir.ui.view" id="itsec_policy_form">
+        <field name="name">itsec.compolicy.form</field>
+        <field name="model">itsec.compolicy</field>
+        <field name="arch" type="xml">
+            <form string="Compolicy Form">
+                <sheet>
+                    <group>
+                      <field name="name"          string="Name"/>
+                      <field name="doc_no"        string="Doc No"/>
+                      <field name="rev_no"        string="Rev No"/>
+                      <field name="description"   string="Description"/>
+                      <field name="issued_date"   string="Issued"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+   <!-- PROSEDUR  -->
+    <record model="ir.ui.view" id="itsec_list_prosedur">
+      <field name="name">itsec.prosedur.tree</field>
+      <field name="model">itsec.prosedur</field>
+      <field name="arch" type="xml">
+        <tree string="Prosedur List">
+          <field name="name"          string="Name"/>
+          <field name="doc_no"        string="Doc No"/>
+          <field name="rev_no"        string="Rev No"/>
+          <field name="issued_date"   string="Issued"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_prosedur_window">
+      <field name="name">Procedures</field>
+      <field name="res_model">itsec.prosedur</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_prosedur_form">
+        <field name="name">itsec.prosedur.form</field>
+        <field name="model">itsec.prosedur</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="name"          string="Name"/>
+                      <field name="doc_no"        string="Doc No"/>
+                      <field name="rev_no"        string="Rev No"/>
+                      <field name="description"   string="Description"/>
+                      <field name="issued_date"   string="Issued"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   <!-- INSTRUKSI  -->
+    <record model="ir.ui.view" id="itsec_list_instruksi">
+      <field name="name">itsec.instruksi.tree</field>
+      <field name="model">itsec.instruksi</field>
+      <field name="arch" type="xml">
+        <tree string="Prosedur List">
+          <field name="name"          string="Name"/>
+          <field name="doc_no"        string="Doc No"/>
+          <field name="rev_no"        string="Rev No"/>
+          <field name="issued_date"   string="Issued"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_instruksi_window">
+      <field name="name">Working Instruction</field>
+      <field name="res_model">itsec.instruksi</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_instruksi_form">
+        <field name="name">itsec.instruksi.form</field>
+        <field name="model">itsec.instruksi</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="name"          string="Name"/>
+                      <field name="doc_no"        string="Doc No"/>
+                      <field name="rev_no"        string="Rev No"/>
+                      <field name="description"   string="Description"/>
+                      <field name="issued_date"   string="Issued"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   <!-- DRAWING  -->
+    <record model="ir.ui.view" id="itsec_list_drawing">
+      <field name="name">itsec.drawing.tree</field>
+      <field name="model">itsec.drawing</field>
+      <field name="arch" type="xml">
+        <tree string="Drawing List">
+          <field name="name"          string="Name"/>
+          <field name="doc_no"        string="Doc No"/>
+          <field name="rev_no"        string="Rev No"/>
+          <field name="issued_date"   string="Issued"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_drawing_window">
+      <field name="name">Drawing</field>
+      <field name="res_model">itsec.drawing</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_drawing_form">
+        <field name="name">itsec.drawing.form</field>
+        <field name="model">itsec.drawing</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="name"          string="Name"/>
+                      <field name="doc_no"        string="Doc No"/>
+                      <field name="rev_no"        string="Rev No"/>
+                      <field name="description"   string="Description"/>
+                      <field name="issued_date"   string="Issued"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   <!-- STANDARD  -->
+    <record model="ir.ui.view" id="itsec_list_standard">
+      <field name="name">itsec.standard.drawing.tree</field>
+      <field name="model">itsec.standard</field>
+      <field name="arch" type="xml">
+        <tree string="Standard List">
+          <field name="name"          string="Name"/>
+          <field name="doc_no"        string="Doc No"/>
+          <field name="rev_no"        string="Rev No"/>
+          <field name="issued_date"   string="Issued"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_standard_window">
+      <field name="name">Standard</field>
+      <field name="res_model">itsec.standard</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_standard_form">
+        <field name="name">itsec.standard.form</field>
+        <field name="model">itsec.standard</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="name"          string="Name"/>
+                      <field name="doc_no"        string="Doc No"/>
+                      <field name="rev_no"        string="Rev No"/>
+                      <field name="description"   string="Description"/>
+                      <field name="issued_date"   string="Issued"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   <!-- FORM  -->
+    <record model="ir.ui.view" id="itsec_list_form">
+      <field name="name">itsec.form.tree</field>
+      <field name="model">itsec.form</field>
+      <field name="arch" type="xml">
+        <tree string="Form List">
+          <field name="name"          string="Name"/>
+          <field name="doc_no"        string="Doc No"/>
+          <field name="rev_no"        string="Rev No"/>
+          <field name="issued_date"   string="Issued"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_form_window">
+      <field name="name">Form</field>
+      <field name="res_model">itsec.form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="itsec_form_form">
+        <field name="name">itsec.form.form</field>
+        <field name="model">itsec.form</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="name"          string="Name"/>
+                      <field name="doc_no"        string="Doc No"/>
+                      <field name="rev_no"        string="Rev No"/>
+                      <field name="description"   string="Description"/>
+                      <field name="issued_date"   string="Issued"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   <!-- QUALITY PLAN  -->
+    <record model="ir.ui.view" id="itsec_list_quality_plan">
+      <field name="name">itsec.quality_plan.tree</field>
+      <field name="model">itsec.quality_plan</field>
+      <field name="arch" type="xml">
+        <tree string="Quality Plan List">
+          <field name="name"          string="Name"/>
+          <field name="doc_no"        string="Doc No"/>
+          <field name="rev_no"        string="Rev No"/>
+          <field name="issued_date"   string="Issued"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_quality_plan_window">
+      <field name="name">Quality plan</field>
+      <field name="res_model">itsec.quality_plan</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_quality_plan_form">
+        <field name="name">itsec.quality_plan.form</field>
+        <field name="model">itsec.quality_plan</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="name"          string="Name"/>
+                      <field name="doc_no"        string="Doc No"/>
+                      <field name="rev_no"        string="Rev No"/>
+                      <field name="issued_date"   string="Issued"/>
+                      <field name="description"   string="Description"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   </data>
+</odoo>

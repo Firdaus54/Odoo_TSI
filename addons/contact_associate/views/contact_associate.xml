@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Action menu -->
+    <record id="action_custom_contact" model="ir.actions.act_window">
+        <field name="name">Contacts Associate</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" ref="base.res_partner_kanban_view"/>
+        <field name="domain">[('is_company', '=', False)]</field>
+    </record>
+
+    <record id="contact_associate_rule_individual" model="ir.rule">
+        <field name="name">Access for Individual Contacts</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="domain_force">[('is_company', '=', False)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Inherit the contact form view -->
+    <record id="view_contact_form_associate" model="ir.ui.view">
+        <field name="name">contact.form.associate</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <field name="show_internal_notess" invisible="1"/>
+            </xpath>
+
+            <!-- Add custom tab after existing tabs -->
+            <xpath expr="//notebook/page[position()=2]" position="before">
+                <page string="Associate" attrs="{'invisible': ['|',('is_company', '=', False),('show_internal_notess', '=', False)]}">
+                    <button name="open_custom_contact_wizards" type="object" string="Add" class="oe_highlight"/>
+                    <separator string="" colspan="2"/>
+                    <field name="custom_contact_idss" string="" nolabel="1">
+                        <tree editable="bottom" create="false">
+                            <field name="name_associates"/>
+                            <field name="phone_associates"/>
+                            <field name="email_associates"/>
+                            <field name="address_associates"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name_associates"/>
+                                <field name="phone_associates"/>
+                                <field name="email_associates"/>
+                                <field name="address_associates"/>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+                <page string="Company" attrs="{'invisible': [('is_company', '=', True)]}">
+                    <button name="open_custom_contact_wizard" type="object" string="Add" class="oe_highlight"/>
+                    <separator string="" colspan="2"/>
+                    <field name="custom_contact_ids" string="" nolabel="1">
+                        <tree editable="bottom" create="false">
+                            <field name="name_associate"/>
+                            <field name="phone_associate"/>
+                            <field name="email_associate"/>
+                            <field name="address_associate"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name_associate"/>
+                                <field name="phone_associate"/>
+                                <field name="email_associate"/>
+                                <field name="address_associate"/>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Wizard view -->
+    <record id="view_custom_contact_wizard_form" model="ir.ui.view">
+        <field name="name">custom.contact.wizard.form</field>
+        <field name="model">custom.contact.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Company &amp; Address">
+                <group>
+                    <field name="company_id"/>
+                    <field name="phone_associate"/>
+                    <field name="email_associate"/>
+                    <field name="address_associate"/>
+                </group>
+                <footer>
+                    <button string="Save" type="object" name="action_save" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open wizard -->
+    <record id="action_custom_contact_wizard" model="ir.actions.act_window">
+        <field name="name">Add Company &amp; Address</field>
+        <field name="res_model">custom.contact.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Wizard view -->
+    <record id="view_custom_contact_wizard_forms" model="ir.ui.view">
+        <field name="name">custom.contact.wizard.forms</field>
+        <field name="model">custom.contact.wizards</field>
+        <field name="arch" type="xml">
+            <form string="Add Company &amp; Address">
+                <group>
+                    <field name="company_ids"/>
+                    <field name="phone_associates"/>
+                    <field name="email_associates"/>
+                    <field name="address_associates"/>
+                </group>
+                <footer>
+                    <button string="Save" type="object" name="action_saves" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open wizard -->
+    <record id="action_custom_contact_wizards" model="ir.actions.act_window">
+        <field name="name">Add Company &amp; Address</field>
+        <field name="res_model">custom.contact.wizards</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <menuitem id="menu_custom_contact_root" name="Contacts Associate" web_icon="contact_associate,static/description/icon_associate.png" groups="contact_associate.group_contact_associate_admin"/>
+    <menuitem id="menu_custom_contact" name="Contacts Associate" parent="menu_custom_contact_root" action="action_custom_contact"/>
+</odoo>

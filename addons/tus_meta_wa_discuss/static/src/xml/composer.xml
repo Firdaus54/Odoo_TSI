@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template_ext" xml:space="preserve">
+    <t t-name="DiscussExt" t-inherit="mail.Discuss.content" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-if='discuss.threadView']" position="inside">
+            <WaThreadView t-if="messaging and messaging.currentUser and messaging.currentUser.isWhatsappUser and discuss.threadView.thread and discuss.threadView.thread.channel_type == 'chat'" class="o_Discuss_wa_thread" threadViewLocalId="discuss.threadView.localId"/>
+        </xpath>
+    </t>
+</templates>

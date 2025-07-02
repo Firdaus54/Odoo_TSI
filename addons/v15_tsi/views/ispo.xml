@@ -1,0 +1,480 @@
+<odoo>
+    <data>
+
+        <!-- tsi.iso action window -->
+        <!-- <record id="tsi_ispo_action" model="ir.actions.act_window">
+            <field name="name">Application Form</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ispo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('show_ispo','!=','False')]</field>
+        </record> -->
+
+        <record id="tsi_isporeview_action" model="ir.actions.act_window">
+            <field name="name">ISPO Application Review</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.iso.review</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('iso_standard_ids.name', '=', 'ISPO')]</field>
+        </record>
+
+        <record id="tsi_isoreview_action" model="ir.actions.act_window">
+            <field name="name">ISO Application Review</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.iso.review</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('doctype','=','iso')]</field>
+        </record>
+
+        <!-- tsi.ispo action window -->
+        <record id="tsi_ispo_action" model="ir.actions.act_window">
+            <field name="name">Formulir ISPO</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ispo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('iso_standard_ids.name', '=', 'ISPO')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.ispo tree view -->
+        <record id="tsi_ispo_view_tree" model="ir.ui.view">
+            <field name="name">tsi.ispo.view.tree</field>
+            <field name="model">tsi.ispo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                            <button name="create_quotation" string="Create Quotation" type="object" />
+                    </header>
+                    
+                    <field name="name"/>
+                    <field name="customer"/>
+                    <field name="issue_date"/>
+                    <field name="scope"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                    <field name="state"/>
+                    <field name="state_sales" decoration-success="state_sales == 'sale' or state_sales == 'done'" decoration-info="state_sales == 'draft' or state_sales == 'sent'" decoration-danger = "state_sales == 'cancel'" widget="badge" placeholder="New"/>
+                    <field name="audit_status" widget="badge" decoration-muted="audit_status == 'draft'" decoration-info="audit_status == 'program' or audit_status == 'recommendation'" decoration-primary="audit_status == 'plan'" decoration-warning="audit_status == 'report' or audit_status == 'certificate'" decoration-success="audit_status == 'done'"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="tsi_ispo_seq">
+            <field name="name">ispo</field>
+            <field name="code">tsi.ispo</field>
+            <field name="prefix">ISPO</field>
+            <field name="padding">7</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+        <!-- tsi.ispo.filter action window -->
+        <record id="ispo_filter_crm" model="ir.actions.act_window">
+            <field name="name">ISPO</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ispo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'reference': active_id}</field>
+            <field name="domain">[('reference', 'in', [active_id])]</field>
+
+        </record>
+
+
+        <!-- tsi.ispo form view -->
+        <record id="tsi_ispo_view_form" model="ir.ui.view">
+            <field name="name">tsi.ispo.view.form</field>
+            <field name="model">tsi.ispo</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="set_to_running" states="new" string="Send To Verify" type="object" class="oe_highlight" groups="v15_tsi.group_iso_form_admin"/>
+                        <button name="set_to_closed" states="waiting" string="Verifed" type="object" class="oe_highlight" groups="v15_tsi.group_iso_form_manager"/>
+                        <button name="set_to_revice" states="reject" string="Reject" type="object" groups="v15_tsi.group_iso_form_manager"/>
+                        <button name="set_to_draft" states="approved" string="Reset" type="object" />
+                        <!-- <button name="create_open_iso" states="verifikasi" string="Create Review" type="object" /> -->
+                        <!-- <button name="create_open_quotation" string="Create Quotation" type="object" /> -->
+                        <field name="state" widget="statusbar" statusbar_visible="new,review,waiting,verifikasi,reject"/>
+                    </header>
+
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button class="oe_stat_button" type="object" name="get_ispo_review" icon="fa-dot-circle-o">
+                                <field string="Review" name="count_review" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="get_iso_quotation" icon="fa-dot-circle-o">
+                                <field string="Quotation" name="count_quotation" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="get_iso_sales" icon="fa-dot-circle-o">
+                                <field string="Sales" name="count_sales" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" type="object" name="get_iso_invoice" icon="fa-dot-circle-o">
+                                <field string="Invoice" name="count_invoice" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" name="attached_docs_view_action" type="object" icon="fa-files-o">
+                                <field string="Documents" name="doc_count" widget="statinfo"/>
+                            </button>
+
+                        </div>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group col="20" string="Ruang Lingkup Permohonan Sertifikasi">
+                            <field name="sertifikasi_baru" widget='boolean_button'/>
+                            <field name="re_sertifikasi" widget='boolean_button'/>
+                            <field name="perluasan" widget='boolean_button' attrs="{'invisible': [('re_sertifikasi', '=', False)]}"/>
+                            <field name="pengurangan" widget='boolean_button' attrs="{'invisible': [('re_sertifikasi', '=', False)]}"/>
+                            <field name="transfer" widget='boolean_button' attrs="{'invisible': [('re_sertifikasi', '=', False)]}"/>
+                        </group>
+                        <group col="4" string="General Company Information">
+                            <field name="customer" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="office_address" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="invoicing_address" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="contact_person" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="jabatan" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="telepon" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="fax" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="email" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="website" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="doctype" attrs="{'invisible':True}"/>
+                            <field name="show_salesinfo" attrs="{'invisible':True}"/>
+                            <field name="show_ispo" attrs="{'invisible':True}"/>
+                            <button name="update_to_contact" string="Update to Contact" type="object" />
+
+                        </group>
+
+                        <group col="4" string="Scope and Ownership Status">
+                            <field name="scope" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="kepemilikan" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                        </group>
+
+                        <group col="4" string="Management system standard(s)">
+                            <field name="iso_standard_ids" widget="many2many_tags" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="audit_stage" />
+                            <field name="certification" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="accreditation" domain="[('name', '=', 'KAN')]"/>
+                        </group>
+                        <!-- <group string="Please complete information about maturity of  your management system">
+                            <field name="start_implement" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <label for="mat_consultancy" />
+                            <div >
+                                <field name="mat_consultancy" class="oe_inline"/><![CDATA[&nbsp;]]>
+                                <field name="txt_mat_consultancy" attrs="{'invisible': [('mat_consultancy','!=','YES')]}" nolabel="1"/>
+                            </div>
+
+                            <label for="mat_certified" />
+                            <div >
+                                <field name="mat_certified" class="oe_inline"/><![CDATA[&nbsp;]]>
+                                <field name="txt_mat_certified" attrs="{'invisible': [('mat_certified','!=','YES')]}" nolabel="1"/>
+                            </div>
+                        </group> -->
+                        <group string="Informasi Legalitas">
+                            <field name="legalitas_type"/>
+
+                            <!-- Line Kebun -->
+                            <field name="kebun_line_ids" attrs="{'invisible': [('legalitas_type', 'not in', ['kebun', 'integrasi'])]}">
+                                <tree string="Data Kebun">
+                                    <field name="nama_kebun"/>
+                                    <field name="lokasi"/>
+                                    <field name="jumlah_karyawan"/>
+                                    <field name="luas_hgu"/>
+                                    <field name="tahun_tanam"/>
+                                    <field name="keterangan"/>
+                                </tree>
+                                <form string="Data Kebun">
+                                    <group>
+                                        <field name="nama_kebun"/>
+                                        <field name="lokasi"/>
+                                        <field name="jumlah_karyawan"/>
+                                        <field name="luas_hgu"/>
+                                        <field name="tahun_tanam"/>
+                                        <field name="keterangan"/>
+                                    </group>
+                                </form>
+                            </field>
+
+                            <!-- Line Pabrik -->
+                            <field name="pabrik_line_ids" attrs="{'invisible': [('legalitas_type', 'not in', ['pabrik', 'integrasi'])]}">
+                                <tree string="Data Pabrik">
+                                    <field name="nama_pabrik"/>
+                                    <field name="lokasi"/>
+                                    <field name="jumlah_karyawan"/>
+                                    <field name="koordinat_gps"/>
+                                    <field name="kapasitas"/>
+                                    <field name="volume_tahunan"/>
+                                </tree>
+                                <form string="Data Pabrik">
+                                    <group>
+                                        <field name="nama_pabrik"/>
+                                        <field name="lokasi"/>
+                                        <field name="jumlah_karyawan"/>
+                                        <field name="koordinat_gps"/>
+                                        <field name="kapasitas"/>
+                                        <field name="volume_tahunan"/>
+                                    </group>
+                                </form>
+                            </field>
+
+                            <!-- Line Swadaya/Plasma -->
+                            <field name="swadaya_line_ids" attrs="{'invisible': [('legalitas_type', '!=', 'swadaya_plasma')]}">
+                                <tree string="Data Swadaya / Plasma" editable="bottom">
+                                    <field name="nama_kebun"/>
+                                    <field name="lokasi"/>
+                                    <field name="total_area"/>
+                                    <field name="area_tertanam"/>
+                                    <field name="produksi_tbs"/>
+                                    <field name="koordinat_gps"/>
+                                </tree>
+                                <form string="Data Swadaya / Plasma">
+                                    <group>
+                                        <field name="nama_kebun"/>
+                                        <field name="lokasi"/>
+                                        <field name="total_area"/>
+                                        <field name="area_tertanam"/>
+                                        <field name="produksi_tbs"/>
+                                        <field name="koordinat_gps"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group>
+                            <!-- Field untuk Integrasi -->
+                            <group string="Integrasi" attrs="{'invisible': [('legalitas_type', '!=', 'integrasi')]}">
+                                <field name="izin_lokasi"/>
+                                <field name="risalah_panitia"/>
+                                <field name="apl"/>
+                                <field name="sk_hgu" />
+                                <field name="hgu" />
+                                <field name="sk_hgb" />
+                                <field name="hgb" />
+                                <field name="iup"/>
+                                <field name="pup"/>
+                                <field name="izin_lingkungan_integrasi"/>
+                                <field name="lahan_gambut"/>
+                                <field name="peta_ids" widget="many2many_tags"/>
+                                <field name="luas_lahan"/>
+                                <field name="kapasitas_pabrik"/>
+                                <field name="jlh_pabrik"/>
+                                <field name="jlh_kebun"/>
+                            </group>
+
+                            <!-- Field untuk Kebun -->
+                            <group string="Kebun" attrs="{'invisible': [('legalitas_type', '!=', 'kebun')]}">
+                                <field name="izin_lokasi"/>
+                                <field name="risalah_panitia_kebun"/>
+                                <field name="apl_kebun"/>
+                                <field name="sk_hgu_kebun" />
+                                <field name="hgu_kebun" />
+                                <field name="iupb"/>
+                                <field name="informasi_plasma_kebun"/>
+                                <field name="pup_kebun"/>
+                                <field name="izin_lingkungan_kebun"/>
+                                <field name="lahan_gambut"/>
+                                <field name="peta_ids" widget="many2many_tags"/>
+                                <field name="luas_lahan"/>
+                                <field name="jumlah_kebun"/>
+                            </group>
+
+                            <!-- Field untuk Pabrik -->
+                            <group string="Pabrik" attrs="{'invisible': [('legalitas_type', '!=', 'pabrik')]}">
+                                <field name="izin_lokasi"/>
+                                <field name="risalah_panitia_pabrik"/>
+                                <field name="apl_pabrik"/>
+                                <field name="sk_hgb_pabrik" />
+                                <field name="hgb_pabrik" />
+                                <field name="iup_pabrik"/>
+                                <field name="sumber_bahan_baku"/>
+                                <field name="kapasitas_pabrik_pabrik"/>
+                                <field name="izin_lingkungan_pabrik"/>
+                                <field name="lahan_gambut"/>
+                                <field name="peta_ids" widget="many2many_tags"/>
+                                <field name="luas_lahan"/>
+                                <field name="jumlah_pabrik"/>
+                            </group>
+
+                            <!-- Field untuk Swadaya/Plasma -->
+                            <group string="Swadaya/Plasma" attrs="{'invisible': [('legalitas_type', '!=', 'swadaya_plasma')]}">
+                                <field name="izin_lokasi"/>
+                                <field name="shm"/>
+                                <field name="stdb"/>
+                                <field name="sppl"/>
+                                <field name="akta_pendirian"/>
+                                <field name="luas_lahan"/>
+                                <field name="jlh_kebun_plasma"/>
+                                <field name="jlh_anggota"/>
+                                <field name="apl"/>
+                                <field name="lahan_gambut"/>
+                                <field name="peta_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="salesinfo_site_ispo">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="surveilance_3"/>
+                                    <field name="surveilance_4"/>
+                                    <field name="surveilance_5"/>
+                                    <field name="recertification_1"/>
+                                    <field name="recertification_2"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/><field name="surveilance_3"/>
+                                        <field name="surveilance_4"/>
+                                        <field name="recertification_1"/>
+                                        <field name="recertification_2"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <!-- <group col="4" string="Sertifikat" attrs="{'invisible':[('show_ispo', '=', False)]}">
+                            <field name="sertifikat_ispo"/>
+                        </group> -->
+
+
+                        <group string="Informasi Tambahan" attrs="{'invisible':[('show_ispo', '=', False)]}">
+                            <field name="start_implement" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="add_nama_perusahaan"/>
+                            <field name="add_sertifikasi"/>
+                            <!-- <field name="add_auditor"/> -->
+                        </group>
+
+                        <group col="10" string="Auditor Internal" attrs="{'invisible':[('show_ispo', '=', False)]}">
+                            <div class="row">
+                                <!-- Audit PT -->
+                                <div class="col-4">
+                                    <label for="audit_pt">Audit Per PT 2 Orang</label>
+                                    <field name="audit_pt" widget="boolean_button"/>
+
+                                    <div attrs="{'invisible': [('audit_pt', '=', False)]}">
+                                        <label for="nama_audit_pt">Nama Auditor PT</label>
+                                        <field name="nama_audit_pt"/>
+                                    </div>
+                                </div>
+
+                                <!-- Audit Group -->
+                                <div class="col-4">
+                                    <label for="audit_pt" string="Audit Per Group 5 Orang"/>
+                                    <field name="audit_group" widget="boolean_button"/>
+                                </div>
+
+                                <!-- ICS -->
+                                <div class="col-4">
+                                    <label for="ics">ICS untuk Plasma/Swadaya"</label>
+                                    <field name="ics" widget="boolean_button"/>
+
+                                    <div attrs="{'invisible': [('ics', '=', False)]}">
+                                        <label for="nama_ics">Nama ICS / Auditor Swadaya</label>
+                                        <field name="nama_ics"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </group>
+
+                        <group col="4" string="Declaration" attrs="{'invisible':[('show_ispo', '=', False)]}">
+                            <field name="sales_person" widget="many2one_avatar_user"/>
+                            <field name="user_id" domain="[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]" optional="show" widget="many2one_avatar_user"/>
+                            <field name="company_id" attrs="{'invisible':True}"/>
+                        </group>
+                        <notebook position="inside">
+                            <page name="ispo_sertifikat" string="Sertifikat" attrs="{'invisible': [('audit_stage', 'not in', ['transfer_surveilance', 'transfer_recert'])]}">
+                                <group>
+                                    <field name="ispo_sertifikat" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="nomor"/>
+                                            <field name="uplad_sertifikat" filename="file_name"/>
+                                            <field name="file_name"   invisible="1"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="nomor"/>
+                                                <field name="uplad_sertifikat" filename="file_name"/>
+                                                <field name="file_name"   invisible="1"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page name="initial" string="Initial Purpose Price" groups="v15_tsi.group_menu_line_initial">
+                                <group>
+                                    <field name="lines_initial" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="product_id"/>
+                                            <field name="audit_stage"/>
+                                            <field name="tahun"/>
+                                            <field name="price"/>
+                                            <!-- <field name="tax_id" widget="many2many_tags"/> -->
+                                            <field name="fee"/>
+                                            <field name="percentage" widget="percentage"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="audit_stage"/>
+                                                <field name="tahun"/>
+                                                <field name="price"/>
+                                                <!-- <field name="tax_id" widget="many2many_tags"/> -->
+                                                <field name="fee"/>
+                                                <field name="percentage" widget="percentage"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page name="surveillance" string="Surveillance Purpose Price" groups="v15_tsi.group_menu_line_surveillance">
+                                <group>
+                                    <field name="lines_surveillance" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="audit_stage_ispo"/>
+                                            <field name="tahun"/>
+                                            <field name="price"/>
+                                            <!-- <field name="tax_id" widget="many2many_tags"/> -->
+                                            <field name="fee"/>
+                                            <field name="percentage" widget="percentage"/>
+                                            <!-- <field name="hidden_in_review" attrs="{'invisible':True}"/> -->
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="audit_stage_ispo"/>
+                                                <field name="tahun"/>
+                                                <field name="price"/>
+                                                <!-- <field name="tax_id" widget="many2many_tags"/> -->
+                                                <field name="fee"/>
+                                                <field name="percentage" widget="percentage"/>
+                                                <!-- <field name="hidden_in_review" attrs="{'invisible':True}"/> -->
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

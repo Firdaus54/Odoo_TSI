@@ -1,0 +1,137 @@
+<odoo>
+  <data>
+
+    <!-- Notulen -->
+    <record model="ir.ui.view" id="list_notulen">
+      <field name="name">mgt.notulen.tree</field>
+      <field name="model">mgt.notulen</field>
+      <field name="arch" type="xml">
+        <tree string="Notulen List">
+          <field name="nomor"   string="No"/>
+          <field name="tanggal" string="Date"/>
+          <field name="agenda"  string="Agenda"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="notulen_window">
+      <field name="name">Notulen</field>
+      <field name="res_model">mgt.notulen</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="notulen_form">
+        <field name="name">mgt.notulen.form</field>
+        <field name="model">mgt.notulen</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="nomor"     string="No"/>
+                      <field name="tanggal"   string="Date"/>
+                      <field name="agenda"    string="Agenda"/>
+                      <field name="file_bin"  filename="file_name"/>
+                      <field name="file_name" invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Management Report -->
+    <record model="ir.ui.view" id="list_mgtreport">
+      <field name="name">mgt.mgtreport.tree</field>
+      <field name="model">mgt.mgtreport</field>
+      <field name="arch" type="xml">
+        <tree string="Management Report List">
+          <field name="period"      string="Periode"/>
+          <field name="date_review" string="Date"/>
+          <field name="qms_input"   string="Input"/>
+          <field name="qms_output"  string="Output"/>
+          <field name="status"      string="Status"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="mgtreport_window">
+      <field name="name">Report</field>
+      <field name="res_model">mgt.mgtreport</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="mgtreport_form">
+        <field name="name">mgt.mgtreport.form</field>
+        <field name="model">mgt.mgtreport</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="period"          string="Periode"/>
+                      <field name="date_review"     string="Date"/>
+                      <field name="qms_input"       string="Input"/>
+                      <field name="qms_output"      string="Output"/>
+                      <field name="status"          string="Status"/>
+                      <field name="recommendation"  string="Recommendation"/>
+                      <field name="file_bin"  filename="file_name"/>
+                      <field name="file_name" invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!-- Undangan -->
+    <record model="ir.ui.view" id="list_undangan">
+      <field name="name">mgt.undangan.tree</field>
+      <field name="model">mgt.undangan</field>
+      <field name="arch" type="xml">
+        <tree string="Undangan List">
+          <field name="nomor"     string="No"/>
+          <field name="tanggal"   string="Date"/>
+          <field name="waktu"     string="Time"/>
+          <field name="att_list"  string="Attendance"/>
+          <field name="att_email" string="Email"/>
+          <field name="location"  string="Location"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="undangan_window">
+      <field name="name">Invitation</field>
+      <field name="res_model">mgt.undangan</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="undangan_form">
+        <field name="name">mgt.undangan.form</field>
+        <field name="model">mgt.undangan</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="nomor"     string="No"/>
+                      <field name="tanggal"   string="Date"/>
+                      <field name="waktu"     string="Time"/>
+                      <field name="att_list"  string="Attendance" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                      <field name="att_email" string="Email"/>
+                      <field name="location"  string="Location"/>
+                      <field name="agenda"    string="Agenda"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   </data>
+</odoo>

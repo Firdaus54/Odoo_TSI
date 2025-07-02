@@ -1,0 +1,49 @@
+<odoo>
+
+	<record id="tsi_wizard_quotation_view" model="ir.ui.view">
+		<field name="name">Create Quotation</field>
+		<field name="model">tsi.wizard_quotation</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="partner_id"/>
+					<field name="doctype"/>
+					<field name="iso_standard_ids" widget="many2many_tags"/>
+					<field name="apprev_ids" widget="many2many_list" readonly="1">
+						<tree string="Documents">
+							<field name="name"/>
+							<field name="customer"/>
+							<field name="iso_standard_ids"	widget="many2many_tags"/>
+							<field name="state"/>
+						</tree>
+					</field>
+					<field name="initial_ids" widget="many2many_list" readonly="1">
+						<tree string="Lines Initial">
+							<field name="product_id"/>
+							<field name="audit_stage"/>
+							<field name="tahun"/>
+							<field name="price"/>
+							<field name="fee"/>
+							<field name="percentage"/>
+						</tree>
+					</field>
+					<field name="surveillance_ids" widget="many2many_list" readonly="1">
+						<tree string="Lines Surveillance">
+							<field name="audit_stage"/>
+							<field name="tahun"/>
+							<field name="price"/>
+							<field name="fee"/>
+							<field name="percentage"/>
+						</tree>
+					</field>
+				</group>
+				<footer>
+					<button name="send" string="Confirm" class="btn-primary" type="object" />
+					<button string="Cancel" class="btn-secondary" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+</odoo>

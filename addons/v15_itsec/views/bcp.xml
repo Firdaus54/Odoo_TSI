@@ -1,0 +1,304 @@
+<odoo>
+  <data>
+
+    <!-- Emergency  -->
+    <record model="ir.ui.view" id="list_emergency">
+     <field name="name">bcp.emergency.tree</field>
+     <field name="model">bcp.emergency</field>
+     <field name="arch" type="xml">
+       <tree string="Jobdesc List">
+         <field name="dep_name"      string="Department"/>
+         <field name="job_position"  string="Position"/>
+         <field name="doc_no"        string="Doc No"/>
+         <field name="rev_no"        string="Revision"/>
+         <field name="issued_date"   string="Issued"/>
+       </tree>
+     </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="emergency_window">
+     <field name="name">Emergency</field>
+     <field name="res_model">bcp.emergency</field>
+     <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="emergency_form">
+       <field name="name">bcp.emergency.form</field>
+       <field name="model">bcp.emergency</field>
+       <field name="arch" type="xml">
+           <form string="Form">
+               <sheet>
+                   <group col="4">
+                     <field name="dep_name"        string="Department"/>
+                     <field name="job_position"    string="Job Position"/>
+                     <field name="responsibility"  string="Responsibility"/>
+                     <field name="authority"       string="Authority"/>
+                     <field name="doc_no"          string="Document No"/>
+                     <field name="rev_no"          string="Revision No"/>
+                     <field name="issued_date"     string="Issued Date"/>
+                     <field name="file_bin"        filename="file_name"/>
+                     <field name="file_name"       invisible="1"/>
+                   </group>
+               </sheet>
+               <div class="oe_chatter">
+                   <field name="message_follower_ids" widget="mail_followers"/>
+                   <field name="message_ids" widget="mail_thread"/>
+               </div>
+           </form>
+       </field>
+     </record>
+
+     <!-- Emergency Number  -->
+     <record model="ir.ui.view" id="list_emergency_number">
+      <field name="name">bcp.emergency_number.tree</field>
+      <field name="model">bcp.emergency_number</field>
+      <field name="arch" type="xml">
+        <tree string="Jobdesc List">
+          <field name="name"        string="Name"/>
+          <field name="address"     string="Address"/>
+          <field name="position"    string="Position"/>
+          <field name="number"      string="Phone Number"/>
+          <field name="alt_number"  string="Alt Number"/>
+        </tree>
+      </field>
+     </record>
+
+     <record model="ir.actions.act_window" id="emergency_number_window">
+      <field name="name">Emergency Number</field>
+      <field name="res_model">bcp.emergency_number</field>
+      <field name="view_mode">tree,form</field>
+     </record>
+
+     <record model="ir.ui.view" id="emergency_number_form">
+        <field name="name">bcp.emergency_number.form</field>
+        <field name="model">bcp.emergency_number</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="name"        string="Name"/>
+                      <field name="address"     string="Address"/>
+                      <field name="position"    string="Position"/>
+                      <field name="number"      string="Phone Number"/>
+                      <field name="alt_number"  string="Alt Number"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+      </record>
+
+     <!-- Emergency Tools  -->
+     <record model="ir.ui.view" id="list_emergency_tools">
+      <field name="name">bcp.emergency_tools.tree</field>
+      <field name="model">bcp.emergency_tools</field>
+      <field name="arch" type="xml">
+        <tree string="Jobdesc List">
+          <field name="name"        string="Name"/>
+          <field name="asset_no"    string="Address"/>
+          <field name="description" string="Position"/>
+        </tree>
+      </field>
+     </record>
+
+     <record model="ir.actions.act_window" id="emergency_tools_window">
+      <field name="name">Emergency Tools</field>
+      <field name="res_model">bcp.emergency_tools</field>
+      <field name="view_mode">tree,form</field>
+     </record>
+
+     <record model="ir.ui.view" id="emergency_tools_form">
+        <field name="name">bcp.emergency_tools.form</field>
+        <field name="model">bcp.emergency_tools</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="name"        string="Name"/>
+                      <field name="asset_no"    string="Asset No"/>
+                      <field name="description" string="Description"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+      </record>
+
+     <!-- Emergency Drill Plan  -->
+     <record model="ir.ui.view" id="list_emergency_drill_plan">
+      <field name="name">bcp.emergency_drill_plan.tree</field>
+      <field name="model">bcp.emergency_drill_plan</field>
+      <field name="arch" type="xml">
+        <tree string="Jobdesc List">
+          <field name="name"    string="Name"/>
+          <field name="doc_no"  string="Document No"/>
+          <field name="rev_no"  string="Revision No"/>
+        </tree>
+      </field>
+     </record>
+
+     <record model="ir.actions.act_window" id="emergency_drill_plan_window">
+      <field name="name">Emergency Drill Plan</field>
+      <field name="res_model">bcp.emergency_drill_plan</field>
+      <field name="view_mode">tree,form</field>
+     </record>
+
+     <record model="ir.ui.view" id="emergency_drill_plan_form">
+        <field name="name">bcp.emergency_drill_plan.form</field>
+        <field name="model">bcp.emergency_drill_plan</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="name"        string="Name"/>
+                      <field name="doc_no"      string="Document No"/>
+                      <field name="rev_no"      string="Revision No"/>
+                      <field name="description" string="Description"/>
+                      <field name="file_bin"  filename="file_name"/>
+                      <field name="file_name" invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+      </record>
+
+      <!-- Emergency Drill Evaluation  -->
+      <record model="ir.ui.view" id="list_emergency_drill_eval">
+       <field name="name">bcp.emergency_drill_eval.tree</field>
+       <field name="model">bcp.emergency_drill_eval</field>
+       <field name="arch" type="xml">
+         <tree string="Jobdesc List">
+           <field name="name"    string="Name"/>
+           <field name="doc_no"  string="Document No"/>
+           <field name="rev_no"  string="Revision No"/>
+           <field name="status"    string="Status"/>
+         </tree>
+       </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="emergency_drill_eval_window">
+       <field name="name">Emergency Drill Evaluation</field>
+       <field name="res_model">bcp.emergency_drill_eval</field>
+       <field name="view_mode">tree,form</field>
+      </record>
+
+      <record model="ir.ui.view" id="emergency_drill_eval_form">
+         <field name="name">bcp.emergency_drill_eval.form</field>
+         <field name="model">bcp.emergency_drill_eval</field>
+         <field name="arch" type="xml">
+             <form string="Form">
+                 <sheet>
+                     <group col="4">
+                       <field name="name"        string="Name"/>
+                       <field name="doc_no"      string="Document No"/>
+                       <field name="rev_no"      string="Revision No"/>
+                       <field name="description" string="Description"/>
+                       <field name="file_bin"  filename="file_name"/>
+                       <field name="file_name" invisible="1"/>
+                       <field name="status"    string="Status"/>
+                     </group>
+                 </sheet>
+                 <div class="oe_chatter">
+                     <field name="message_follower_ids" widget="mail_followers"/>
+                     <field name="message_ids" widget="mail_thread"/>
+                 </div>
+             </form>
+         </field>
+       </record>
+
+       <!-- Emergency Drill Scenario  -->
+       <record model="ir.ui.view" id="list_emergency_drill_sec">
+        <field name="name">bcp.drill_scenario.tree</field>
+        <field name="model">bcp.drill_scenario</field>
+        <field name="arch" type="xml">
+          <tree string="Jobdesc List">
+            <field name="name"    string="Name"/>
+            <field name="doc_no"  string="Document No"/>
+            <field name="rev_no"  string="Revision No"/>
+          </tree>
+        </field>
+       </record>
+
+       <record model="ir.actions.act_window" id="emergency_drill_sec_window">
+        <field name="name">Emergency Drill Scenario</field>
+        <field name="res_model">bcp.drill_scenario</field>
+        <field name="view_mode">tree,form</field>
+       </record>
+
+       <record model="ir.ui.view" id="emergency_drill_sec_form">
+          <field name="name">bcp.drill_scenario.form</field>
+          <field name="model">bcp.drill_scenario</field>
+          <field name="arch" type="xml">
+              <form string="Form">
+                  <sheet>
+                      <group col="4">
+                        <field name="name"        string="Name"/>
+                        <field name="doc_no"      string="Document No"/>
+                        <field name="rev_no"      string="Revision No"/>
+                        <field name="description" string="Description"/>
+                        <field name="file_bin"  filename="file_name"/>
+                        <field name="file_name" invisible="1"/>
+                      </group>
+                  </sheet>
+                  <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                  </div>
+              </form>
+          </field>
+        </record>
+
+      <!-- Recovery Plan  -->
+      <record model="ir.ui.view" id="list_recovery_plan">
+       <field name="name">bcp.recovery_plan.tree</field>
+       <field name="model">bcp.recovery_plan</field>
+       <field name="arch" type="xml">
+         <tree>
+           <field name="name"    string="Name"/>
+           <field name="doc_no"  string="Document No"/>
+           <field name="rev_no"  string="Revision No"/>
+         </tree>
+       </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="recovery_plan_window">
+       <field name="name">Recovery Plan</field>
+       <field name="res_model">bcp.recovery_plan</field>
+       <field name="view_mode">tree,form</field>
+      </record>
+
+      <record model="ir.ui.view" id="recovery_plan_form">
+         <field name="name">bcp.recovery_plan.form</field>
+         <field name="model">bcp.recovery_plan</field>
+         <field name="arch" type="xml">
+             <form string="Form">
+                 <sheet>
+                     <group col="4">
+                       <field name="name"        string="Name"/>
+                       <field name="doc_no"      string="Document No"/>
+                       <field name="rev_no"      string="Revision No"/>
+                       <field name="description" string="Description"/>
+                       <field name="file_bin"  filename="file_name"/>
+                       <field name="file_name" invisible="1"/>
+                     </group>
+                 </sheet>
+                 <div class="oe_chatter">
+                     <field name="message_follower_ids" widget="mail_followers"/>
+                     <field name="message_ids" widget="mail_thread"/>
+                 </div>
+             </form>
+         </field>
+       </record>
+
+   </data>
+</odoo>

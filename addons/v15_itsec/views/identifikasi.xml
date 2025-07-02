@@ -1,0 +1,71 @@
+<odoo>
+  <data>
+    <!-- RISK REGISTER -->
+    <record model="ir.ui.view" id="ident_identifikasi_tree">
+      <field name="name">ident.identifikasi.tree</field>
+      <field name="model">ident.identifikasi</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nomor_dokumen"/>
+          <field name="nomor_revisi"/>
+          <field name="berlaku_mulai"/>
+          <field name="tahun"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ident_identifikasi_action">
+      <field name="name">Identifikasi dan Evaluasi</field>
+      <field name="res_model">ident.identifikasi</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="ident_identifikasi_form">
+        <field name="name">ident.identifikasi.form</field>
+        <field name="model">ident.identifikasi</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                        <field name="nomor_dokumen"/>
+                        <field name="nomor_revisi"/>
+                        <field name="berlaku_mulai"/>
+                        <field name="tahun"/>
+                    </group>
+                    <notebook>
+                        <page string="Identifikasi">
+                            <field name="ident_line">
+                                <tree>
+                                    <field name="peraturan"/>
+                                    <field name="tentang"/>
+                                    <field name="fungsi_terkait"/>
+                                    <field name="kepatuhan"/>
+                                    <field name="tindak_lanjut"/>
+                                </tree>
+                                <form>
+                                    <group col="4" string="Identifikasi">
+                                        <field name="peraturan"/>
+                                        <field name="tentang"/>
+                                    </group>
+                                    <group col="4" string="Hasil Evaluasi">
+                                        <field name="fungsi_terkait"/>
+                                        <field name="kepatuhan"/>
+                                        <field name="tindak_lanjut"/>
+                                    </group>
+                                </form>
+
+                            </field>
+                        </page>
+                    </notebook>                    
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>    
+
+
+  </data>
+</odoo>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payroll_hr_employee_view_form" model="ir.ui.view">
+        <field name="name">payroll.hr.employee.view.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="%(om_hr_payroll.act_hr_employee_payslip_list)d" class="oe_stat_button"
+                        icon="fa-money" type="action" string="Payslip">
+                    <field name="payslip_count" widget="statinfo"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='birthday']" position="attributes">
+                <attribute name="string">Tanggal Lahir</attribute>
+            </xpath>
+            <xpath expr="//field[@name='gender']" position="attributes">
+                <attribute name="string">Jenis Kelamin</attribute>
+            </xpath>
+            <xpath expr="//field[@name='place_of_birth']" position="attributes">
+                <attribute name="string">Tempat Lahir</attribute>
+            </xpath>
+            <xpath expr="//field[@name='marital']" position="attributes">
+                <attribute name="string">Status Pernikahan</attribute>
+            </xpath>
+            <xpath expr="//field[@name='emergency_contact']" position="attributes">
+                <attribute name="string">Kontak Darurat</attribute>
+            </xpath>
+            <xpath expr="//field[@name='emergency_phone']" position="attributes">
+                <attribute name="string">Nomor Darurat</attribute>
+            </xpath>
+            <xpath expr="//field[@name='study_field']" position="attributes">
+                <attribute name="string">Bidang Studi</attribute>
+            </xpath>
+            <xpath expr="//field[@name='study_school']" position="attributes">
+                <attribute name="string">Tempat Pendidikan</attribute>
+            </xpath>
+            <xpath expr="//field[@name='children']" position="attributes">
+                <attribute name="string">Jumlah Anak</attribute>
+            </xpath>
+            <xpath expr="//field[@name='country_id']" position="attributes">
+                <attribute name="string">Negara</attribute>
+            </xpath>
+            <xpath expr="//field[@name='identification_id']" position="attributes">
+                <attribute name="string">No KTP</attribute>
+            </xpath>
+            <xpath expr="//field[@name='job_title']" position="after">
+                    <group>
+                        <field name="nip" string="NIP" required="1"/>
+                        <!-- <field name="auditor" string="Auditor"/> -->
+                    </group>
+            </xpath>
+            <field name="mobile_phone" position="after">
+                    <field name="phone_wa" widget="phone"/>
+            </field>
+            <xpath expr="//page[@name='personal_information']/group/group[field[@name='certificate']]" position="after">
+                <group string="Medsos">
+                    <field name="linkedin"/>
+                    <field name="linkedin_url" widget="url" readonly="1"/>
+                    <field name="instagram_username"/>
+                    <field name="instagram_url" widget="url" readonly="1"/>
+                    <field name="facebook_username"/>
+                    <field name="facebook_url" widget="url" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <menuitem id="menu_payroll_employee"
+              name="Employees"
+              parent="om_hr_payroll.menu_hr_payroll_root"
+              sequence="15"/>
+
+    <menuitem id="menu_hr_employee"
+              name="Employees"
+              action="hr.open_view_employee_list_my"
+              parent="menu_payroll_employee"
+              sequence="10"/>
+
+    <menuitem id="hr_menu_contract"
+              name="Contracts"
+              action="hr_contract.action_hr_contract"
+              parent="menu_payroll_employee"
+              sequence="20"
+              groups="hr_contract.group_hr_contract_manager"/>
+
+
+</odoo>

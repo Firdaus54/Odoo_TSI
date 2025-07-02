@@ -1,0 +1,118 @@
+<odoo>
+    <data>
+
+        <!-- ops.review form view -->
+        <record id="ops_review_ispo_view_form" model="ir.ui.view">
+            <field name="name">ops.review.ispo.view.form</field>
+            <field name="model">ops.review.ispo</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="set_to_confirm" states="new" string="Approve" type="object" class="oe_highlight" />
+                        <button name="set_to_reject" states="new" string="Reject" type="object" class="oe_highlight" />
+                        <button name="set_to_done" states="approve" string="Done" type="object" class="oe_highlight"/>
+                        <button name="set_to_draft" states="reject" string="Reset" type="object" />
+                        <!-- <button name="audit_recomendation" string="Report Audit Recomendation" type="object" class="btn-primary"/> -->
+                        <!-- <button string="Download Attachment" type="object" icon="fa-download" name="download_attachment"/> -->
+                        <field name="state" widget="statusbar" statusbar_visible="new,approve,reject,done"/>
+                    </header>                
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="report_id"/>
+                            <field name="nama_customer"/>
+                            <field name="ispo_reference"/>
+                            <field name="dokumen_sosialisasi" filename="file_name1" widget="binary"/>
+                            <field name="file_name1"   invisible="1"/>
+                            <field name="upload_dokumen" filename="file_name2" widget="binary"/>
+                            <field name="file_name2"   invisible="1"/>
+                            <field name="criteria"/>
+                        </group>
+
+                        <notebook>
+                            <page name="review_summary" string="Details">
+                                <group>
+                                    <field name="review_summary" nolabel="1" >
+                                        <tree editable="bottom">
+                                            <field name="attachment" filename="file_name1" widget="binary"/>
+                                            <field name="file_name1"   invisible="1"/>
+                                            <field name="date"/>
+                                            <field name="status"/>
+                                            <field name="remarks"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="attachment"/>
+                                                <field name="date"/>
+                                                <field name="status"/>
+                                                <field name="remarks"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="objectives" string="Objectives">
+                                <group>
+                                    <field name="objectives"    nolabel="1"/>
+                                </group>
+                            </page>                        
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- ops.review tree view -->
+        <record id="ops_review_ispo_view_tree" model="ir.ui.view">
+            <field name="name">ops.review.ispo.view.tree</field>
+            <field name="model">ops.review.ispo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="ispo_reference"/>
+                    <field name="nama_customer"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ops.review action window -->
+        <record id="ops_review_ispo_action" model="ir.actions.act_window">
+            <field name="name">Audit Recommendation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ops.review.ispo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="ops_review_ispo_seq">
+            <field name="name">review</field>
+            <field name="code">ops.review.ispo</field>
+            <field name="prefix">REP</field>
+            <field name="padding">7</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+        <!-- <record id="audit_recomendation" model="ir.actions.report">
+            <field name="name">Report Audit Recomendation</field>
+            <field name="model">ops.review</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.audit_recomendation</field>
+            <field name="report_file">v15_tsi.audit_recomendation</field>
+            <field name="binding_model_id" ref="model_ops_review"/>
+            <field name="binding_type">report</field>
+        </record> -->
+    </data>
+</odoo>

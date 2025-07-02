@@ -1,0 +1,1391 @@
+<odoo>
+  <data>
+
+    <!-- Employee -->
+  	<record model="ir.ui.view" id="instruktur_form_view">
+    	<field name="name">itsec.employee</field>
+    	<field name="model">hr.employee</field>
+    	<field name="inherit_id" ref="hr.view_employee_form"/>
+    	<field name="arch" type="xml">
+            <xpath expr="//field[@name='job_title']" position="after">
+                    <group>
+                        <field name="auditor" string="Auditor"/>
+                        <!-- <field name="auditor" string="Auditor"/> -->
+                    </group>
+            </xpath>
+            <xpath expr="//page[@name='public']//group[4]" position="after">
+                <button name="action_import_personal_information" string="Import Personal Information" class="oe_highlight" type="object" />
+            </xpath>
+        <sheet>
+    		<notebook position="inside">
+          <page string="Training">
+            <field name="training_ids">
+                <tree string="Training" >
+                    <field name="name"        string="Name"/>
+                    <field name="periode"     string="Periode"/>
+                    <field name="type_schema"     string="Training Related Schema"/>
+                    <field name="file_bin"    string="Certificate" filename="file_name" widget="binary"/>
+                    <field name="file_name"   string="Filename"  widget="binary"/>
+                </tree>
+                <form>
+                  <sheet>
+                      <group>
+                        <field name="name"        string="Name"/>
+                        <field name="periode"     string="Periode"/>
+                        <field name="type_schema"     string="Training Related Schema"/>
+                        <field name="file_bin"    string="Certificate" filename="file_name" widget="pdf_viewer"/>
+                        <field name="file_name"   invisible="1" widget="binary"/>
+                      </group>
+                  </sheet>
+                </form>
+            </field>
+          </page>
+          <page string="Experience">
+            <field name="experience_ids">
+                <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="periode"/>
+                    <field name="type_schema"     string="Experience Related Schema"/>
+                </tree>
+                <form>
+                    <field name="name"/>
+                    <field name="periode"/>
+                    <field name="type_schema"     string="Experience Related Schema"/>
+                </form>
+            </field>
+          </page>
+          <page string="Education">
+            <field name="education_ids">
+                <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="periode"/>
+                </tree>
+                <form>
+                    <field name="name"/>
+                    <field name="periode"/>
+                </form>
+            </field>
+          </page>
+          <page string="Documents">
+            <group>
+              <field name="file_bin"    filename="file_name"/>
+              <field name="file_name"   invisible="1"/>
+              <field name="file_bin1"   filename="file_name1"/>
+              <field name="file_name1"  invisible="1"/>
+              <field name="file_bin2"   filename="file_name2"/>
+              <field name="file_name2"  invisible="1"/>
+              <field name="file_bin3"   filename="file_name3"/>
+              <field name="file_name3"  invisible="1"/>
+              <field name="file_bin4"   filename="file_name4"/>
+              <field name="file_name4"  invisible="1"/>
+              <field name="file_bin5"   filename="file_name5"/>
+              <field name="file_name5"  invisible="1"/>
+            </group>
+          </page>
+          <page string="Skill" attrs="{'invisible': [('auditor', '!=', 'Yes')]}">
+            <!-- <button name="action_import_auditor_skill" string="Import Auditor Skill" class="oe_highlight" type="object" /> -->
+            <field name="skill_ids">
+                <tree editable="bottom">
+                    <field name="iso_standard_ids" widget="many2many_tags" string="Standard"/>
+                    <field name="ea_code" widget="many2many_tags" string="Ea Code"/>
+                    <field name="auditor" widget='boolean_button' string="Auditor"/>
+                    <field name="lead_auditor" widget='boolean_button' string="Lead Auditor"/>
+                    <field name="pk" widget='boolean_button' string="PK"/>
+                    <field name="keterangan" string="Keterangan"/>
+                </tree>
+                <form>
+                    <field name="iso_standard_ids" widget="many2many_tags" string="Standard"/>
+                    <field name="ea_code" widget="many2many_tags" string="Ea Code"/>
+                    <field name="auditor" widget='boolean_button' string="Auditor"/>
+                    <field name="lead_auditor" widget='boolean_button' string="Lead Auditor"/>
+                    <field name="pk" widget='boolean_button' string="PK"/>
+                    <field name="keterangan" string="Keterangan"/>
+                </form>
+            </field>
+          </page>
+          <page string="Consultant Log" attrs="{'invisible': [('auditor', '!=', 'Yes')]}">
+            <!-- <button name="action_import_auditor_skill" string="Import Auditor Skill" class="oe_highlight" type="object" /> -->
+            <field name="consultat_log_ids">
+                <tree editable="bottom">
+                    <field name="duration" string="Duration"/>
+                    <field name="comp_name" string="Company Name"/>
+                    <field name="standard" string="Schema"/>
+                    <field name="busines" string="Business Sector"/>
+                </tree>
+                <form>
+                    <field name="duration" string="Duration"/>
+                    <field name="comp_name" string="Company Name"/>
+                    <field name="standard" string="Schema"/>
+                    <field name="busines" string="Business Sector"/>
+                </form>
+            </field>
+          </page>
+          <page string="Audit" attrs="{'invisible': [('auditor', '!=', 'Yes')]}">
+            <!-- <button name="action_import_audit_exp" string="Import Audit Log" class="oe_highlight" type="object" /> -->
+            <field name="audit_exp_ids">
+                <tree string="Audit" >
+                  <field name="comp_name"   string="Client Name"/>
+                  <field name="standard"    string="Standard"/>
+                  <field name="audit_date"  string="Date"/>
+                  <field name="mandays"     string="Mandays"/>
+                  <field name="role"        string="Role"/>
+                  <field name="audit_type"  string="Audit Type"/>
+                  <field name="ea_code"     string="EA Code" widget="many2many_tags"/>
+                  <field name="audit_behalf" string="Audit on Behalf"/>
+                </tree>
+                <form >
+                  <sheet string="Documents">
+                      <group>
+                        <field name="comp_name"   string="Client Name"/>
+                        <field name="standard"    string="Standard"/>
+                        <field name="audit_date"  string="Date"/>
+                        <field name="mandays"     string="Mandays"/>
+                        <field name="role"        string="Role"/>
+                        <field name="audit_type"  string="Audit Type"/>
+                        <field name="ea_code"     string="EA Code" widget="many2many_tags"/>
+                        <field name="audit_behalf" string="Audit on Behalf"/>
+                      </group>
+                  </sheet>
+                </form>
+            </field>
+          </page>
+          <page string="Site Mandays" attrs="{'invisible': [('auditor', '!=', 'Yes')]}">
+            <field name="site_mandays_ids">
+                <tree editable="bottom">
+                    <field name="mandays"/>
+                    <field name="harga_mandays"/>
+                </tree>
+                <form>
+                    <field name="mandays"/>
+                    <field name="harga_mandays"/>
+                </form>
+            </field>
+          </page>
+        </notebook>
+      </sheet>
+    	</field>
+  	</record>
+
+
+   <!-- KOMPETENSI KARYAWAN -->
+    <record model="ir.ui.view" id="itsec_kompetensi_view_tree">
+      <field name="name">itsec.kompetensi.view.tree</field>
+      <field name="model">itsec.kompetensi</field>
+      <field name="arch" type="xml">
+        <tree string="Assesment Competency General">
+          <field name="name"      string="Name of Candidate"/>
+          <field name="date_assesment"  string="Date of Assessment"/>
+          <field name="job_position" widget="many2many_tags" string="Position"/>
+          <field name="doc_no"        string="Document Reference"/>
+          <field name="authority"   string="Evaluator Name"/>
+          <field name="state"   string="State"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_kompetensi_window">
+      <field name="name">Assesment Competency General</field>
+      <field name="res_model">itsec.kompetensi</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+   <record model="ir.ui.view" id="itsec_kompetensi_form">
+        <field name="name">itsec.kompetensi.form</field>
+        <field name="model">itsec.kompetensi</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>
+                    <button name="set_to_running" states="New" string="Send To Approval" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="New,approval"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                      <field name="name"      string="Name of Candidate"/>
+                      <field name="date_assesment"  string="Date of Assessment"/>
+                      <field name="job_position" widget="many2many_tags" string="Position"/>
+                      <field name="doc_no"        string="Document Reference"/>
+                      <field name="authority"   string="Evaluator Name"/>
+                    </group>
+                    <notebook>
+                      <page string="Assesment General">
+                        <field name="line_assesment">
+                            <tree string="Assesment General" >
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                                <field name="evidence_education"/>
+                                <field name="evidence_experience"/>
+                                <field name="evidence_training"/>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                            </tree>
+                            <form>
+                            <sheet>
+                              <group>
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                              </group>
+                              <notebook>
+                                <page string="Evidence">
+                                  <field name="line_evidence_ids">
+                                    <tree editable="bottom">
+                                      <field name="education"/>
+                                      <field name="experience"/>
+                                      <field name="training"/>
+                                    </tree>
+                                  </field>
+                                </page>
+                              </notebook>
+                              <group>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                              </group>
+                            </sheet>
+                          </form>
+                        </field>
+                      </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+     <!-- Kompetensi Values -->
+     <record model="ir.ui.view" id="itsec_list_comp_values">
+       <field name="name">itsec.comp_values.tree</field>
+       <field name="model">itsec.comp_values</field>
+       <field name="arch" type="xml">
+         <tree string="Assesment Competency QMS">
+           <field name="name"      string="Name of Candidate"/>
+            <field name="date_assesment"  string="Date of Assessment"/>
+            <field name="job_position" widget="many2many_tags" string="Position"/>
+            <field name="doc_no"        string="Document Reference"/>
+            <field name="authority"   string="Evaluator Name"/>
+            <field name="type_schema"   string="Type Schema"/>
+            <field name="state"   string="State"/>
+         </tree>
+       </field>
+     </record>
+
+     <record model="ir.actions.act_window" id="itsec_comp_values_window">
+       <field name="name">Assesment Competency Spesifik</field>
+       <field name="res_model">itsec.comp_values</field>
+       <field name="view_mode">tree,form</field>
+     </record>
+
+     <record model="ir.ui.view" id="itsec_comp_values_form">
+         <field name="name">itsec.comp_values.form</field>
+         <field name="model">itsec.comp_values</field>
+         <field name="arch" type="xml">
+             <form >
+                  <header>
+                    <button name="set_to_running" states="New" string="Send To Approval" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="New,approval"/>
+                  </header>
+                 <sheet>
+                    <group col="4">
+                      <field name="name" domain="[('department_id.name', 'in', ['OPERATION ICT', 'OPERATION XMS'])]" string="Name of Candidate"/>
+                      <field name="date_assesment"  string="Date of Assessment"/>
+                      <field name="job_position" widget="many2many_tags" string="Position"/>
+                      <field name="doc_no"        string="Document Reference"/>
+                      <field name="authority"   string="Evaluator Name"/>
+                      <field name="type_schema"   string="Type Schema"/>
+                    </group>
+                    <notebook>
+                      <page string="Assesment Spesifik">
+                        <field name="line_assesment_qms">
+                            <tree string="Assesment General" >
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                                <field name="evidence_education"/>
+                                <field name="evidence_experience"/>
+                                <field name="evidence_training"/>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                            </tree>
+                            <form>
+                            <sheet>
+                              <group>
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                              </group>
+                              <notebook>
+                                <page string="Evidence">
+                                  <field name="line_evidence_ids">
+                                    <tree editable="bottom">
+                                      <field name="education" readonly="1"/>
+                                      <field name="experience" readonly="1"/>
+                                      <field name="training" readonly="1"/>
+                                    </tree>
+                                  </field>
+                                </page>
+                              </notebook>
+                              <group>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                              </group>
+                            </sheet>
+                          </form>
+                        </field>
+                      </page>
+                    </notebook>
+                 </sheet>
+             </form>
+         </field>
+     </record>
+
+     <record id="itsec_position_view_tree" model="ir.ui.view">
+       <field name="name">itsec.position.view.tree</field>
+       <field name="model">itsec.position</field>
+       <field name="arch" type="xml">
+         <tree string="Assesment Competency QMS">
+            <field name="name"/>
+            <field name="description"/>
+         </tree>
+       </field>
+     </record>
+
+     <record model="ir.actions.act_window" id="itsec_position_action">
+       <field name="name">Job Position</field>
+       <field name="res_model">itsec.position</field>
+       <field name="view_mode">tree,form</field>
+     </record>
+
+     <record model="ir.ui.view" id="itsec_position_form">
+         <field name="name">itsec.position.form</field>
+         <field name="model">itsec.position</field>
+         <field name="arch" type="xml">
+             <form >
+                 <sheet>
+                    <group>
+                      <field name="name"/>
+                      <field name="description"/>
+                    </group>
+                 </sheet>
+             </form>
+         </field>
+     </record>
+     
+
+     <record id="itsec_standard_kompetensi_view_tree" model="ir.ui.view">
+       <field name="name">itsec.standard.kompetensi.view.tree</field>
+       <field name="model">itsec.standard.kompetensi</field>
+       <field name="arch" type="xml">
+         <tree string="Assesment Competency QMS">
+            <field name="type_schema"/>
+         </tree>
+       </field>
+     </record>
+
+     <record model="ir.actions.act_window" id="standard_kompetensi_action">
+       <field name="name">Standard Kompetensi</field>
+       <field name="res_model">itsec.standard.kompetensi</field>
+       <field name="view_mode">tree,form</field>
+     </record>
+
+     <record model="ir.ui.view" id="itsec_standard_kompetensi_view_form">
+         <field name="name">itsec.standard.kompetensi.view.form</field>
+         <field name="model">itsec.standard.kompetensi</field>
+         <field name="arch" type="xml">
+             <form >
+                 <sheet>
+                    <group>
+                      <field name="type_schema"/>
+                    </group>
+                    <notebook>
+                      <page string="Line Standard Kompetensi">
+                        <field name="line_standard_kompetensi">
+                            <tree editable="bottom" string="Line Standard Kompetensi" >
+                              <field name="no"/>
+                              <field name="requierement"/>
+                              <field name="standard"/>
+                            </tree>
+                        </field>
+                      </page>
+                    </notebook>
+                 </sheet>
+             </form>
+         </field>
+     </record>
+
+   <!-- JOBDESC  -->
+    <record model="ir.ui.view" id="itsec_list_jobdesc">
+      <field name="name">itsec.jobdesc.tree</field>
+      <field name="model">itsec.jobdesc</field>
+      <field name="arch" type="xml">
+        <tree string="Assesment Competency Scope">
+          <field name="name"      string="Name of Candidate"/>
+          <field name="date_assesment"  string="Date of Assessment"/>
+          <field name="job_position" widget="many2many_tags" string="Position"/>
+          <field name="doc_no"        string="Document Reference"/>
+          <field name="authority"   string="Evaluator Name"/>
+          <field name="state"   string="State"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_jobdesc_window">
+      <field name="name">Assesment Competency Scope</field>
+      <field name="res_model">itsec.jobdesc</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_jobdesc_form">
+        <field name="name">itsec.jobdesc.form</field>
+        <field name="model">itsec.jobdesc</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>
+                  <button name="set_to_running" states="New" string="Send To Approval" type="object" class="oe_highlight" />
+                  <field name="state" widget="statusbar" statusbar_visible="New,approval"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                      <field name="name"      string="Name of Candidate"/>
+                      <field name="date_assesment"  string="Date of Assessment"/>
+                      <field name="job_position" widget="many2many_tags" string="Position"/>
+                      <field name="doc_no"        string="Document Reference"/>
+                      <field name="authority"   string="Evaluator Name"/>
+                    </group>
+                    <notebook>
+                      <page string="Assesment Scope">
+                        <field name="ass_scope_ids">
+                            <tree string="Assesment Scope" >
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                                <field name="evidence_education"/>
+                                <field name="evidence_experience"/>
+                                <field name="evidence_training"/>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                            </tree>
+                            <form>
+                            <sheet>
+                              <group>
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                              </group>
+                              <notebook>
+                                <page string="Evidence">
+                                  <field name="line_evidence_ids" widget="one2many_list">
+                                    <tree editable="bottom">
+                                      <field name="education"/>
+                                      <field name="experience"/>
+                                      <field name="training"/>
+                                    </tree>
+                                  </field>
+                                </page>
+                              </notebook>
+                              <group>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                              </group>
+                            </sheet>
+                          </form>
+                        </field>
+                      </page>
+                    </notebook>
+                    <group>
+                      <field name="conclusion" string="Conlusion"/>
+                    </group>
+                    <group string="Technical Scope Recommended">
+                      <div class="row">
+                          <div class="col-6">
+                              <div class="o_row">
+                                  <field name="agriculture"/>
+                                  <label for="agriculture"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="mining"/>
+                                  <label for="mining"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="food_products"/>
+                                  <label for="food_products"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="textiles"/>
+                                  <label for="textiles"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="leather"/>
+                                  <label for="leather"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="wood"/>
+                                  <label for="wood"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="pulp_paper"/>
+                                  <label for="pulp_paper"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="publishing"/>
+                                  <label for="publishing"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="printing"/>
+                                  <label for="printing"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="petroleum"/>
+                                  <label for="petroleum"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="nuclear_fuel_1"/>
+                                  <label for="nuclear_fuel_1"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="chemical"/>
+                                  <label for="chemical"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="nuclear_fuel_2"/>
+                                  <label for="nuclear_fuel_2"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="rubber"/>
+                                  <label for="rubber"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="non_metallic"/>
+                                  <label for="non_metallic"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="concrete"/>
+                                  <label for="concrete"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="basic_metal"/>
+                                  <label for="basic_metal"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="machinery"/>
+                                  <label for="machinery"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="electrical_equipment"/>
+                                  <label for="electrical_equipment"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="shipbuilding"/>
+                                  <label for="shipbuilding"/>
+                              </div>
+                          </div>
+                          <div class="col-6">
+                              <div class="o_row">
+                                  <field name="aerospace"/>
+                                  <label for="aerospace"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="other_transport"/>
+                                  <label for="other_transport"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="manufacturing_other"/>
+                                  <label for="manufacturing_other"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="recycling"/>
+                                  <label for="recycling"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="electricity_supply"/>
+                                  <label for="electricity_supply"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="gas_supply"/>
+                                  <label for="gas_supply"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="water_supply"/>
+                                  <label for="water_supply"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="construction"/>
+                                  <label for="construction"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="wholesale_repair"/>
+                                  <label for="wholesale_repair"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="hotels_restaurants"/>
+                                  <label for="hotels_restaurants"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="transport_storage"/>
+                                  <label for="transport_storage"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="financial_realestate"/>
+                                  <label for="financial_realestate"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="information_tech"/>
+                                  <label for="information_tech"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="engineering_services"/>
+                                  <label for="engineering_services"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="other_services"/>
+                                  <label for="other_services"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="public_admin"/>
+                                  <label for="public_admin"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="education"/>
+                                  <label for="education"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="health_social"/>
+                                  <label for="health_social"/>
+                              </div>
+                              <div class="o_row">
+                                  <field name="social_services"/>
+                                  <label for="social_services"/>
+                              </div>
+                          </div>
+                      </div>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_list_assesment_scope_food">
+      <field name="name">itsec.assesment_scope_food.tree</field>
+      <field name="model">itsec.assesment_scope_food</field>
+      <field name="arch" type="xml">
+        <tree string="Assesment Competency Scope">
+          <field name="name"      string="Name of Candidate"/>
+          <field name="date_assesment"  string="Date of Assessment"/>
+          <field name="job_position" widget="many2many_tags" string="Position"/>
+          <field name="doc_no"        string="Document Reference"/>
+          <field name="authority"   string="Evaluator Name"/>
+          <field name="state"   string="State"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_assesment_scope_food_window_22000">
+      <field name="name">Assesment Competency Scope Food</field>
+      <field name="res_model">itsec.assesment_scope_food</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_assesment_scope_food_form">
+        <field name="name">itsec.assesment_scope_food.form</field>
+        <field name="model">itsec.assesment_scope_food</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>
+                  <button name="set_to_running" states="New" string="Send To Approval" type="object" class="oe_highlight" />
+                  <field name="state" widget="statusbar" statusbar_visible="New,approval"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                      <field name="name"      string="Name of Candidate"/>
+                      <field name="date_assesment"  string="Date of Assessment"/>
+                      <field name="job_position" widget="many2many_tags" string="Position"/>
+                      <field name="doc_no"        string="Document Reference"/>
+                      <field name="authority"   string="Evaluator Name"/>
+                    </group>
+                    <notebook>
+                      <page string="Assesment Scope FSMS">
+                        <field name="ass_scope_food_ids">
+                            <tree string="Assesment Scope" >
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                                <field name="evidence_education"/>
+                                <field name="evidence_experience"/>
+                                <field name="evidence_training"/>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                            </tree>
+                            <form>
+                            <sheet>
+                              <group>
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                              </group>
+                              <notebook>
+                                <page string="Evidence">
+                                  <field name="line_evidence_ids" widget="one2many_list">
+                                    <tree editable="bottom">
+                                      <field name="education"/>
+                                      <field name="experience"/>
+                                      <field name="training"/>
+                                    </tree>
+                                  </field>
+                                </page>
+                              </notebook>
+                              <group>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                              </group>
+                            </sheet>
+                          </form>
+                        </field>
+                      </page>
+                    </notebook>
+                    <group>
+                      <field name="conclusion" string="Conlusion"/>
+                    </group>
+                    <group string="Technical Scope Recommended">
+                      <div class="row">
+                        <div class="col-6">
+                            <div class="o_row">
+                                <field name="farming_animals"/>
+                                <label for="farming_animals"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="farming_fish"/>
+                                <label for="farming_fish"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="farming_plants"/>
+                                <label for="farming_plants"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="farming_grains"/>
+                                <label for="farming_grains"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="preprocess_plant"/>
+                                <label for="preprocess_plant"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="animal_primary_conversion"/>
+                                <label for="animal_primary_conversion"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="processing_animal"/>
+                                <label for="processing_animal"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="processing_plant"/>
+                                <label for="processing_plant"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="processing_mixed"/>
+                                <label for="processing_mixed"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="processing_ambient"/>
+                                <label for="processing_ambient"/>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="o_row">
+                                <field name="feed_processing"/>
+                                <label for="feed_processing"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="catering_services"/>
+                                <label for="catering_services"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="retail"/>
+                                <label for="retail"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="brokering"/>
+                                <label for="brokering"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="transport_storage"/>
+                                <label for="transport_storage"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="services"/>
+                                <label for="services"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="packaging_production"/>
+                                <label for="packaging_production"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="equipment"/>
+                                <label for="equipment"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="bio_chemicals"/>
+                                <label for="bio_chemicals"/>
+                            </div>
+                        </div>
+                      </div>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_list_assesment_scope_food_haccp">
+      <field name="name">itsec.assesment_scope_food_haccp.tree</field>
+      <field name="model">itsec.assesment_scope_food_haccp</field>
+      <field name="arch" type="xml">
+        <tree string="Assesment Competency Scope HACCP">
+          <field name="name"      string="Name of Candidate"/>
+          <field name="date_assesment"  string="Date of Assessment"/>
+          <field name="job_position" widget="many2many_tags" string="Position"/>
+          <field name="doc_no"        string="Document Reference"/>
+          <field name="authority"   string="Evaluator Name"/>
+          <field name="state"   string="State"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_assesment_scope_food_haccp_window">
+      <field name="name">Assesment Competency Scope HACCP</field>
+      <field name="res_model">itsec.assesment_scope_food_haccp</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_assesment_scope_food_haccp_form">
+        <field name="name">itsec.assesment_scope_food_haccp.form</field>
+        <field name="model">itsec.assesment_scope_food_haccp</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>
+                  <button name="set_to_running" states="New" string="Send To Approval" type="object" class="oe_highlight" />
+                  <field name="state" widget="statusbar" statusbar_visible="New,approval"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                      <field name="name"      string="Name of Candidate"/>
+                      <field name="date_assesment"  string="Date of Assessment"/>
+                      <field name="job_position" widget="many2many_tags" string="Position"/>
+                      <field name="doc_no"        string="Document Reference"/>
+                      <field name="authority"   string="Evaluator Name"/>
+                    </group>
+                    <notebook>
+                      <page string="Assesment Scope HACCP">
+                        <field name="ass_scope_food_haccp_ids">
+                            <tree string="Assesment Scope" >
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                                <field name="evidence_education"/>
+                                <field name="evidence_experience"/>
+                                <field name="evidence_training"/>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                            </tree>
+                            <form>
+                            <sheet>
+                              <group>
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                              </group>
+                              <notebook>
+                                <page string="Evidence">
+                                  <field name="line_evidence_ids" widget="one2many_list">
+                                    <tree editable="bottom">
+                                      <field name="education"/>
+                                      <field name="experience"/>
+                                      <field name="training"/>
+                                    </tree>
+                                  </field>
+                                </page>
+                              </notebook>
+                              <group>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                              </group>
+                            </sheet>
+                          </form>
+                        </field>
+                      </page>
+                    </notebook>
+                    <group>
+                      <field name="conclusion" string="Conlusion"/>
+                    </group>
+                    <group string="Technical Scope Recommended">
+                      <div class="row">
+                        <div class="col-6">
+                            <div class="o_row">
+                                <field name="product_milk"/>
+                                <label for="product_milk"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="fats_oils"/>
+                                <label for="fats_oils"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="ice_cream"/>
+                                <label for="ice_cream"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="fruit_veg"/>
+                                <label for="fruit_veg"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="flower_sugar"/>
+                                <label for="flower_sugar"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="cereal_products"/>
+                                <label for="cereal_products"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="bakery_products"/>
+                                <label for="bakery_products"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="meat_products"/>
+                                <label for="meat_products"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="fish_products"/>
+                                <label for="fish_products"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="eggs_products"/>
+                                <label for="eggs_products"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="sugar_honey"/>
+                                <label for="sugar_honey"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="salt_sauces"/>
+                                <label for="salt_sauces"/>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="o_row">
+                                <field name="special_nutrition"/>
+                                <label for="special_nutrition"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="beverages"/>
+                                <label for="beverages"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="snack"/>
+                                <label for="snack"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="ready_food"/>
+                                <label for="ready_food"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="food_contact"/>
+                                <label for="food_contact"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="feed_animals"/>
+                                <label for="feed_animals"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="catering"/>
+                                <label for="catering"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="distribution"/>
+                                <label for="distribution"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="transport_services"/>
+                                <label for="transport_services"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="supporting_services"/>
+                                <label for="supporting_services"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="food_packaging"/>
+                                <label for="food_packaging"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="equipment_fabrication"/>
+                                <label for="equipment_fabrication"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="bio_chemical"/>
+                                <label for="bio_chemical"/>
+                            </div>
+                        </div>
+                      </div>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_list_assesment_scope_eoms">
+      <field name="name">itsec.assesment_scope_eoms.tree</field>
+      <field name="model">itsec.assesment_scope_eoms</field>
+      <field name="arch" type="xml">
+        <tree string="Assesment Competency Scope HACCP">
+          <field name="name"      string="Name of Candidate"/>
+          <field name="date_assesment"  string="Date of Assessment"/>
+          <field name="job_position" widget="many2many_tags" string="Position"/>
+          <field name="doc_no"        string="Document Reference"/>
+          <field name="authority"   string="Evaluator Name"/>
+          <field name="state"   string="State"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_assesment_scope_eoms_window">
+      <field name="name">Assesment Competency EOMS</field>
+      <field name="res_model">itsec.assesment_scope_eoms</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_assesment_scope_eoms_form">
+        <field name="name">itsec.assesment_scope_eoms.form</field>
+        <field name="model">itsec.assesment_scope_eoms</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>
+                  <button name="set_to_running" states="New" string="Send To Approval" type="object" class="oe_highlight" />
+                  <field name="state" widget="statusbar" statusbar_visible="New,approval"/>
+                </header>
+                <sheet>
+                    <group col="4">
+                      <field name="name"      string="Name of Candidate"/>
+                      <field name="date_assesment"  string="Date of Assessment"/>
+                      <field name="job_position" widget="many2many_tags" string="Position"/>
+                      <field name="doc_no"        string="Document Reference"/>
+                      <field name="authority"   string="Evaluator Name"/>
+                    </group>
+                    <notebook>
+                      <page string="Assesment Scope HACCP">
+                        <field name="ass_scope_eoms_ids">
+                            <tree string="Assesment Scope" >
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                                <field name="evidence_education"/>
+                                <field name="evidence_experience"/>
+                                <field name="evidence_training"/>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                            </tree>
+                            <form>
+                            <sheet>
+                              <group>
+                                <field name="nomor"/>
+                                <field name="requirement"/>
+                                <field name="standard"/>
+                              </group>
+                              <notebook>
+                                <page string="Evidence">
+                                  <field name="line_evidence_ids" widget="one2many_list">
+                                    <tree editable="bottom">
+                                      <field name="education"/>
+                                      <field name="experience"/>
+                                      <field name="training"/>
+                                    </tree>
+                                  </field>
+                                </page>
+                              </notebook>
+                              <group>
+                                <field name="ass_method"/>
+                                <field name="evaluator_comment"/>
+                              </group>
+                            </sheet>
+                          </form>
+                        </field>
+                      </page>
+                    </notebook>
+                    <group>
+                      <field name="conclusion" string="Conlusion"/>
+                    </group>
+                    <group string="Technical Scope Recommended">
+                      <div class="row">
+                        <div class="col-6">
+                            <div class="o_row">
+                                <field name="early"/>
+                                <label for="early"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="primary"/>
+                                <label for="primary"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="high_education"/>
+                                <label for="high_education"/>
+                            </div>
+                            <div class="o_row">
+                                <field name="educational"/>
+                                <label for="educational"/>
+                            </div>
+                        </div>
+                      </div>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- WORKER Representative -->
+    <record model="ir.ui.view" id="itsec_list_qms_worker_rep">
+      <field name="name">itsec.qms_worker_rep.tree</field>
+      <field name="model">itsec.qms_worker_rep</field>
+      <field name="arch" type="xml">
+        <tree string="Worker Representative">
+          <field name="nomor"   string="No"/>
+          <field name="name"    string="Name"/>
+          <field name="pic"     string="PIC"/>
+          <field name="address" string="Address"/>
+          <field name="phone"   string="Phone"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_qms_worker_rep_window">
+      <field name="name">Worker Representative</field>
+      <field name="res_model">itsec.qms_worker_rep</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_qms_worker_rep_form">
+        <field name="name">itsec.qms_worker_rep.form</field>
+        <field name="model">itsec.qms_worker_rep</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="nomor"     string="No"/>
+                      <field name="name"      string="Name"/>
+                      <field name="pic"       string="PIC"/>
+                      <field name="address"   string="Address"/>
+                      <field name="phone"     string="Phone"/>
+                      <field name="file_bin"  filename="file_name"/>
+                      <field name="file_name" invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Woker Representative CONTRACT -->
+    <record model="ir.ui.view" id="itsec_list_qms_worker_rep_contract">
+      <field name="name">itsec.qms_worker_rep_contract.tree</field>
+      <field name="model">itsec.qms_worker_rep_contract</field>
+      <field name="arch" type="xml">
+        <tree string="Worker Rep Contract List">
+          <field name="nomor"         string="No"/>
+          <field name="worker_rep"    string="Worker Representative"/>
+          <field name="contract_date" string="Date"/>
+          <field name="expired_date"  string="Expired"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_qms_worker_rep_contract_window">
+      <field name="name">Worker Rep Contract</field>
+      <field name="res_model">itsec.qms_worker_rep_contract</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_qms_worker_rep_contract_form">
+        <field name="name">itsec.qms_worker_rep_contract.form</field>
+        <field name="model">itsec.qms_worker_rep_contract</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="nomor"           string="No"/>
+                      <field name="worker_rep"      string="Worker Representative"/>
+                      <field name="contract_title"  string="Title"/>
+                      <field name="contract_date"   string="Date"/>
+                      <field name="expired_date"    string="Expired"/>
+                      <field name="file_bin"        filename="file_name"/>
+                      <field name="file_name"       invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Worker Rep Meeting -->
+    <record model="ir.ui.view" id="itsec_list_qms_worker_rep_meet">
+      <field name="name">itsec.qms_worker_rep_meet.tree</field>
+      <field name="model">itsec.qms_worker_rep_meet</field>
+      <field name="arch" type="xml">
+        <tree string="Worker Rep Meeting">
+          <field name="name"          string="Name"/>
+          <field name="worker_rep"    string="Worker Representative"/>
+          <field name="description"   string="Description"/>
+          <field name="tanggal"       string="Date"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="itsec_qms_worker_rep_meet_window">
+      <field name="name">Worker Rep Meeting</field>
+      <field name="res_model">itsec.qms_worker_rep_meet</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="itsec_qms_worker_rep_meet_form">
+        <field name="name">itsec.qms_worker_rep_meet.form</field>
+        <field name="model">itsec.qms_worker_rep_meet</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="name"          string="Meeting Name"/>
+                      <field name="worker_rep"    string="Worker Representative"/>
+                      <field name="description"   string="Description"/>
+                      <field name="tanggal"       string="Date"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- tsi.iso.standard action window -->
+        <record id="tsi_iso_standard_employee_action" model="ir.actions.act_window">
+            <field name="name">ISO Standard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.standard.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.iso.standard tree view -->
+        <record id="tsi_iso_standard_view_tree" model="ir.ui.view">
+            <field name="name">tsi.iso.standard.view.tree</field>
+            <field name="model">tsi.standard.employee</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.standard.employee form view -->
+        <record id="tsi_iso_standard_view_form" model="ir.ui.view">
+            <field name="name">tsi.standard.employee.view.form</field>
+            <field name="model">tsi.standard.employee</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.ea_code action window -->
+        <record id="tsi_employee_ea_code_action" model="ir.actions.act_window">
+            <field name="name">EA Code</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.employee.ea_code</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- <function model="ir.model.fields" name="formbuilder_whitelist">
+            <value>tsi.employee.ea_code</value>
+            <value eval="['name','description','iso_standard_ids']"/>
+        </function> -->
+
+
+
+        <!-- tsi.employee.ea_code tree view -->
+        <record id="tsi_employee_ea_code_view_tree" model="ir.ui.view">
+            <field name="name">tsi.employee.ea_code.view.tree</field>
+            <field name="model">tsi.employee.ea_code</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.employee.ea_code form view -->
+        <record id="tsi_employee_ea_code_view_form" model="ir.ui.view">
+            <field name="name">tsi.employee.ea_code.view.form</field>
+            <field name="model">tsi.employee.ea_code</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+   </data>
+</odoo>

@@ -1,0 +1,140 @@
+<odoo>
+  <data>
+    <!-- RISK REGISTER -->
+    <record model="ir.ui.view" id="risk_register_tree">
+      <field name="name">risk.register.tree</field>
+      <field name="model">risk.register</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="subject"/>
+          <field name="nomor"/>
+          <field name="sub_klasifikasi"/>
+          <field name="ancaman"/>
+          <field name="kerawanan"/>
+          <field name="kriteria"/>
+          <field name="pic"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="risk_register_action">
+      <field name="name">Risk Register</field>
+      <field name="res_model">risk.register</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="risk_register_form">
+        <field name="name">risk.register.form</field>
+        <field name="model">risk.register</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>
+                    <button name="set_to_running" string="Approved" type="object" class="oe_highlight"
+                        groups="v15_itsec.group_manager"/>
+                </header>
+                <sheet>
+                    <group string="Subject">
+                        <field name="subject"/>
+                    </group>
+                    <group col="4" string="Identifikasi Resiko">
+                        <field name="nomor"/>
+                        <field name="sub_klasifikasi"/>
+                        <field name="ancaman"/>
+                        <field name="kerawanan"/>
+                        <field name="source"/>
+                    </group>
+                    <group col="4" string="Dampak">
+                        <field name="d_finansial"/>
+                        <field name="d_reputasi"/>
+                        <field name="d_hukum"/>
+                        <field name="d_operasional"/>
+                    </group>
+                    <group col="4" string="Inherent Risk">
+                        <field name="awal_dampak"/>
+                        <field name="awal_cenderung"/>
+                        <field name="awal_rnd" />
+                        <field name="awal_level"/>
+                    </group>
+                    <group string="Klasifikasi Pengendalian">
+                        <field name="klasifikasi_line">
+                            <tree editable="bottom">
+                                <field name="refference"/>
+                            </tree>
+                        </field>
+                        <field name="kontrol"/>
+                    </group>
+                    <group col="4"  string="Residual Risk">
+                        <field name="akhir_dampak"/>
+                        <field name="akhir_cenderung"/>
+                        <field name="akhir_rnd"/>
+                        <field name="akhir_level"/>
+                        <field name="kriteria"/>
+                    </group>
+                    <group col="4" string="Perlakuan">
+                        <field name="tindakan"/>
+                        <field name="pic"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>    
+
+<!-- risk.kategori action window -->
+<record id="risk_kategori_action" model="ir.actions.act_window">
+    <field name="name">Kategori Resiko</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">risk.kategori</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+        </p><p>
+            <!-- More details about what a user can do with this object will be OK --> 
+        </p>
+    </field>
+</record>
+
+<!-- risk.kategori tree view -->
+<record id="model_name_view_tree" model="ir.ui.view">
+    <field name="name">risk.kategori.view.tree</field>
+    <field name="model">risk.kategori</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="bobot_from"/>
+            <field name="bobot_to"/>
+            <field name="accepted"/>
+            <field name="audit_criteria"/>
+            <field name="pentest_criteria"/>
+        </tree>
+    </field>
+</record>
+
+<!-- risk.kategori form view -->
+<record id="model_name_view_form" model="ir.ui.view">
+    <field name="name">risk.kategori.view.form</field>
+    <field name="model">risk.kategori</field>
+    <field name="arch" type="xml">
+        <form string="">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="bobot_from"/>
+                    <field name="bobot_to"/>
+                    <field name="accepted"/>
+                    <field name="audit_criteria"/>
+                    <field name="pentest_criteria"/>
+                    <field name="color_code"/>
+                    <field name="risk_action"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+  </data>
+</odoo>

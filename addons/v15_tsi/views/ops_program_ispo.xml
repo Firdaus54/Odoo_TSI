@@ -1,0 +1,256 @@
+<odoo>
+    <data>
+
+        <!-- ops.program.ispo form view -->
+        <record id="ops_program_ispo_view_form" model="ir.ui.view">
+            <field name="name">ops.program.ispo.view.form</field>
+            <field name="model">ops.program.ispo</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="set_to_confirm" states="new" string="Confirm" type="object" class="oe_highlight" />
+                        <button name="action_stage2" states="done" string="Lanjut Stage2" type="object" class="oe_highlight" />
+                        <button name="action_surviellance1" states="done_stage2" string="Lanjut Surveillance 1" type="object" class="oe_highlight" />
+                        <button name="action_surviellance2" states="done_surveillance1" string="Lanjut Surveillance 2" type="object" class="oe_highlight" />
+                        <button name="action_surviellance3" states="done_surveillance2" string="Lanjut Surveillance 3" type="object" class="oe_highlight" />
+                        <button name="action_surviellance4" states="done_surveillance3" string="Lanjut Surveillance 4" type="object" class="oe_highlight" />
+                        <button name="action_recertification" states="done_surveillance4" string="Lanjut Recertification" type="object" class="oe_highlight" />
+                        <button name="set_to_done" states="confirm" string="Done" type="object" class="oe_highlight"/>
+                        <button name="set_to_draft" states="confirm,done" string="Reset" type="object" />
+                        <button name="set_to_stage1" states="done_stage2" string="Reset" type="object" />
+                        <button name="set_to_stage2" states="done_surveillance1" string="Reset" type="object" />
+                        <button name="set_to_surveillance1" states="done_surveillance2" string="Reset" type="object" />
+                        <button name="set_to_surveillance2" states="done_surveillance3" string="Reset" type="object" />
+                        <button name="set_to_surveillance3" states="done_surveillance4" string="Reset" type="object" />
+                        <button name="set_to_surveillance4" states="done_recertification" string="Reset" type="object" />
+                        <button name="audit_notification" states="new,confirm,done,done_stage2,done_surveillance1,done_surveillance2,done_recertification" string="Report Audit Notification" type="object" class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,confirm,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group col="4" string="Sales Related">
+                            <field name="contract_number"/>
+                            <field name="ispo_reference"/>
+                            <field name="customer"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                            <!-- <field name="ea_code"/> -->
+                            <field name="contact_person"/>
+                            <field name="telepon"/>
+                            <!-- <field name="head_office"/>
+                            <field name="site_office"/>
+                            <field name="off_location"/>
+                            <field name="part_time"/>
+                            <field name="subcon"/>
+                            <field name="unskilled"/>
+                            <field name="seasonal"/> -->
+                            <!-- <field name="total_emp"/> -->
+                            <field name="scope"/>
+                            <!-- <field name="boundaries"/> -->
+                            <!-- <field name="accreditation"/> -->
+                            <!-- <field name="ea_code"/> -->
+                            <field name="type_client"/>
+                            <field name="apprev_date"/>
+                            <field name="contract_date"/>
+                            <field name="tgl_notifikasi" attrs="{'invisible': [('notification_printed', '=', False)]}"/>
+                            <field name="dokumen_sosialisasi" filename="file_name1"/>
+                            <field name="file_name1"   invisible="1"/>
+                            <field name="notification_printed" attrs="{'invisible':True}"/>
+                        </group>
+                        <!-- <group col="4" string="Sertifikat">
+                            <field name="tgl_sertifikat"/>
+                            <field name="tgl_sertifikat_original"/>
+                            <field name="tgl_sertifikat_update"/>
+                            <field name="tgl_sertifikat_descision"/>
+                            <field name="pic_decision"/>
+                            <field name="tgl_audit_stage_2"/>
+                            <field name="pic_auditor_2" widget="many2many_tags"/>
+                            <field name="tgl_review_stage_1"/>
+                            <field name="pic_reviewer"/>
+                            <field name="tgl_audit_stage_1"/>
+                            <field name="tgl_audit_stage_1_akhir"/>
+                            <field name="pic_auditor_1"/>
+                            <field name="tgl_application_form"/>
+                            <field name="tgl_kontrak"/>
+                        </group> -->
+                        <notebook>
+                            <page name="program" string="Report">
+                                    <field name="program_lines" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="audit_type"/>
+                                            <field name="metode"/>
+                                            <field name="date_start"/>
+                                            <field name="date_end"/>
+                                            <field name="lead_auditor"/>
+                                            <field name="auditor"/>
+                                            <field name="auditor_2"/>
+                                            <field name="auditor_3"/>
+                                            <field name="expert"/>
+                                            <field name="remarks"/>
+                                            <field name="mandayss"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="audit_type"/>
+                                                <field name="metode"/>
+                                                <field name="date_start"/>
+                                                <field name="date_end"/>
+                                                <field name="lead_auditor"/>
+                                                <field name="auditor"/>
+                                                <field name="auditor_2"/>
+                                                <field name="auditor_3"/>
+                                                <field name="expert"/>
+                                                <field name="remarks"/>
+                                                <field name="mandayss"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page name="program" string="Aktual" groups="v15_tsi.group_menu_line_aktual">
+                                    <field name="program_lines_aktual" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="audit_type"/>
+                                            <field name="metode"/>
+                                            <field name="date_start"/>
+                                            <field name="date_end"/>
+                                            <field name="lead_auditor"/>
+                                            <field name="auditor"/>
+                                            <field name="auditor_2"/>
+                                            <field name="auditor_3"/>
+                                            <field name="expert"/>
+                                            <field name="remarks"/>
+                                            <field name="mandayss"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="audit_type"/>
+                                                <field name="metode"/>
+                                                <field name="date_start"/>
+                                                <field name="date_end"/>
+                                                <field name="lead_auditor"/>
+                                                <field name="auditor"/>
+                                                <field name="auditor_2"/>
+                                                <field name="auditor_3"/>
+                                                <field name="expert"/>
+                                                <field name="remarks"/>
+                                                <field name="mandayss"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- ops.program.ispo tree view -->
+        <record id="ops_program_ispo_view_tree" model="ir.ui.view">
+            <field name="name">ops.program.ispo.view.tree</field>
+            <field name="model">ops.program.ispo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="ispo_reference"/>
+                    <field name="customer"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                    <!-- <field name="tgl_sertifikat"/>
+                    <field name="tgl_sertifikat_update"/>
+                    <field name="tgl_sertifikat_descision"/>
+                    <field name="pic_decision"/> -->
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ops.program.ispo action window -->
+        <record id="ops_program_ispo_action" model="ir.actions.act_window">
+            <field name="name">Audit Program</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ops.program.ispo</field>
+            <field name="view_mode">tree,form,pivot,graph,kanban</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="ops_program_ispo_view_pivot" model="ir.ui.view">
+            <field name="name">ops.program.ispo.view.pivot</field>
+            <field name="model">ops.program.ispo</field>
+            <field name="arch" type="xml">
+                <pivot string="Pivot">
+                    <!-- Add your fields here -->
+
+                </pivot>
+            </field>
+        </record>
+
+        <record id="ops_program_ispo_view_kanban" model="ir.ui.view">
+            <field name="name">ops.program.ispo.view.kanban</field>
+            <field name="model">ops.program.ispo</field>
+            <field name="arch" type="xml">
+                <pivot string="Kanban">
+                    <!-- Add your fields here -->
+
+                </pivot>
+            </field>
+        </record>
+
+        <!-- tsi.iso graph view -->
+        <record id="ops_program_ispo_view_graph" model="ir.ui.view">
+            <field name="name">ops.program.ispo.view.graph</field>
+            <field name="model">ops.program.ispo</field>
+            <field name="arch" type="xml">
+                <graph string="Graph Description">
+                    <!-- Add your fields here -->
+
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="ops_program_ispo_seq">
+            <field name="name">program</field>
+            <field name="code">ops.program.ispo</field>
+            <field name="prefix">OPS</field>
+            <field name="padding">7</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+        <record id="audit_notification" model="ir.actions.report">
+            <field name="name">Report Audit Notification</field>
+            <field name="model">ops.program.ispo</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.audit_notification</field>
+            <field name="report_file">v15_tsi.audit_notification</field>
+            <field name="binding_model_id" ref="model_ops_program"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="ops_program_ispo_view_search" model="ir.ui.view">
+			<field name="name">ops.program.ispo.view.search</field>
+			<field name="model">ops.program.ispo</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<search string="Operation Program Filter">
+					<!-- <field name="nama_klien"/> -->
+                    <field name="name"/>
+					<field name="customer"/>
+				</search>
+			</field>
+		</record>
+
+    </data>
+</odoo>

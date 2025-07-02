@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+
+        <!-- tsi.iso.risk action window -->
+        <record id="tsi_iso_risk_action" model="ir.actions.act_window">
+            <field name="name">ISO Standard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.iso.risk</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.iso.risk tree view -->
+        <record id="tsi_iso_risk_view_tree" model="ir.ui.view">
+            <field name="name">tsi.iso.risk.view.tree</field>
+            <field name="model">tsi.iso.risk</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.iso.risk form view -->
+        <record id="tsi_iso_risk_view_form" model="ir.ui.view">
+            <field name="name">tsi.iso.risk.view.form</field>
+            <field name="model">tsi.iso.risk</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="value"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
+
+
+

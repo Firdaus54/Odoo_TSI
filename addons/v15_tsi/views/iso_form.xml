@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="online_appointment_form" name="ISO Application Form">
+        <t t-call="website.layout">
+
+            <div class="container mb64" id="s2u_online_appointment">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <form action="/appointment/submit/" method="post" class="form-horizontal mt32" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div t-if="error_message" class="alert alert-danger" role="alert">
+                                        <t t-foreach="error_message" t-as="err">
+                                            <t t-esc="err"/>
+                                            <br />
+                                        </t>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="alert alert-success">GENERAL INFORMATION</div>
+                                </div>
+
+                                <div class="form-group col-xl-6">
+
+                                    <label cclass="control-label" for="iso_standardx">ISO Standards *</label>
+                                    <div id="fields_permit" class="col-md-7 col-sm-8">
+                                        <select multiple="multiple" name="iso_standardx" class="form-control select2" required="true">
+                                            <t t-foreach="iso_standard" t-as="permit">
+                                                <option t-att-value="permit.id">
+                                                    <t t-esc="permit.name"/>
+                                                </option>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label cclass="control-label" for="certification">Certification Type *</label>
+                                    <div id="certification" class="col-md-7 col-sm-8">
+                                        <select class="form-control" name="certification" required="true">
+                                            <option t-attf-value="single">SINGLE SITE</option>
+                                            <option t-attf-value="multi">MULTI SITE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label class="control-label" for="name">Company Name *</label>
+                                    <div>
+                                        <input type="text" class="form-control" name="company_name" id="company_name" required="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label class="control-label" for="name">Office Address *</label>
+                                    <div>
+                                        <input type="text" class="form-control" name="office_address" t-att-value="office_address" required="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label class="control-label" for="name">Invoice Address *</label>
+                                    <div>
+                                        <input type="text" class="form-control" name="invoicing_address" t-att-value="invoicing_address" required="true"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-xl-6">
+                                    <label for="contact_person">Contact Person *</label>
+                                    <input type="text" class="form-control" name="contact_person" id="contact_person" required="true" />
+                                </div>
+
+                                <div class="form-group col-xl-6">
+                                    <label for="jabatan">Jabatan *</label>
+                                    <input type="text" class="form-control" name="jabatan" id="jabatan" required="true" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="telepon">Telepon *</label>
+                                    <input type="text" class="form-control" name="telepon" id="telepon" required="true" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="fax">Fax *</label>
+                                    <input type="text" class="form-control" name="fax" id="fax" required="true" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="email">Email *</label>
+                                    <input type="text" class="form-control" name="email" id="email" required="true" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="website">Website *</label>
+                                    <input type="text" class="form-control" name="website" id="website" required="true" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="cellular">Cellular *</label>
+                                    <input type="text" class="form-control" name="cellular" id="cellular" required="true" />
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="alert alert-success">Aktivitas Usaha</div>
+                                </div>
+
+                                <div class="form-group col-xl-6">
+                                    <label for="scope">Scope  *</label>
+                                    <input type="text" class="form-control" name="scope" id="scope" required="true" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="boundaries">Boundaries *</label>
+                                    <input type="text" class="form-control" name="boundaries" id="boundaries" required="true" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="isms_doc">Dokumen ISMS</label>
+                                    <input type="text" class="form-control" name="isms_doc" id="isms_doc" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="cause">Clause *</label>
+                                    <input type="text" class="form-control" name="cause" id="cause" required="true" />
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="alert alert-success">JUMLAH PERSONNEL</div>
+                                </div>
+
+                                <div class="form-group col-xl-6">
+                                    <label for="head_office">Head Office</label>
+                                    <input type="text" class="form-control" name="head_office" id="head_office" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="site_office">Site Office</label>
+                                    <input type="text" class="form-control" name="site_office" id="site_office" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="off_location">Off Location</label>
+                                    <input type="text" class="form-control" name="off_location" id="off_location" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="part_time">Part Time</label>
+                                    <input type="text" class="form-control" name="part_time" id="part_time" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="subcon">Subcontract</label>
+                                    <input type="text" class="form-control" name="subcon" id="subcon" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="unskilled">Unskilled</label>
+                                    <input type="text" class="form-control" name="unskilled" id="unskilled" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="seasonal">Seasonal</label>
+                                    <input type="text" class="form-control" name="seasonal" id="seasonal" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="total_emp">Total Personnel</label>
+                                    <input type="text" class="form-control" name="total_emp" id="total_emp" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="shift_number">Shift Number:</label>
+                                    <input type="text" class="form-control" name="shift_number" id="shift_number" />
+                                </div>
+                                <div class="form-group col-xl-6">
+                                    <label for="number_site">Site Number</label>
+                                    <input type="text" class="form-control" name="number_site" id="number_site" />
+                                </div>
+
+                                <t t-if="iso_doctype == 'iso'">
+
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">OUTSOURCING PROCESS</div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="outsource_proc">Outsource Process</label>
+                                        <input type="text" class="form-control" name="outsource_proc" id="outsource_proc" />
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">MANAGEMENT SYSTEM</div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="last_audit">Last Audit</label>
+                                        <input type="text" class="form-control" name="last_audit" id="last_audit" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="last_review">Last Review:</label>
+                                        <input type="text" class="form-control" name="last_review" id="last_review" />
+                                    </div>
+
+
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">MATURITY SYSTEM</div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <input type="checkbox" class="form-control" name="mat_consultancy" id="mat_consultancy">Consultancy</input>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <input type="checkbox" class="form-control" name="mat_certified" id="mat_certified">Maturity Certified</input>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <input type="checkbox" class="form-control" name="mat_certified_cb" id="mat_certified_cb">Certified CB</input>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <input type="checkbox" class="form-control" name="mat_tools" id="mat_tools">Continual Improvement Tools</input>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <input type="checkbox" class="form-control" name="mat_national" id="mat_national">National Certified</input>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <input type="checkbox" class="form-control" name="mat_more" id="mat_more">Setup More Standard</input>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">INTEGRATED AUDIT</div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="int_review">int_review:</label>
+                                        <input type="text" class="form-control" name="int_review" id="int_review" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="int_internal">int_internal:</label>
+                                        <input type="text" class="form-control" name="int_internal" id="int_internal" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="int_policy">int_policy:</label>
+                                        <input type="text" class="form-control" name="int_policy" id="int_policy" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="int_system">int_system:</label>
+                                        <input type="text" class="form-control" name="int_system" id="int_system" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="int_instruction">int_instruction:</label>
+                                        <input type="text" class="form-control" name="int_instruction" id="int_instruction" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="int_improvement">int_improvement:</label>
+                                        <input type="text" class="form-control" name="int_improvement" id="int_improvement" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="int_planning">int_planning:</label>
+                                        <input type="text" class="form-control" name="int_planning" id="int_planning" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="int_support">int_support:</label>
+                                        <input type="text" class="form-control" name="int_support" id="int_support" />
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">ADDITIONAL INFO FORM ISO 14001</div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_14001_environmental">Environmental:</label>
+                                        <input type="text" class="form-control" name="iso_14001_environmental" id="iso_14001_environmental" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_14001_legal">Legal Aspect:</label>
+                                        <input type="text" class="form-control" name="iso_14001_legal" id="iso_14001_legal" />
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">ADDITIONAL INFO FORM ISO 45001</div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_45001_ohs">OHS:</label>
+                                        <input type="text" class="form-control" name="iso_45001_ohs" id="iso_45001_ohs" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_45001_legal">Legal Aspect:</label>
+                                        <input type="text" class="form-control" name="iso_45001_legal" id="iso_45001_legal" />
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success">ADDITIONAL INFO FORM ISO 22000:2018 </div>
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_22000_hazard_no">HAZARD:</label>
+                                        <input type="text" class="form-control" name="iso_22000_hazard_no" id="iso_22000_hazard_no" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_22000_hazard_desc">Description:</label>
+                                        <input type="text" class="form-control" name="iso_22000_hazard_desc" id="iso_22000_hazard_desc" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_22000_process_no">No of Process:</label>
+                                        <input type="text" class="form-control" name="iso_22000_process_no" id="iso_22000_process_no" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_22000_process_desc">Process Description:</label>
+                                        <input type="text" class="form-control" name="iso_22000_process_desc" id="iso_22000_process_desc" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_22000_tech_no">Technologi:</label>
+                                        <input type="text" class="form-control" name="iso_22000_tech_no" id="iso_22000_tech_no" />
+                                    </div>
+                                    <div class="form-group col-xl-6">
+                                        <label for="iso_22000_tech_desc">Description:</label>
+                                        <input type="text" class="form-control" name="iso_22000_tech_desc" id="iso_22000_tech_desc" />
+                                    </div>
+                                </t>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="online_appointment_form_success" name="Application Form Successfully Submitted">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            Application Form submitted.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="tsi_iso_form" name="ISO Application Form">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'isoform'"/>
+
+            <div id="wrap" class="oe_structure oe_empty"/>
+        </t>
+    </template>
+
+    <template id="tsi_ispo_form" name="ISPO Application Form">
+        <t t-call="website.layout">
+            <t t-set="pageName" t-value="'ispoform'"/>
+
+            <div id="wrap" class="oe_structure oe_empty"/>
+        </t>
+    </template>
+
+    <record id="feature_tsi_iso_form" model="website.configurator.feature">
+        <field name="name">About Us</field>
+        <field name="description">Info and stats about your company</field>
+        <field name="iap_page_code">about_us</field>
+        <field name="sequence">1</field>
+        <field name="page_view_id" ref="tsi_iso_form"/>
+        <field name="icon">fa-building</field>
+        <field name="menu_company">True</field>
+        <field name="menu_sequence">50</field>
+        <field name="feature_url">/tsi-iso-form</field>
+    </record>
+
+</odoo>

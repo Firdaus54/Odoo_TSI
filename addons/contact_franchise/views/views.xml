@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Action menu -->
+    <record id="action_contact_franchise" model="ir.actions.act_window">
+        <field name="name">Contacts Franchise</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" ref="base.res_partner_kanban_view"/>
+        <field name="domain">[('is_company', '=', True),('contact_client', '=', False)]</field>
+        <field name="context">{'default_company_type': 'company'}</field>
+    </record>
+
+    <!-- Inherit the form view of res.partner -->
+    <record id="view_partner_form_franchise_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.franchise.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="attrs">{'invisible': ['|',('is_company', '=', False),'&amp;',('is_company', '=', True),('contact_franchise_ids', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <field name="hide_contact_franchisess" invisible="1"/>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <field name="hide_contact_fr" invisible="1"/>
+            </xpath>
+            
+            <xpath expr="//notebook/page[1]" position="after">
+                <page string="Franchise"  attrs="{'invisible': [('hide_contact_franchisess','=',False)]}">
+                <button name="open_contact_franchise_wizard" type="object" string="Add" class="oe_highlight"/>
+                <separator string="" colspan="2"/>
+                    <field name="contact_franchise_ids">
+                        <tree editable="bottom" create="false">
+                            <field name="name_franchise"/>
+                            <field name="address_franchise"/>
+                            <field name="phone_franchise"/>
+                            <field name="email_franchise"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name_franchise"/>
+                                <field name="address_franchise"/>
+                                <field name="phone_franchise"/>
+                                <field name="email_franchise"/>
+                            </group>
+                        </form>
+                    </field>  
+                </page>
+                <page string="Company" attrs="{'invisible': [('hide_contact_fr', '=', False)]}">
+                <button name="open_contact_franchise_wizard" type="object" string="Add" class="oe_highlight"/>
+                <separator string="" colspan="2"/>
+                    <field name="contact_franchise_ids">
+                        <tree editable="bottom" create="false">
+                            <field name="name_franchise"/>
+                            <field name="address_franchise"/>
+                            <field name="phone_franchise"/>
+                            <field name="email_franchise"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name_franchise"/>
+                                <field name="address_franchise"/>
+                                <field name="phone_franchise"/>
+                                <field name="email_franchise"/>
+                            </group>
+                        </form>
+                    </field>  
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action to open wizard -->
+    <record id="action_contact_franchise_wizard" model="ir.actions.act_window">
+        <field name="name">Add Company &amp; Address</field>
+        <field name="res_model">contact.franchise.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <!-- Wizard view -->
+    <record id="view_contact_franchise_wizard_form" model="ir.ui.view">
+        <field name="name">contact.franchise.wizard.form</field>
+        <field name="model">contact.franchise.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Company &amp; Address">
+                <group>
+                    <field name="company_id"/>
+                    <field name="phone_franchise"/>
+                    <field name="email_franchise"/>
+                    <field name="address_franchise"/>
+                </group>
+                <footer>
+                    <button string="Save" type="object" name="action_save_franchise" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+                 
+    <!-- Menu item -->
+    <menuitem id="menu_contact_franchise_root" name="Contacts Franchise" web_icon="contact_franchise,static/description/odoo_icon.png" groups="contact_franchise.group_contact_franchise_admin"/>
+    <menuitem id="menu_contact_franchise" name="Contacts Franchise" parent="menu_contact_franchise_root" action="action_contact_franchise"/>
+</odoo>

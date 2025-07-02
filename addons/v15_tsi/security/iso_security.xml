@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record model="ir.module.category" id="category_iso_localization">
+            <field name="name">Iso Review</field>
+            <field name="description">Category for Management</field>
+        </record>
+
+        <record id="group_iso_review_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="category_iso_localization"/>
+            <field name="implied_ids" eval="[(4, ref('group_iso_review_manager'))]"/>
+        </record>
+
+        <record model="ir.module.category" id="category_iso_form_localization">
+            <field name="name">Form Iso</field>
+            <field name="description">Category for Management</field>
+        </record>
+
+        <record id="group_button_iso_form_manager" model="res.groups">
+            <field name="name">ISO Sales Manager</field>
+            <field name="category_id" ref="category_iso_form_localization"/>
+        </record>
+
+        <record id="group_iso_form_manager" model="res.groups">
+            <field name="name">Sales Manager</field>
+            <field name="category_id" ref="category_iso_form_localization"/>
+        </record>
+
+        <record id="group_iso_form_manager_all" model="res.groups">
+            <field name="name">Sales Manager All</field>
+            <field name="category_id" ref="category_iso_form_localization"/>
+        </record>
+
+        <record id="group_iso_form_manager1" model="res.groups">
+            <field name="name">Team Manager 1</field>
+            <field name="category_id" ref="category_iso_form_localization"/>
+        </record>
+
+        <record id="group_iso_form_manager2" model="res.groups">
+            <field name="name">Team Manager 2</field>
+            <field name="category_id" ref="category_iso_form_localization"/>
+        </record>
+
+        <record id="group_iso_form_manager3" model="res.groups">
+            <field name="name">Team Manager 3</field>
+            <field name="category_id" ref="category_iso_form_localization"/>
+        </record>
+
+        <record id="group_iso_form_manager4" model="res.groups">
+            <field name="name">Team Manager 4</field>
+            <field name="category_id" ref="category_iso_form_localization"/>
+        </record>
+
+        <record id="group_iso_form_manager5" model="res.groups">
+            <field name="name">Team Manager 5</field>
+            <field name="category_id" ref="category_iso_form_localization"/>
+        </record>
+
+        <record model="ir.module.category" id="category_iso_form_localization">
+            <field name="name">Form Iso</field>
+            <field name="description">Category for Management</field>
+        </record>
+
+        <record id="group_iso_form_admin" model="res.groups">
+            <field name="name">Admin Sales</field>
+            <field name="category_id" ref="category_iso_form_localization"/>
+            <field name="implied_ids" eval="[(4, ref('group_iso_form_admin'))]"/>
+        </record>
+
+        <record model="ir.module.category" id="category_iso_menu_localization">
+            <field name="name">Menu</field>
+            <field name="description">Category Menu For Management</field>
+        </record>
+
+        <record id="group_menu_admin" model="res.groups">
+            <field name="name">Admin Sales</field>
+            <field name="category_id" ref="category_iso_menu_localization"/>
+            <field name="implied_ids" eval="[(4, ref('group_menu_admin'))]"/>
+        </record>
+
+    <record model="ir.module.category" id="module_category_tsi">
+        <field name="name">TSI</field>
+        <field name="description">TSI Security</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="group_tsi_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_tsi"/>
+    </record>
+
+    <record id="group_ut_manager" model="res.groups">
+        <field name="name">Operation Manager</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <!-- <record id="group_iso_review_manager" model="res.groups">
+            <field name="name">Manager Review</field>
+            <field name="category_id" ref="module_category_tsi"/>
+            <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record> -->
+
+    <record id="group_admin_iso" model="res.groups">
+        <field name="name">Admin ISO</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_sales" model="res.groups">
+        <field name="name">Sales 1</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="domain_force">[('user_id', '=', 26)]</field>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_admin_ispo" model="res.groups">
+        <field name="name">Admin ISPO</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_menu_admin_ispo" model="res.groups">
+        <field name="name">Menu FORM ISPO</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_manager_ispo" model="res.groups">
+        <field name="name">Manager ISPO</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_admin_operation" model="res.groups">
+        <field name="name">Admin Operation ISO</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_admin_operation_iso" model="res.groups">
+        <field name="name">Admin Operation ISO</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_admin_operation_ispo" model="res.groups">
+        <field name="name">Admin Operation ISPO</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_admin_crm" model="res.groups">
+        <field name="name">Admin CRM</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_admin_crm_1" model="res.groups">
+        <field name="name">CRM</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_admin_pd" model="res.groups">
+        <field name="name">PD Quality Control</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_head_pd" model="res.groups">
+        <field name="name">Head PD</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_pd_dc" model="res.groups">
+        <field name="name">PD Document Control</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_pd_ca" model="res.groups">
+        <field name="name">Control Audit</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_menu_review" model="res.groups">
+        <field name="name">Menu Review</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_menu_line_aktual" model="res.groups">
+        <field name="name">Menu Operation Line Aktual</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_menu_line_initial" model="res.groups">
+        <field name="name">App Form Line Initial</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_menu_line_surveillance" model="res.groups">
+        <field name="name">App Form Line Surveillance</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="group_menu_audit_request" model="res.groups">
+        <field name="name">Menu Audit Request</field>
+        <field name="category_id" ref="module_category_tsi"/>
+        <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+
+    <record id="access_application_form_user" model="ir.model.access">
+        <field name="name">access.application.form.user</field>
+        <field name="model_id" ref="model_tsi_iso"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <record id="tsi_history_kontrak_admin_crm_access" model="ir.model.access">
+        <field name="name">tsi.history_kontrak access</field>
+        <field name="model_id" ref="model_tsi_history_kontrak"/>
+        <field name="group_id" ref="v15_tsi.group_admin_crm_1"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="0"/>  <!-- Tidak bisa delete -->
+    </record>
+
+        <!-- Record Rule -->
+        <record id="application_form_user_rule" model="ir.rule">
+            <field name="name">Application Form User Rule</field>
+            <field name="model_id" ref="model_tsi_iso"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="sales_manager_rule" model="ir.rule">
+            <field name="name">Sales Manager Access Rule</field>
+            <field name="model_id" ref="model_tsi_iso"/>
+        </record>
+    
+    <record model="ir.module.category" id="group_iso_form_review">
+        <field name="name">Iso Form Review</field>
+        <field name="description">Iso Form Review</field>
+    </record>
+    <record id="group_iso_form_review_27001_20000" model="res.groups">
+        <field name="name">Iso Form Review 27001_20000</field>
+        <field name="category_id" ref="group_iso_form_review"/>
+    </record>
+    <record id="group_iso_form_review_haccp_22000" model="res.groups">
+        <field name="name">Iso Form Review HACCP_22000</field>
+        <field name="category_id" ref="group_iso_form_review"/>
+    </record>
+    <record id="group_iso_form_review_all" model="res.groups">
+        <field name="name">Iso Form Review All</field>
+        <field name="category_id" ref="group_iso_form_review"/>
+    </record>
+    <record id="group_iso_review_manager" model="res.groups">
+            <field name="name">Manager Review</field>
+            <field name="category_id" ref="group_iso_form_review"/>
+            <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+    </record>
+    <!-- <record id="rule_sales_order_user_self" model="ir.rule">
+        <field name="name">Akses Sale Order untuk User yang Login</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="domain_force">[('sales_person', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
+    </record>
+    <record id="rule_sales" model="ir.rule">
+        <field name="name">Akses Sales</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="domain_force">['|',('sales_person','=',user.id),('sales_person','=',False)]</field>
+        <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+    </record> -->
+
+    </data>
+</odoo>

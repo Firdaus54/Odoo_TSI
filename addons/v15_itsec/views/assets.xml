@@ -1,0 +1,165 @@
+<odoo>
+  <data>
+    <!-- Assets REGISTER -->
+    <record model="ir.ui.view" id="assets_register_tree">
+      <field name="name">assets.register.tree</field>
+      <field name="model">assets.register</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="doc_no"/>
+          <field name="klasifikasi"/>
+          <field name="kode"/>
+          <field name="layanan"/>
+          <field name="name"/>
+          <field name="pemilik"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="assets_register_action">
+      <field name="name">Assets Register</field>
+      <field name="res_model">assets.register</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="assets_register_form">
+        <field name="name">assets.register.form</field>
+        <field name="model">assets.register</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4" string="Documents">
+                        <field name="doc_no"/>
+                        <field name="rev_no"/>
+                        <field name="tanggal"/>
+                        <field name="klasifikasi"/>
+                    </group>
+                    <group col="4" string="Assets">
+                        <field name="kode"/>
+                        <field name="layanan"/>
+                        <field name="name"/>
+                        <field name="sub_klasifikasi"/>
+                        <field name="pemilik"/>
+                        <field name="pemegang"/>
+                        <field name="lokasi"/>
+                        <field name="masa_berlaku"/>
+                        <field name="metode"/>
+                    </group>
+                    <group>
+                        <field name="confidentiality"   style="width:40%%" />
+                        <field name="integrity"         style="width:40%%"/>
+                        <field name="availability"      style="width:40%%"/>
+                        <field name="value"             style="width:40%%"/>                        
+                    </group>                
+                    <group>
+                        <field name="keterangan" />
+                    </group>                
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>    
+
+    <!-- Access Matrix -->
+    <record model="ir.ui.view" id="access_tree">
+      <field name="name">access.tree</field>
+      <field name="model">assets.access</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="unit_kerja"/>
+          <field name="sub_unit_kerja"/>
+          <field name="user_level"/>
+          <field name="role"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="access_action">
+      <field name="name">Access Matrix</field>
+      <field name="res_model">assets.access</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="access_form">
+        <field name="name">access.form</field>
+        <field name="model">assets.access</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="unit_kerja"/>
+                      <field name="sub_unit_kerja"/>
+                      <field name="user_level"/>
+                      <field name="role"/>
+                    </group>
+                    <notebook>
+                        <page string="Access">
+                            <field name="access_line">
+                                <tree editable="bottom">
+                                    <field name="access_name"/>
+                                    <field name="access_c"/>
+                                    <field name="access_r"/>
+                                    <field name="access_u"/>
+                                    <field name="access_d"/>
+                                    <field name="access_r_1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Role Member">
+                            <field name="pegawai_line">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="work_email"/>
+                                </tree>
+                            </field>
+                        </page>                        
+                    </notebook>                    
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>    
+
+    <!-- assets.def_asset tree view -->
+    <record id="def_asset_view_tree" model="ir.ui.view">
+      <field name="name">assets.def_asset.view.tree</field>
+      <field name="model">assets.def_asset</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+        </tree>
+      </field>
+    </record>
+
+    <!-- assets.def_asset action window -->
+    <record id="def_asset_action" model="ir.actions.act_window">
+      <field name="name">Access List</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">assets.def_asset</field>
+      <field name="view_mode">tree,form</field>
+      
+    </record>
+
+    <!-- assets.def_asset form view -->
+    <record id="def_asset_view_form" model="ir.ui.view">
+      <field name="name">assets.def_asset.view.form</field>
+      <field name="model">assets.def_asset</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+              <field name="name" />              
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+  </data>
+</odoo>

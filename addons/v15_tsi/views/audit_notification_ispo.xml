@@ -1,0 +1,153 @@
+<odoo>
+    <data>
+
+        <!-- audit.notification action window -->
+        <record id="audit_notification_ispo_action" model="ir.actions.act_window">
+            <field name="name">Audit Status ISPO</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">audit.notification.ispo</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- audit.notification tree view -->
+        <record id="audit_notification_ispo_view_tree" model="ir.ui.view">
+            <field name="name">Audit Status ISPO</field>
+            <field name="model">audit.notification.ispo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="ispo_reference"/>
+                    <field name="customer"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                    <field name="audit_state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- audit.notification form view -->
+        <record id="audit_notification_ispo_view_form" model="ir.ui.view">
+            <field name="name">audit_notification.ispo.view.form</field>
+            <field name="model">audit.notification.ispo</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="ispo_reference"/>
+                            <field name="customer"/>
+                            <field name="sales_order_id"/>
+                            <field name="tipe_pembayaran"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                        </group>
+                        <group string="Audit Program">
+                            <field name="program_lines" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                                    <field name="state"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="iso_standard_ids" widget="many2many_tags"/>
+                                        <field name="state"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+
+                        <group string="Audit Plan">
+                            <field name="plan_lines" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                                    <field name="state"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="iso_standard_ids" widget="many2many_tags"/>
+                                        <field name="state"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group string="Audit Report">
+                            <field name="report_lines" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                                    <field name="state"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="iso_standard_ids" widget="many2many_tags"/>
+                                        <field name="state"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>                        
+                        <group string="Audit Review">
+                            <field name="review_lines" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                                    <field name="state"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="iso_standard_ids" widget="many2many_tags"/>
+                                        <field name="state"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group string="Sertifikat">
+                            <field name="sertifikat_lines" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                                    <field name="state"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="iso_standard_ids" widget="many2many_tags"/>
+                                        <field name="state"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <!-- <group string="Sertifikat Delivery">
+                            <field name="delivery_sertifikat_line" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                                    <field name="state"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="iso_standard_ids" widget="many2many_tags"/>
+                                        <field name="state"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.sequence" id="audit_notification_ispo_seq">
+            <field name="name">Notification</field>
+            <field name="code">audit.notification.ispo</field>
+            <field name="prefix">INF</field>
+            <field name="padding">7</field>
+            <field name="company_id" eval="False" />
+        </record>
+    </data>
+</odoo>

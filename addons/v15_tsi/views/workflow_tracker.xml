@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+
+        <template id="assets_backend_legacy_lazy" name="Workflow Tracker Assets" inherit_id="web.assets_backend_legacy_lazy">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/css" href="/v15_tsi/static/src/css/workflow.css"/>
+            </xpath>
+        </template>
+
+        <record id="view_workflow_tracker_form" model="ir.ui.view">
+            <field name="name">workflow.tracker.form</field>
+            <field name="model">workflow.tracker</field>
+            <field name="arch" type="xml">
+                <form string="Workflow Tracker">
+                    <header>
+                        <button name="next_step" type="object" string="Next Step" class="btn-primary" />
+                        <button name="previous_step" type="object" string="Previous Step" class="btn-secondary" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name" readonly="1" />
+                            <field name="current_step" readonly="1" />
+                            <!-- <field name="step_name" readonly="1" /> -->
+                        </group>
+                        <!-- <div class="workflow-container">
+                            <t t-foreach="object.steps" t-as="step">
+                                <div t-att-class="('step ' + ('completed' if step[0] <= object.current_step else '') + ' ' + ('in_progress' if step[0] == object.current_step else '')).replace('<', '&lt;').replace('>', '&gt;')">
+                                    <span t-esc="step[1]" />
+                                </div>
+                            </t>
+                        </div> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_workflow_tracker_tree" model="ir.ui.view">
+            <field name="name">workflow.tracker.tree</field>
+            <field name="model">workflow.tracker</field>
+            <field name="arch" type="xml">
+                <tree string="Workflow Tracker">
+                    <field name="name" />
+                    <!-- <field name="step_name" /> -->
+                    <field name="current_step" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="workflow_tracker_action" model="ir.actions.act_window">
+            <field name="name">Workflow Tracker</field>
+            <field name="res_model">workflow.tracker</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_workflow_tracker_root" name="Workflow Tracker" sequence="10"/>
+        <menuitem id="menu_workflow_tracker" name="Trackers" parent="menu_workflow_tracker_root" action="workflow_tracker_action"/>
+    </data>
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <record id="view_import_audit_experience_wizard_form" model="ir.ui.view">
+        <field name="name">import.audit.experience.wizard.form</field>
+        <field name="model">import.audit.experience.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Audit Experience">
+                <group>
+                    <field name="file" filename="file_name"/>
+                    <field name="emp_audit_id" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="action_import"
+                            string="Import"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_audit_experience_wizard" model="ir.actions.act_window">
+        <field name="name">Import Audit Experience</field>
+        <field name="res_model">import.audit.experience.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_import_audit_experience_wizard_form"/>
+        <field name="target">new</field>
+    </record> -->
+
+
+    <!-- <record id="view_wizard_audit_log_form" model="ir.ui.view">
+        <field name="name">view.wizard.audit.log.form</field>
+        <field name="model">tsi.wizard.audit.log</field>
+        <field name="arch" type="xml">
+            <form string="Import Audit Experience">
+                <group>
+                    <field name="file" filename="file_name"/>
+                    <field name="emp_audit_id" invisible="1"/>
+                </group>
+                <footer>
+                    <a href="/download/template_audit_log" target="_blank"
+                        class="btn btn-secondary o_form_button o_form_button_import">
+                        <i class="fa fa-download"/> Download Template
+                    </a>
+                    <button name="action_import"
+                            string="Import"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_wizard_audit_skill_form" model="ir.ui.view">
+        <field name="name">view.wizard.audit.skill.form</field>
+        <field name="model">tsi.wizard.audit.skill</field>
+        <field name="arch" type="xml">
+            <form string="Import Audit Experience">
+                <group>
+                    <field name="file" filename="file_name"/>
+                    <field name="qms_extra_id6" invisible="1"/>
+                </group>
+                <footer>
+                    <a href="/download/template_audit_skill" target="_blank"
+                        class="btn btn-secondary o_form_button o_form_button_import">
+                        <i class="fa fa-download"/> Download Template
+                    </a>
+                    <button name="action_import"
+                            string="Import"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record> -->
+
+    <record id="view_wizard_personal_information_form" model="ir.ui.view">
+        <field name="name">tsi.wizard.personal.information.form</field>
+        <field name="model">tsi.wizard.personal.information</field>
+        <field name="arch" type="xml">
+            <form string="Import Personal Information">
+                <group>
+                    <field name="data_type"/>
+                    <field name="employee_id"/>
+                    <field name="file" filename="filename"/>
+                </group>
+                <footer>
+                    <button name="action_download_template" type="object" string="Download Template" class="btn-secondary"/>
+                    <button name="action_import_file" type="object" string="Import File" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

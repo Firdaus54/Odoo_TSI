@@ -1,0 +1,349 @@
+<odoo>
+    <data>
+
+        <!-- ops.plan form view -->
+        <record id="ops_plan_view_form" model="ir.ui.view">
+            <field name="name">ops.plan.view.form</field>
+            <field name="model">ops.plan</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="set_to_confirm" states="new" string="Confirm" type="object" class="oe_highlight" />
+                        <button name="set_to_done" states="confirm" string="Done" type="object" class="oe_highlight"/>
+                        <button name="set_to_draft" states="confirm,done" string="Reset" type="object" />
+                        <field name="state" widget="statusbar" statusbar_visible="new,confirm,waiting_finance,done"/>
+                        <button name="generate_stage1_report" string="Stage-01" type="object" class="btn-primary" attrs="{'invisible': [('audit_stage','!=','Stage-01')]}"/>
+                        <button name="generate_stage2_report" string="Stage-02" type="object" class="btn-primary" attrs="{'invisible': [('audit_stage','!=','Stage-02')]}"/>
+                        <button name="generate_survilance1_report" string="Surveillance1" type="object" class="btn-primary" attrs="{'invisible': [('audit_stage','!=','Survillance-1')]}"/>
+                        <button name="generate_survilance2_report" string="Surveillance2" type="object" class="btn-primary" attrs="{'invisible': [('audit_stage','!=','Survillance-2')]}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <!-- <field name="program_id"/> -->
+                        </group>
+                        <group col="4" string="Sales Related">
+                            <field name="contract_number"/>
+                            <field name="contract_date"/>
+                            <field name="iso_reference"/>
+                            <field name="customer"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                            <field name="contact_person"/>
+                            <field name="telepon"/>
+                            <!-- <field name="head_office"/>
+                            <field name="site_office"/>
+                            <field name="off_location"/>
+                            <field name="part_time"/>
+                            <field name="subcon"/>
+                            <field name="unskilled"/> -->
+                            <!-- <field name="seasonal"/> -->
+                            <!-- <field name="total_emp"/> -->
+                            <field name="scope"/>
+                            <field name="boundaries"/>
+                            <field name="ea_code"/>
+                            <field name="ea_code_plan" widget="many2many_tags"/>
+                            <field name="type_client"/>
+                            <!-- <field name="apprev_date"/> -->
+                        </group>
+                        <group>
+                            <field name="dokumen_sosialisasi" filename="file_name1"/>
+                            <field name="file_name1"   invisible="1"/>
+                        </group>
+
+                        <notebook>
+                            <page name="form_detail" string="Forms">
+                                <group col="4" string="Audit">
+                                    <!-- <field name="contract_number"/> -->
+                                    <field name="audit_stage"/>
+                                    <field name="audit_start"/>
+                                    <field name="audit_end"/>
+                                    <field name="certification_type"/>
+                                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                                    <field name="audit_criteria"/>
+                                    <field name="audit_method"/>
+                                    <field name="auditor_lead"/>
+                                    <field name="technical_expert"/>
+                                    <field name="auditor_1"/>
+                                    <field name="auditor_2"/>
+                                    <field name="auditor_3"/>
+                                    <!-- <field name="program_id" invisible="1"/>   -->
+                                </group>
+                                <group col="4" string="Others">
+
+                                    <field name="kan_function"/>
+                                    <field name="kan_1"/>
+                                    <field name="kan_2"/>
+                                </group>                                
+                            </page>
+                            <page name="str_objectives" string="Objectives">
+                                <group>
+                                    <field name="audit_objectives" nolabel="1">
+                                        <tree>
+                                            <field name="audit_stage"/>
+                                            <field name="name"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="audit_stage"/>
+                                                <field name="name"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="plan_detail_ids" string="Details">
+                                <group>
+                                    <field name="plan_detail_ids" nolabel="1">
+                                        <tree>
+                                            <field name="auditor"/>
+                                            <field name="time"/>
+                                            <field name="function"/>
+                                            <field name="agenda"  widget="many2many_tags"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="auditor"/>
+                                                <field name="time"/>
+                                                <field name="function"/>
+                                                <field name="agenda"  widget="many2many_tags"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- ops.plan tree view -->
+        <record id="ops_plan_view_tree" model="ir.ui.view">
+            <field name="name">ops.plan.view.tree</field>
+            <field name="model">ops.plan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="iso_reference"/>
+                    <field name="customer"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                    <field name="audit_stage"/>
+                    <field name="state" widget="badge" decoration-success = "state == 'done'" decoration-info = "state == 'waiting_finance' or state == 'confirm'"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ops.plan action window -->
+        <record id="ops_plan_action" model="ir.actions.act_window">
+            <field name="name">Audit plan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ops.plan</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="domain">[('state', '!=', 'done')]</field> Menyaring record dengan status 'done' -->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="ops_plan_seq">
+            <field name="name">plan</field>
+            <field name="code">ops.plan</field>
+            <field name="prefix">PLX</field>
+            <field name="padding">7</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+        <!-- ops.objectives action window -->
+        <record id="ops_objectives_action" model="ir.actions.act_window">
+            <field name="name">Objectives</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ops.objectives</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- ops.objectives tree view -->
+        <record id="ops_objectives_view_tree" model="ir.ui.view">
+            <field name="name">ops.objectives.view.tree</field>
+            <field name="model">ops.objectives</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Add your fields here -->
+                    <field name="audit_stage"/>
+                    <field name="name"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- ops.objectives form view -->
+        <record id="ops_objectives_view_form" model="ir.ui.view">
+            <field name="name">ops.objectives.view.form</field>
+            <field name="model">ops.objectives</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <!-- Add your fields here -->
+                            <field name="audit_stage"/>
+                            <field name="name"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ops_plan_function_action" model="ir.actions.act_window">
+            <field name="name">Function</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ops.plan_function</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="ops_plan_function_view_tree" model="ir.ui.view">
+            <field name="name">ops.plan_function.view.tree</field>
+            <field name="model">ops.plan_function</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Add your fields here -->
+                    <field name="name"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="ops_plan_function_view_form" model="ir.ui.view">
+            <field name="name">ops.plan_function.view.form</field>
+            <field name="model">ops.plan_function</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <!-- Add your fields here -->
+                            <field name="name"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="ops_plan_agenda_action" model="ir.actions.act_window">
+            <field name="name">Agenda</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ops.plan_agenda</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="ops_plan_agenda_view_tree" model="ir.ui.view">
+            <field name="name">ops.plan_agenda.view.tree</field>
+            <field name="model">ops.plan_agenda</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Add your fields here -->
+                    <field name="kode"/>
+                    <field name="name"/>
+                    <!-- <field name="iso_standard_ids" widget="many2many_tags"/> -->
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="ops_plan_agenda_view_form" model="ir.ui.view">
+            <field name="name">ops.plan_agenda.view.form</field>
+            <field name="model">ops.plan_agenda</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <!-- Add your fields here -->
+                            <field name="kode"/>
+                            <field name="name"/>
+                            <!-- <field name="iso_standard_ids" widget="many2many_tags"/> -->
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="report_plan_stage1" model="ir.actions.report">
+            <field name="name">Stage 1</field>
+            <field name="model">ops.plan</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.report_plan_stage1</field>
+            <field name="report_file">v15_tsi.report_plan_stage1</field>
+            <field name="binding_model_id" ref="model_ops_plan"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_plan_stage2" model="ir.actions.report">
+            <field name="name">Stage 2</field>
+            <field name="model">ops.plan</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.report_plan_stage2</field>
+            <field name="report_file">v15_tsi.report_plan_stage2</field>
+            <field name="binding_model_id" ref="model_ops_plan"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_plan_surveillance1" model="ir.actions.report">
+            <field name="name">Surviellance-1</field>
+            <field name="model">ops.plan</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.report_plan_surveillance1</field>
+            <field name="report_file">v15_tsi.report_plan_surveillance1</field>
+            <field name="binding_model_id" ref="model_ops_plan"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="report_plan_surveillance2" model="ir.actions.report">
+            <field name="name">Surviellance-2</field>
+            <field name="model">ops.plan</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.report_plan_surveillance2</field>
+            <field name="report_file">v15_tsi.report_plan_surveillance2</field>
+            <field name="binding_model_id" ref="model_ops_plan"/>
+            <field name="binding_type">report</field>
+        </record>
+        
+        <record id="report_plan_recertification" model="ir.actions.report">
+            <field name="name">Recertification</field>
+            <field name="model">ops.plan</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">v15_tsi.report_plan_recertification</field>
+            <field name="report_file">v15_tsi.report_plan_recertification</field>
+            <field name="binding_model_id" ref="model_ops_plan"/>
+            <field name="binding_type">report</field>
+        </record>
+        
+        <record id="ops_plan_view_search" model="ir.ui.view">
+			<field name="name">ops.plan.view.search</field>
+			<field name="model">ops.plan</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<search string="Operation Plan Filter">
+					<!-- <field name="nama_klien"/> -->
+                    <field name="name"/>
+					<field name="customer"/>
+				</search>
+			</field>
+		</record>
+
+    </data>
+</odoo>

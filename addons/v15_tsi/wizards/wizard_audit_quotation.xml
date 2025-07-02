@@ -1,0 +1,27 @@
+<odoo>
+
+	<record id="tsi_wizard_audit_quotation_view" model="ir.ui.view">
+		<field name="name">Create Quotation</field>
+		<field name="model">tsi.wizard_audit_quotation</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="partner_id"/>
+					<field name="doctype"/>
+					<field name="iso_standard_ids" widget="many2many_tags"/>
+				</group>
+				<group col="4" string="Reference">
+					<field name="iso_reference"/>
+					<field name="sales_reference"/>
+					<field name="review_reference" widget="many2many_tags"/>
+				</group>
+				<footer>
+					<button name="send" string="Confirm" class="btn-primary" type="object" />
+					<button string="Cancel" class="btn-secondary" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+</odoo>

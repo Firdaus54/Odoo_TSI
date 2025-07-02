@@ -1,0 +1,10 @@
+<odoo>
+  <data>
+    <menuitem name="Tender"   id="tad_menu_root" web_icon="v14_tad_crm,static/description/icon.png" />
+
+    <menuitem name="Tender"   id="tad_menu_1" parent="tad_menu_root"  />
+
+    <menuitem name="Data Tender"           id="tad_menu_1_list_1" parent="tad_menu_1" action="act_tender_window"/>
+
+  </data>
+</odoo>

@@ -1,0 +1,7 @@
+/* Jika checkbox dicentang, ubah warna jadi hijau */
+
+.o_list_view .o_data_row.highlight-checked {
+    font-weight: bold;
+    border: 2px solid #2ecc71;
+    background-color: #e8f8f5;
+}

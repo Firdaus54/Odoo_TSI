@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tad_tender,access_tad_tender,model_tad_tender,base.group_user,1,1,1,1
+access_tad_jadwal,access_tad_jadwal,model_tad_jadwal,base.group_user,1,1,1,1
+access_tad_lampiran,access_tad_lampiran,model_tad_lampiran,base.group_user,1,1,1,1

@@ -1,0 +1,1729 @@
+<odoo>
+    <data>
+
+        <!-- tsi.iso.review action window -->
+        <record id="tsi_iso_review_action" model="ir.actions.act_window">
+            <field name="name">Application Review</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.iso.review</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="tsi_iso_kontrak_seq">
+            <field name="name">iso_kontrak</field>
+            <field name="code">tsi.iso.kontrak</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+        <record model="ir.sequence" id="tsi_ispo_kontrak_seq">
+            <field name="name">ispo_kontrak</field>
+            <field name="code">tsi.ispo.kontrak</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+        <record id="iso_review_view_search" model="ir.ui.view">
+			<field name="name">iso.review.view.search</field>
+			<field name="model">tsi.iso.review</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<search string="ISO Review Filter">
+					<!-- <field name="nama_klien"/> -->
+                    <field name="name"/>
+					<field name="customer"/>
+				</search>
+			</field>
+		</record>
+
+
+        <!-- tsi.iso.review tree view -->
+        <record id="tsi_iso_review_view_tree" model="ir.ui.view">
+            <field name="name">tsi.iso.review.view.tree</field>
+            <field name="model">tsi.iso.review</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <header>
+                        <button name="create_quotation"    string="Create Quotation" type="object" />
+                        <button name="action_create_kontrak"    string="Create Kontrak" type="object" />
+                    </header>
+
+                    <field name="name"/>
+                    <field name="customer"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                    <field name="received_date"/>
+                    <field name="review_date"/>
+                    <!-- <field name="review_by"/> -->
+                    <field name="finish_date"/>
+                    <!-- <field name="tgl_perkiraan_mulai" /> -->
+                    <field name="tgl_perkiraan_selesai"/>
+                    <!-- <field name="doctype"/> -->
+                    <field name="state" widget="badge" decoration-success = "state == 'approved'" decoration-danger = "state == 'reject'" decoration-info = "state == 'revice'"/>
+                    <field name="state_sales" decoration-success="state_sales == 'sale' or state_sales == 'done'" decoration-info="state_sales == 'draft' or state_sales == 'sent' or state_sales == 'create_kontrak'" decoration-danger = "state_sales == 'cancel' or state_sales == 'application_form'" widget="badge" placeholder="New"/>
+                    <field name="audit_status" widget="badge" decoration-muted="audit_status == 'draft'" decoration-info="audit_status == 'Stage-1' or audit_status == 'Stage-2' or audit_status == 'recommendation'" decoration-primary="audit_status == 'plan'" decoration-warning="audit_status == 'report' or audit_status == 'certificate'" decoration-success="audit_status == 'done'" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="tsi_iso_review_seq">
+            <field name="name">iso</field>
+            <field name="code">tsi.iso.review</field>
+            <field name="prefix">REV</field>
+            <field name="padding">7</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+        <!-- tsi.iso.review form view -->
+        <record id="tsi_iso_review_view_form" model="ir.ui.view">
+            <field name="name">tsi.iso.review.view.form</field>
+            <field name="model">tsi.iso.review</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="set_to_running" states="new,revice" string="Approved" type="object" class="oe_highlight" groups="v15_tsi.group_iso_review_manager"/>
+                        <!-- <button name="set_to_closed" states="review" string="Approved" type="object" class="oe_highlight"/> -->
+                        <button name="set_to_reject" states="new,revice" string="Reject" type="object" groups="v15_tsi.group_iso_review_manager" />
+                        <button name="set_to_revice" string="Revise" states="reject" type="object"/>
+                        <!-- <button name="set_to_draft" string="Reset" type="object" /> -->
+                        <!-- <button name="set_to_draft" states="reject" string="Submit" type="object" /> -->
+                        <field name="state" widget="statusbar" statusbar_visible="new,approved"/>
+                    </header>
+
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                            <field name="reference"/>
+                            <field name="received_date"/>
+                            <field name="review_date"/>
+                            <field name="finish_date" attrs="{'invisible': [('state', '!=', 'approved')]}"/>
+                            <!-- <field name="tgl_perkiraan_mulai" /> -->
+                            <field name="tgl_perkiraan_selesai"/>
+                        </group>
+
+                        <group col="4" string="Customer Information">
+                            <!-- <field name="reference"/> -->
+                            <field name="customer"/>
+                            <field name="office_address"/>
+                            <field name="invoicing_address"/>
+                            <field name="contact_person" />
+                            <field name="jabatan" />
+                            <field name="telepon" />
+                            <field name="fax" />
+                            <field name="email" />
+                            <field name="website" />
+                            <field name="doctype" attrs="{'invisible':True}"/>
+                            <field name="show_salesinfo" attrs="{'invisible':True}"/>
+                            <field name="show_14001" attrs="{'invisible':True}"/>
+                            <field name="show_45001" attrs="{'invisible':True}"/>
+                            <field name="show_27001" attrs="{'invisible':True}"/>
+                            <field name="show_27701" attrs="{'invisible':True}"/>
+                            <field name="show_27017" attrs="{'invisible':True}"/>
+                            <field name="show_27018" attrs="{'invisible':True}"/>
+                            <field name="show_27001_2022" attrs="{'invisible':True}"/>
+                            <field name="show_31000" attrs="{'invisible':True}"/>
+                            <field name="show_9994" attrs="{'invisible':True}"/>
+                            <field name="show_haccp" attrs="{'invisible':True}"/>
+                            <field name="show_22000" attrs="{'invisible':True}"/>
+                            <field name="show_fscc" attrs="{'invisible':True}"/>
+                            <field name="show_ispo" attrs="{'invisible':True}"/>
+                            <field name="show_37001" attrs="{'invisible':True}"/>
+                            <field name="show_22301" attrs="{'invisible':True}"/>
+                            <field name="show_13485" attrs="{'invisible':True}"/>
+                            <field name="show_smk" attrs="{'invisible':True}"/>
+                            <field name="show_19649" attrs="{'invisible':True}"/>
+                            <field name="show_ce" attrs="{'invisible':True}"/>
+                            <field name="show_19650" attrs="{'invisible':True}"/>
+                            <field name="show_196502" attrs="{'invisible':True}"/>
+                            <field name="show_196503" attrs="{'invisible':True}"/>
+                            <field name="show_196504" attrs="{'invisible':True}"/>
+                            <field name="show_196505" attrs="{'invisible':True}"/>
+                            <field name="show_21000" attrs="{'invisible':True}"/>
+                            <field name="show_37301" attrs="{'invisible':True}"/>
+                            <field name="show_gdp" attrs="{'invisible':True}"/>
+                            <field name="show_56001" attrs="{'invisible':True}"/>
+                            <field name="show_integreted_yes" attrs="{'invisible':True}"/>
+                            <!-- <field name="customer"/> -->
+                            <!-- <field name="alt_scope_id"/> -->
+                            <!-- <field name="boundaries"    attrs="{'invisible':[('doctype', '!=', 'iso')]}"/>
+                            <field name="audit_type"/>
+                            <field name="certification"/>
+                            <field name="proposed_aspect"/>
+                            <field name="allowed_sampling" attrs="{'invisible':[('certification', '=', 'single')]}"/>
+                            <field name="accreditation"    attrs="{'invisible':[('doctype', '!=', 'iso')]}"/> -->
+                            <field name="doctype" attrs="{'invisible':True}"/>
+                        </group>
+                        <group col="4" string="Scope and Boundaries">
+                            <field name="scope"/>
+                            <field name="boundaries"/>
+                            <!-- <field name="cause"/> -->
+                            <!-- <field name="isms_doc" attrs="{'readonly': [('state','=','verifikasi')]}"/> -->
+                        </group>
+
+                        <group col="4" string="Management system standard(s)">
+                            <field name="iso_standard_ids" widget="many2many_tags" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="stage_audit" />
+                            <field name="certification" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="tx_site_count" />
+                            <field name="tx_remarks" />
+                            <field name="upload_file" filename="file_name"/>
+                            <field name="file_name" invisible="1"/>
+                            <!-- <field name="iso_standard_other" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <field name="audit_similarities" attrs="{'invisible':[('doctype', '!=', 'iso')]}"/>
+                            <field name="accreditation" attrs="{'invisible':[('doctype', '!=', 'iso')]}"/> -->
+
+                        </group>
+
+                        <group>
+                            <field name="partner_site">
+                                <tree>
+                                    <field name="type"/>
+                                    <field name="address"/>
+                                    <field name="product"/>
+                                    <field name="total_active"/>
+                                    <field name="total_emp"/>
+                                    <field name="emp_total"/>
+                                    <field name="permanent"/>
+                                    <field name="subcon"/>
+                                    <field name="other"/>
+                                    <field name="remarks"/>
+                                    <!-- <field name="unskilled"/>
+                                    <field name="seasonal"/> -->
+                                    <field name="non_shift"/>
+                                    <field name="shift1"/>
+                                    <field name="shift2"/>
+                                    <field name="shift3"/>
+                                    <field name="differs"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="type"/>
+                                        <field name="address"/>
+                                        <field name="product"/>
+                                        <field name="total_active"/>
+                                        <field name="total_emp"/>
+                                        <field name="emp_total"/>
+                                        <field name="permanent"/>
+                                        <field name="subcon"/>
+                                        <field name="other"/>
+                                        <field name="remarks"/>
+                                        <!-- <field name="unskilled"/>
+                                        <field name="seasonal"/> -->
+                                        <field name="non_shift"/>
+                                        <field name="shift1"/>
+                                        <field name="shift2"/>
+                                        <field name="shift3"/>
+                                        <field name="differs"/>
+                                    </group>
+                                </form>
+                            </field>
+                            <field name="outsourced_activity" />
+                        </group>
+
+                        <group string="Please complete information about maturity of  your management system">
+                            <field name="start_implement" attrs="{'readonly': [('state','=','verifikasi')]}"/>
+                            <label for="mat_consultancy" />
+                            <div >
+                                <field name="mat_consultancy" class="oe_inline"/><![CDATA[&nbsp;]]>
+                                <field name="txt_mat_consultancy" attrs="{'invisible': [('mat_consultancy','!=','YES')]}" nolabel="1"/>
+                            </div>
+
+                            <label for="mat_certified" />
+                            <div >
+                                <field name="mat_certified" class="oe_inline"/><![CDATA[&nbsp;]]>
+                                <field name="txt_mat_certified" attrs="{'invisible': [('mat_certified','!=','YES')]}" nolabel="1"/>
+                            </div>
+
+                            <label for="other_system" />
+                            <div >
+                                <field name="other_system" class="oe_inline"/>
+                            </div>
+
+                            <!-- <label for="mat_tools"/>
+                            <div style="width:100%">
+                                <field name="mat_tools" class="oe_inline"/><![CDATA[&nbsp;]]>
+                                <field name="txt_mat_tools" attrs="{'invisible': [('mat_tools','!=','YES')]}" nolabel="1"/>
+                            </div>
+
+                            <label for="mat_national" />
+                            <div >
+                                <field name="mat_national" class="oe_inline"/><![CDATA[&nbsp;]]>
+                                <field name="txt_mat_national" attrs="{'invisible': [('mat_national','!=','YES')]}" nolabel="1"/>
+                            </div>
+
+                            <label for="mat_more" />
+                            <div >
+                                <field name="mat_more" class="oe_inline"/><br/>
+                                <field name="txt_mat_more" attrs="{'invisible': [('mat_more','!=','YES')]}" nolabel="1"/>
+                            </div> -->
+
+                        </group>
+                        <group col="4" string="Integrated Audit"> <field name="integreted_audit"/>
+                            <field name="int_review"  attrs="{'invisible': [('integreted_audit', '!=', 'YES')]}" default='YES'/>
+                            <field name="int_planning" attrs="{'invisible': [('integreted_audit', '!=', 'YES')]}" default='YES'/>
+                            <field name="int_internal" attrs="{'invisible': [('integreted_audit', '!=', 'YES')]}" default='YES'/>
+                            <field name="int_policy" attrs="{'invisible': [('integreted_audit', '!=', 'YES')]}" default='YES'/>
+                            <field name="int_system" attrs="{'invisible': [('integreted_audit', '!=', 'YES')]}" default='YES'/>
+                            <field name="int_instruction" attrs="{'invisible': [('integreted_audit', '!=', 'YES')]}" default='YES'/>
+                            <field name="int_improvement" attrs="{'invisible': [('integreted_audit', '!=', 'YES')]}" default='YES'/>
+                            <!-- <field name="int_support" attrs="{'invisible': [('integreted_audit', '!=', 'YES')]}" default='YES'/> -->
+                        </group>
+
+                        <group col="4" string="Additional Information for ISO 9001" attrs="{'invisible':[('show_salesinfo', '=', False)]}">
+                            <field name="accreditation"/>
+                            <!-- <field name="ea_code"/> -->
+                            <field name="ea_code_9001" widget="many2many_tags"/>
+                            <field name="complexity"/>
+                            <field name="cause"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_salesinfo', '=', False)]}">
+                            <field name="salesinfo_site">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for ISO 13485" attrs="{'invisible':[('show_13485', '=', False)]}">
+                            <field name="accreditation_13485"/>
+                            <field name="notes_13485"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_13485', '=', False)]}">
+                            <field name="salesinfo_site_13485">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for SMK3" attrs="{'invisible':[('show_smk', '=', False)]}">
+                            <field name="accreditation_13485"/>
+                            <field name="notes_13485"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_smk', '=', False)]}">
+                            <field name="salesinfo_site_13485">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for IATF 16949" attrs="{'invisible':[('show_19649', '=', False)]}">
+                            <field name="accreditation_19649"/>
+                            <field name="notes_19649"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_19649', '=', False)]}">
+                            <field name="salesinfo_site_19649">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for CE Marking" attrs="{'invisible':[('show_ce', '=', False)]}">
+                            <field name="accreditation_ce"/>
+                            <field name="notes_ce"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_ce', '=', False)]}">
+                            <field name="salesinfo_site_ce">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for 19650" attrs="{'invisible':[('show_19650', '=', False)]}">
+                            <field name="accreditation_19650"/>
+                            <field name="notes_19650"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_19650', '=', False)]}">
+                            <field name="salesinfo_site_19650">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for 19650-2" attrs="{'invisible':[('show_196502', '=', False)]}">
+                            <field name="accreditation_196502"/>
+                            <field name="notes_196502"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_196502', '=', False)]}">
+                            <field name="salesinfo_site_196502">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for 19650-3" attrs="{'invisible':[('show_196503', '=', False)]}">
+                            <field name="accreditation_196503"/>
+                            <field name="notes_196503"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_196503', '=', False)]}">
+                            <field name="salesinfo_site_196503">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for 19650-4" attrs="{'invisible':[('show_196504', '=', False)]}">
+                            <field name="accreditation_196504"/>
+                            <field name="notes_196504"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_196504', '=', False)]}">
+                            <field name="salesinfo_site_196504">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for 19650-5" attrs="{'invisible':[('show_196505', '=', False)]}">
+                            <field name="accreditation_196505"/>
+                            <field name="notes_196505"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_196505', '=', False)]}">
+                            <field name="salesinfo_site_196505">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for ISO 21000" attrs="{'invisible':[('show_21000', '=', False)]}">
+                            <field name="accreditation_13485"/>
+                            <field name="notes_13485"/>
+                            <!-- <field name="complexity_13485"/>
+                            <field name="cause_13485"/> -->
+                        </group>
+                        <group attrs="{'invisible':[('show_21000', '=', False)]}">
+                            <field name="salesinfo_site_13485">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for ISO 37301" attrs="{'invisible':[('show_37301', '=', False)]}">
+                            <field name="accreditation_13485"/>
+                            <!-- <field name="ea_code_13485"/> -->
+                            <field name="complexity_13485"/>
+                            <field name="cause_13485"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_37301', '=', False)]}">
+                            <field name="salesinfo_site_13485">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for ISO 37001" attrs="{'invisible':[('show_37001', '=', False)]}">
+                            <field name="accreditation_37001"/>
+                            <field name="notes_37001"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_37001', '=', False)]}">
+                            <field name="salesinfo_site_37001">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information for ISO 22301" attrs="{'invisible':[('show_22301', '=', False)]}">
+                            <field name="accreditation_22301"/>
+                            <field name="notes_22301"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_22301', '=', False)]}">
+                            <field name="salesinfo_site_22301">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group string="Additional Info for ISO 14001" attrs="{'invisible':[('show_14001', '=', False)]}">
+                            <group>
+                                <field name="iso_14001_environmental"/>
+                                <field name="iso_14001_legal"/>
+                            </group>
+                        </group>
+
+                        <group col="4" attrs="{'invisible':[('show_14001', '=', False)]}">
+                            <field name="accreditation_14001"/>
+                            <!-- <field name="ea_code_14001"/> -->
+                            <field name="ea_code_14001_1" widget="many2many_tags"/>
+                            <field name="complexity_14001"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_14001', '=', False)]}">
+                            <field name="salesinfo_site_14001">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+
+
+                        <group string="Additional Info for ISO 45001" attrs="{'invisible':[('show_45001', '=', False)]}">
+                            <field name="iso_45001_key_hazard"/>
+                            <field name="iso_45001_obligation"/>
+                        </group>
+                        <group col="4" attrs="{'invisible':[('show_45001', '=', False)]}">
+                            <field name="accreditation_45001"/>
+                            <!-- <field name="ea_code_45001"/> -->
+                            <field name="ea_code_45001_1" widget="many2many_tags"/>
+                            <field name="complexity_45001"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_45001', '=', False)]}">
+                            <field name="salesinfo_site_45001">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="2" string="Additional Info for ISO 27001" attrs="{'invisible':[('show_27001', '=', False)]}" >
+                            <div style="width: 100%; overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Business Type and regulatory requirements</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_bisnistype" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Process and Tasks</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_process" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Management System establishment level</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_mgmt_system" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of Processes and services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_number_process" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Infrastructure complexity</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_infra" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Dependency on outsourcing and suppliers, including cloud services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_sourcing" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information System development</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itdevelopment" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information security requirements confidentiality, integrity and availability(CIA)</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itsecurity" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of critical assets</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_asset" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of sites and number of Disaster Recovery (DR) sites</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_drc" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                
+                                <label for="additional_27001" style="font-weight: bold; color: #5D8DA8; font-size: 12px;">Additional Info for ISO 27001</label>
+                                <field name="additional_27001" string="Additional Info for ISO 27001">
+                                    <tree>
+                                        <field name="nama_site"/>
+                                        <field name="employee"/>
+                                        <field name="it_aspect"/>
+                                        <field name="it_explanation"/>
+                                        <field name="isms_aspect"/>
+                                        <field name="isms_explanation"/>
+                                        <field name="special"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="nama_site"/>
+                                            <field name="employee"/>
+                                            <field name="it_aspect"/>
+                                            <field name="it_explanation"/>
+                                            <field name="isms_aspect"/>
+                                            <field name="isms_explanation"/>
+                                            <field name="special"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </div>
+                        </group>
+                        <group col="4" attrs="{'invisible':[('show_27001', '=', False)]}">
+                            <field name="accreditation_27001"/>
+                            <!-- <field name="ea_code_27001"/> -->
+                            <field name="ea_code_27001_1" widget="many2many_tags"/>
+                            <field name="complexity_27001"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_27001', '=', False)]}">
+                            <field name="salesinfo_site_27001">
+                                <tree class="custom-margin-bottom">
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="2" string="Additional Info for ISO 27701" attrs="{'invisible':[('show_27701', '=', False)]}" >
+                            <div style="width: 100%; overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Business Type and regulatory requirements</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_bisnistype_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Process and Tasks</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_process_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Management System establishment level</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_mgmt_system_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of Processes and services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_number_process_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Infrastructure complexity</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_infra_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Dependency on outsourcing and suppliers, including cloud services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_sourcing_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information System development</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itdevelopment_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information security requirements confidentiality, integrity and availability(CIA)</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itsecurity_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of critical assets</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_asset_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of sites and number of Disaster Recovery (DR) sites</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_drc_27701" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                
+                                <label for="additional_27701" style="font-weight: bold; color: #5D8DA8; font-size: 12px;">Additional Info for ISO 27701</label>
+                                <field name="additional_27701" string="Additional Info for ISO 27701">
+                                    <tree>
+                                        <field name="nama_site"/>
+                                        <field name="employee"/>
+                                        <field name="it_aspect"/>
+                                        <field name="it_explanation"/>
+                                        <field name="isms_aspect"/>
+                                        <field name="isms_explanation"/>
+                                        <field name="special"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="nama_site"/>
+                                            <field name="employee"/>
+                                            <field name="it_aspect"/>
+                                            <field name="it_explanation"/>
+                                            <field name="isms_aspect"/>
+                                            <field name="isms_explanation"/>
+                                            <field name="special"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </div>
+                        </group>
+                        <group col="4" attrs="{'invisible':[('show_27701', '=', False)]}">
+                            <field name="accreditation_27701"/>
+                            <!-- <field name="ea_code_27701"/> -->
+                            <field name="ea_code_27701_1" widget="many2many_tags"/>
+                            <field name="complexity_27701"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_27701', '=', False)]}">
+                            <field name="salesinfo_site_27701">
+                                <tree class="custom-margin-bottom">
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="2" string="Additional Info for ISO 27017" attrs="{'invisible':[('show_27017', '=', False)]}" >
+                            <div style="width: 100%; overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Business Type and regulatory requirements</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_bisnistype_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Process and Tasks</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_process_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Management System establishment level</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_mgmt_system_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of Processes and services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_number_process_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Infrastructure complexity</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_infra_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Dependency on outsourcing and suppliers, including cloud services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_sourcing_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information System development</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itdevelopment_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information security requirements confidentiality, integrity and availability(CIA)</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itsecurity_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of critical assets</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_asset_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of sites and number of Disaster Recovery (DR) sites</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_drc_27017" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                
+                                <label for="additional_27017" style="font-weight: bold; color: #5D8DA8; font-size: 12px;">Additional Info for ISO 27017</label>
+                                <field name="additional_27017" string="Additional Info for ISO 27017">
+                                    <tree>
+                                        <field name="nama_site"/>
+                                        <field name="employee"/>
+                                        <field name="it_aspect"/>
+                                        <field name="it_explanation"/>
+                                        <field name="isms_aspect"/>
+                                        <field name="isms_explanation"/>
+                                        <field name="special"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="nama_site"/>
+                                            <field name="employee"/>
+                                            <field name="it_aspect"/>
+                                            <field name="it_explanation"/>
+                                            <field name="isms_aspect"/>
+                                            <field name="isms_explanation"/>
+                                            <field name="special"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </div>
+                        </group>
+                        <group col="4" attrs="{'invisible':[('show_27017', '=', False)]}">
+                            <field name="accreditation_27017"/>
+                            <!-- <field name="ea_code_27017"/> -->
+                            <field name="ea_code_27017_1" widget="many2many_tags"/>
+                            <field name="complexity_27017"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_27017', '=', False)]}">
+                            <field name="salesinfo_site_27017">
+                                <tree class="custom-margin-bottom">
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="2" string="Additional Info for ISO 27018" attrs="{'invisible':[('show_27018', '=', False)]}" >
+                            <div style="width: 100%; overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Business Type and regulatory requirements</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_bisnistype_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Process and Tasks</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_process_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Management System establishment level</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_mgmt_system_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of Processes and services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_number_process_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Infrastructure complexity</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_infra_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Dependency on outsourcing and suppliers, including cloud services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_sourcing_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information System development</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itdevelopment_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information security requirements confidentiality, integrity and availability(CIA)</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itsecurity_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of critical assets</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_asset_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of sites and number of Disaster Recovery (DR) sites</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_drc_27018" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                
+                                <label for="additional_27018" style="font-weight: bold; color: #5D8DA8; font-size: 12px;">Additional Info for ISO 27018</label>
+                                <field name="additional_27018" string="Additional Info for ISO 27018">
+                                    <tree>
+                                        <field name="nama_site"/>
+                                        <field name="employee"/>
+                                        <field name="it_aspect"/>
+                                        <field name="it_explanation"/>
+                                        <field name="isms_aspect"/>
+                                        <field name="isms_explanation"/>
+                                        <field name="special"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="nama_site"/>
+                                            <field name="employee"/>
+                                            <field name="it_aspect"/>
+                                            <field name="it_explanation"/>
+                                            <field name="isms_aspect"/>
+                                            <field name="isms_explanation"/>
+                                            <field name="special"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </div>
+                        </group>
+                        <group col="4" attrs="{'invisible':[('show_27018', '=', False)]}">
+                            <field name="accreditation_27018"/>
+                            <!-- <field name="ea_code_27018"/> -->
+                            <field name="ea_code_27018_1" widget="many2many_tags"/>
+                            <field name="complexity_27018"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_27018', '=', False)]}">
+                            <field name="salesinfo_site_27018">
+                                <tree class="custom-margin-bottom">
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="2" string="Additional Info for ISO 27001" attrs="{'invisible':[('show_27001_2022', '=', False)]}" >
+                            <div style="width: 100%; overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Business Type and regulatory requirements</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_bisnistype_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Process and Tasks</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_process_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Management System establishment level</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_mgmt_system_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of Processes and services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_number_process_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Infrastructure complexity</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_infra_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Dependency on outsourcing and suppliers, including cloud services</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_sourcing_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information System development</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itdevelopment_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Information security requirements confidentiality, integrity and availability(CIA)</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_itsecurity_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of critical assets</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_asset_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number of sites and number of Disaster Recovery (DR) sites</th>
+                                        <td style="border: 1px solid black; padding: 8px;"><field name="iso_27001_drc_2022" attrs="{'readonly': [('state','=','verifikasi')]}"/></td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                
+                                <label for="additional_27001" style="font-weight: bold; color: #5D8DA8; font-size: 12px;">Additional Info for ISO 27001</label>
+                                <field name="additional_27001" string="Additional Info for ISO 27001">
+                                    <tree>
+                                        <field name="nama_site"/>
+                                        <field name="employee"/>
+                                        <field name="it_aspect"/>
+                                        <field name="it_explanation"/>
+                                        <field name="isms_aspect"/>
+                                        <field name="isms_explanation"/>
+                                        <field name="special"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="nama_site"/>
+                                            <field name="employee"/>
+                                            <field name="it_aspect"/>
+                                            <field name="it_explanation"/>
+                                            <field name="isms_aspect"/>
+                                            <field name="isms_explanation"/>
+                                            <field name="special"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </div>
+                        </group>
+                        <group col="4" attrs="{'invisible':[('show_27001_2022', '=', False)]}">
+                            <field name="accreditation_27001_2022"/>
+                            <!-- <field name="ea_code_27001_2022"/> -->
+                            <field name="ea_code_27001_2022_1" widget="many2many_tags"/>
+                            <field name="complexity_27001_2022"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_27001_2022', '=', False)]}">
+                            <field name="salesinfo_site_27001_2022">
+                                <tree class="custom-margin-bottom">
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+
+                        <group string="Additional information for Applicant of HACCP, ISO 22000 and FSSC 22000" attrs="{'invisible': [('show_haccp', '=', False), ('show_22000', '=', False), ('show_fscc', '=', False)]}">
+                            <div style="width: 100%; overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;"></th>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center; font-weight: bold; background-color: #d9d9d9;">Site 1</td>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center; font-weight: bold; background-color: #d9d9d9;">Site 2</td>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center; font-weight: bold; background-color: #d9d9d9;">Site 3</td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Number Of Haccp Studies</th>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center;"><field name="hazard_describe_site1"/></td>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center;"><field name="hazard_describe_site2"/></td>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center;"><field name="hazard_describe_site3"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Total Number of Hazard (CCP and OPRP)</th>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center;"><field name="hazard_number_site1"/></td>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center;"><field name="hazard_number_site2"/></td>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center;"><field name="hazard_number_site3"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="border: 1px solid black; padding: 8px; text-align: left; background-color: #d9d9d9;">Please describe your Hazard</th>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center;"><field name="process_describe_site1"/></td>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center;"><field name="process_describe_site2"/></td>
+                                        <td style="border: 1px solid black; padding: 8px; text-align: center;"><field name="process_describe_site3"/></td>
+                                    </tr>
+                                </table>
+                                <br/>
+                            </div>
+                            <!-- <field name="additional_haccp" string="Additional info for HACCP" >
+                                <tree >
+                                    <field name="hazard_number"/>
+                                    <field name="hazard_describe"/>
+                                    <field name="process_number"/>
+                                    <field name="process_describe"/>
+                                    <field name="tech_number"/>
+                                    <field name="tech_describe"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="hazard_number"/>
+                                        <field name="hazard_describe"/>
+                                        <field name="process_number"/>
+                                        <field name="process_describe"/>
+                                        <field name="tech_number"/>
+                                        <field name="tech_describe"/>
+                                    </group>
+                                </form>
+                            </field> -->
+                        </group>
+                        <group string="Additional Information for ISO HACCP 22000" col="4" attrs="{'invisible': [('show_haccp', '=', False), ('show_22000', '=', False), ('show_fscc', '=', False)]}">
+                            <field name="accreditation"/>
+                            <field name="food_category_22000"/>
+                            <!-- <field name="complexity"/> -->
+                        </group>
+                        <group attrs="{'invisible': [('show_haccp', '=', False), ('show_22000', '=', False), ('show_fscc', '=', False)]}">
+                            <field name="salesinfo_site">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group col="4" string="Additional Information Good Distribution Practice " attrs="{'invisible':[('show_gdp', '=', False)]}">
+                            <field name="accreditation_gdp"/>
+                            <field name="ea_code_gdp" widget="many2many_tags"/>
+                            <field name="complexity_gdp"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_gdp', '=', False)]}">
+                            <field name="salesinfo_site_gdp">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+
+                        <group col="4" string="Additional Information for ISO 56001" attrs="{'invisible':[('show_56001', '=', False)]}">
+                            <field name="accreditation_56001"/>
+                            <field name="ea_code_56001" widget="many2many_tags"/>
+                            <field name="complexity_56001"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_56001', '=', False)]}">
+                            <field name="salesinfo_site_56001">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>   
+
+
+                        <!-- <group string="Additional Info for ISO 22000" attrs="{'invisible':[('show_22000', '=', False)]}">
+                            <field name="additional_haccp" string="Additional info for ISO 22000">
+                                <tree>
+                                    <field name="hazard_number"/>
+                                    <field name="hazard_describe"/>
+                                    <field name="process_number"/>
+                                    <field name="process_describe"/>
+                                    <field name="tech_number"/>
+                                    <field name="tech_describe"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="hazard_number"/>
+                                        <field name="hazard_describe"/>
+                                        <field name="process_number"/>
+                                        <field name="process_describe"/>
+                                        <field name="tech_number"/>
+                                        <field name="tech_describe"/>
+                                    </group>
+                                </form>
+                            </field>
+
+                        </group>
+                        <group col="4" attrs="{'invisible':[('show_22000', '=', False)]}">
+                            <field name="accreditation_22000"/>
+                            <field name="ea_code_22000"/>
+                            <field name="complexity_22000"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_22000', '=', False)]}">
+                            <field name="salesinfo_site_22000">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>    
+
+                        <group col="4" attrs="{'invisible':[('show_haccp', '=', False)]}">
+                            <field name="accreditation_haccp"/>
+                            <field name="ea_code_haccp"/>
+                            <field name="complexity_haccp"/>
+                        </group>
+                        <group attrs="{'invisible':[('show_haccp', '=', False)]}">
+                            <field name="salesinfo_site_haccp">
+                                <tree>
+                                    <field name="nama_site"/>
+                                    <field name="stage_1"/>
+                                    <field name="stage_2"/>
+                                    <field name="surveilance_1"/>
+                                    <field name="surveilance_2"/>
+                                    <field name="recertification"/>
+                                    <field name="remarks"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nama_site"/>
+                                        <field name="stage_1"/>
+                                        <field name="stage_2"/>
+                                        <field name="surveilance_1"/>
+                                        <field name="surveilance_2"/>
+                                        <field name="recertification"/>
+                                        <field name="remarks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>                         -->
+                        <group col="4" string="Declaration" attrs="{'invisible':[('doctype', '=', 'ispo')]}">
+                            <field name="segment_id" widget="many2many_tags"/>
+                            <field name="kategori"/>
+                            <!-- <field name="declaration"/> -->
+                            <!-- <field name="user_signature" widget="signature"/> -->
+                            <field name="sales_person" widget="many2one_avatar_user"/>
+                            <field name="review_by" domain="[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]" optional="show" widget="many2one_avatar_user"/>
+                            <field name="company_id" attrs="{'invisible':True}"/>
+                        </group>  
+
+                        <!-- <notebook>
+                            <page name="initial" string="Initial Purpose Price" groups="v15_tsi.group_menu_line_initial">
+                                <group>
+                                    <field name="lines_initial" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="product_id"/>
+                                            <field name="audit_stage"/>
+                                            <field name="tahun"/>
+                                            <field name="price"/>
+                                            <field name="fee"/>
+                                            <field name="percentage" widget="percentage"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="audit_stage"/>
+                                                <field name="tahun"/>
+                                                <field name="price"/>
+                                                <field name="fee"/>
+                                                <field name="percentage" widget="percentage"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+
+                        <notebook>
+                            <page name="surveillance" string="Surveillance Purpose Price" groups="v15_tsi.group_menu_line_surveillance">
+                                <group>
+                                    <field name="lines_surveillance" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="audit_stage"/>
+                                            <field name="tahun"/>
+                                            <field name="price"/>
+                                            <field name="fee"/>
+                                            <field name="percentage" widget="percentage"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="audit_stage"/>
+                                                <field name="tahun"/>
+                                                <field name="price"/>
+                                                <field name="fee"/>
+                                                <field name="percentage" widget="percentage"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>   -->
+                        <!-- <group col="4" string="Employee">
+                            <field name="total_emp"/>
+                            <field name="site_emp_total"/>
+                            <field name="offsite_emp_total"/>
+                            <field name="ho_emp_total"/>
+                            <field name="number_of_site"/>
+                            <field name="doctype" attrs="{'invisible':True}"/>
+                        </group> -->
+
+                        <notebook>
+
+                            <page name="iso_catatan" string="Change Notes" attrs="{'invisible':[('show_14001', '!=', 'False')]}">
+                                <group>
+                                    <field name="catatan"/>
+                                </group>
+                            </page>
+
+                            <page name="iso_catatan" string="Change Notes" attrs="{'invisible':[('show_45001', '!=', 'False')]}">
+                                <group>
+                                    <field name="catatan"/>
+                                </group>
+                            </page>
+
+                            <page name="iso_catatan" string="Change Notes" attrs="{'invisible':[('show_27001', '!=', 'False')]}">
+                                <group>
+                                    <field name="catatan"/>
+                                </group>
+                            </page>
+
+                            <page name="iso_catatan" string="Change Notes" attrs="{'invisible':[('show_haccp', '!=', 'False')]}">
+                                <group>
+                                    <field name="catatan"/>
+                                </group>
+                            </page>
+
+                            <page name="iso_catatan" string="Change Notes" attrs="{'invisible':[('show_22000', '!=', 'False')]}">
+                                <group>
+                                    <field name="catatan"/>
+                                </group>
+                            </page>
+
+                            <page name="iso_catatan" string="Change Notes" attrs="{'invisible':[('show_ispo', '!=', 'False')]}">
+                                <group>
+                                    <field name="catatan"/>
+                                </group>
+                            </page>
+
+                            <page name="iso_catatan" string="Change Notes" attrs="{'invisible':[('show_salesinfo', '!=', 'False')]}">
+                                <group>
+                                    <field name="catatan"/>
+                                </group>
+                            </page>
+
+                            <page name="ispo_evaluasi" string="Penilaian Resiko" attrs="{'invisible':[('show_ispo', '!=', 'False')]}">
+                                <group>
+                                    <field name="ispo_evaluasi" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="issue"/>
+                                            <field name="evaluasi"/>
+                                            <field name="rekomendasi"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="issue"/>
+                                                <field name="evaluasi"/>
+                                                <field name="rekomendasi"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+
+                            <page name="ispo_nilai_skor" string="Nilai Skor" attrs="{'invisible':[('show_ispo', '!=', 'False')]}">
+                                <group>
+                                    <field name="ispo_nilai_skor" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="skor_name"/>
+                                            <field name="skor_1"/>
+                                            <field name="skor_2"/>
+                                            <field name="skor_3"/>
+                                            <field name="skor_nilai" sum="Total"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="skor_name"/>
+                                                <field name="skor_1"/>
+                                                <field name="skor_2"/>
+                                                <field name="skor_3"/>
+                                                <field name="skor_nilai"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+
+                            <page name="ispo_justification" string="Justification" attrs="{'invisible':[('show_ispo', '!=', 'False')]}">
+                                <group>
+                                    <field name="ispo_justification" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="standar"/>
+                                            <field name="maksimal"/>
+                                            <field name="score" sum="Total"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="standar"/>
+                                                <field name="maksimal"/>
+                                                <field name="score"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+
+                            <page name="ispo_mandays" string="Mandays" attrs="{'invisible':[('show_ispo', '!=', 'False')]}">
+                                <group>
+                                    <field name="ispo_mandays" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="lingkup"/>
+                                            <field name="awal" sum="Total"/>
+                                            <field name="penilikan" sum="Total"/>
+                                            <field name="resertifikai" sum="Total"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="lingkup"/>
+                                                <field name="awal"/>
+                                                <field name="penilikan"/>
+                                                <field name="resertifikai"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+
+                            <page name="ispo_total_mandays" string="Total Mandays" attrs="{'invisible':[('show_ispo', '!=', 'False')]}">
+                                <group>
+                                    <field name="ispo_total_mandays" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="lingkup"/>
+                                            <field name="kebun" sum="Total"/>
+                                            <field name="pabrik" sum="Total"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="lingkup"/>
+                                                <field name="kebun"/>
+                                                <field name="pabrik"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+

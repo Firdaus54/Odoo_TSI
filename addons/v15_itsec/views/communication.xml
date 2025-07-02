@@ -1,0 +1,355 @@
+<odoo>
+  <data>
+
+    <!-- CUSTOMERY SURVEY -->
+    <record model="ir.ui.view" id="list_cust_survey">
+      <field name="name">cust_survey.tree</field>
+      <field name="model">cust_survey</field>
+      <field name="arch" type="xml">
+        <tree string="Customer Survey List">
+          <field name="nomor"         string="No"/>
+          <field name="name"          string="Customer Name"/>
+          <field name="satisfaction"  string="Satisfaction Index"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="cust_survey_window">
+      <field name="name">Customer Survey</field>
+      <field name="res_model">cust_survey</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="cust_survey_form">
+        <field name="name">cust_survey.form</field>
+        <field name="model">cust_survey</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="nomor"         string="No"/>
+                      <field name="name"          string="Customer Name"/>
+                      <field name="satisfaction"  string="Satisfaction Index"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- CUSTOMER COMPLAINT -->
+    <record model="ir.ui.view" id="list_cust_complaint">
+      <field name="name">cust_complaint.tree</field>
+      <field name="model">cust_complaint</field>
+      <field name="arch" type="xml">
+        <tree string="Customer Complaint">
+          <field name="nomor"       string="Ticket No"/>
+          <field name="cust_name"   string="Customer"/>
+          <field name="tanggal"     string="Date"/>
+          <field name="description" string="Description"/>
+          <field name="status"      string="Status"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="cust_complaint_window">
+      <field name="name">Customer Complaint</field>
+      <field name="res_model">cust_complaint</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="cust_complaint_form">
+        <field name="name">cust_complaint.form</field>
+        <field name="model">cust_complaint</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="nomor"         string="Ticket No"/>
+                      <field name="cust_name"     string="Customer"/>
+                      <field name="tanggal"       string="Date"/>
+                      <field name="description"   string="Description"/>
+                      <field name="root_cause"    string="Root Cause"/>
+                      <field name="status"        string="Status"/>
+                      <field name="closing_date"  string="Closing Date"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- CUSTOMERY RELATION -->
+    <record model="ir.ui.view" id="list_cust_relation">
+      <field name="name">cust_relation.tree</field>
+      <field name="model">cust_relation</field>
+      <field name="arch" type="xml">
+        <tree string="Customer Relation">
+          <field name="nomor"   string="No"/>
+          <field name="tanggal" string="Date"/>
+          <field name="agenda"  string="Agenda"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="cust_relation_window">
+      <field name="name">Customer Relation</field>
+      <field name="res_model">cust_relation</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="cust_relation_form">
+        <field name="name">cust_relation.form</field>
+        <field name="model">cust_relation</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="nomor"   string="No"/>
+                      <field name="tanggal" string="Date"/>
+                      <field name="agenda"  string="Agenda"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Internal Communication -->
+    <record model="ir.ui.view" id="list_internalcomm">
+      <field name="name">internalcomm.tree</field>
+      <field name="model">internalcomm</field>
+      <field name="arch" type="xml">
+        <tree string="Customer Survey List">
+          <field name="name"          string="Name"/>
+          <field name="description"   string="Description"/>
+          <field name="tanggal"       string="Date"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="internalcomm_window">
+      <field name="name">Internal Communication</field>
+      <field name="res_model">internalcomm</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="internalcomm_form">
+        <field name="name">internalcomm.form</field>
+        <field name="model">internalcomm</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="name"          string="Name"/>
+                      <field name="description"   string="Description"/>
+                      <field name="tanggal"       string="Date"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- External Communication -->
+    <record model="ir.ui.view" id="list_eksternalcomm">
+      <field name="name">eksternalcomm.tree</field>
+      <field name="model">eksternalcomm</field>
+      <field name="arch" type="xml">
+        <tree string="External Communication">
+          <field name="name"          string="Name"/>
+          <field name="description"   string="Description"/>
+          <field name="tanggal"       string="Date"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="eksternalcomm_window">
+      <field name="name">External Communication</field>
+      <field name="res_model">eksternalcomm</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="eksternalcomm_form">
+        <field name="name">eksternalcomm.form</field>
+        <field name="model">eksternalcomm</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="name"          string="Name"/>
+                      <field name="description"   string="Description"/>
+                      <field name="tanggal"       string="Date"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Participation -->
+    <record model="ir.ui.view" id="list_participation">
+      <field name="name">participation.tree</field>
+      <field name="model">participation</field>
+      <field name="arch" type="xml">
+        <tree string="Customer Survey List">
+          <field name="name"          string="Name"/>
+          <field name="description"   string="Description"/>
+          <field name="tanggal"       string="Date"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="participation_window">
+      <field name="name">Participation</field>
+      <field name="res_model">participation</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="participation_form">
+        <field name="name">participation.form</field>
+        <field name="model">participation</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="name"          string="Name"/>
+                      <field name="description"   string="Description"/>
+                      <field name="tanggal"       string="Date"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Social Responsibility -->
+    <record model="ir.ui.view" id="list_social_resp_plan">
+     <field name="name">social_resp_plan.tree</field>
+     <field name="model">social_resp_plan</field>
+     <field name="arch" type="xml">
+       <tree string="Social Responsibility Plan List">
+         <field name="name"          string="Name"/>
+         <field name="dep_name"      string="Department"/>
+         <field name="kpi_what"      string="What"/>
+         <field name="kpi_who"       string="Who"/>
+         <field name="kpi_when"      string="When"/>
+         <field name="kpi_how"       string="How"/>
+         <field name="kpi_resource"  string="Resource Required"/>
+         <field name="kpi_input"     string="Input"/>
+         <field name="kpi_output"    string="Output"/>
+       </tree>
+     </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_resp_plan_window">
+     <field name="name">Social Responsibility Planning</field>
+     <field name="res_model">social_resp_plan</field>
+     <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="social_resp_plan_form">
+       <field name="name">social_resp_plan.form</field>
+       <field name="model">social_resp_plan</field>
+       <field name="arch" type="xml">
+           <form string="Form">
+               <sheet>
+                   <group col="4">
+                     <field name="name"          string="Name"/>
+                     <field name="dep_name"      string="Department"/>
+                     <field name="kpi_what"      string="What"/>
+                     <field name="kpi_who"       string="Who"/>
+                     <field name="kpi_when"      string="When"/>
+                     <field name="kpi_how"       string="How"/>
+                     <field name="kpi_resource"  string="Resource Required"/>
+                     <field name="kpi_input"     string="Input"/>
+                     <field name="kpi_output"    string="Output"/>
+                     <field name="file_bin"      filename="file_name"/>
+                     <field name="file_name"     invisible="1"/>
+                   </group>
+               </sheet>
+               <div class="oe_chatter">
+                   <field name="message_follower_ids" widget="mail_followers"/>
+                   <field name="message_ids" widget="mail_thread"/>
+               </div>
+           </form>
+       </field>
+    </record>
+
+   <!-- Social Responsibility Monitoring -->
+    <record model="ir.ui.view" id="list_social_resp_mon">
+      <field name="name">social_resp_mon.tree</field>
+      <field name="model">social_resp_mon</field>
+      <field name="arch" type="xml">
+        <tree string="Measurement List">
+          <field name="dep_name"      string="Department"/>
+          <field name="csr_plan_id"   string="CSR Plan"/>
+          <field name="month"         string="Month"/>
+          <field name="result"        string="Result"/>
+          <field name="corrective"    string="Corrective"/>
+          <field name="pic_kpi"       string="PIC"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_resp_mon_window">
+      <field name="name">CSR Monitoring</field>
+      <field name="res_model">social_resp_mon</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="social_resp_mon_form">
+        <field name="name">social_resp_mon.form</field>
+        <field name="model">social_resp_mon</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="dep_name"      string="Department"/>
+                      <field name="month"         string="Month"/>
+                      <field name="csr_plan_id"   string="CSR Plan"/>
+                      <field name="result"        string="Result"/>
+                      <field name="corrective"    string="Corrective"/>
+                      <field name="pic_kpi"       string="PIC"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   </data>
+</odoo>

@@ -1,0 +1,43 @@
+<odoo>
+  <data>
+
+    <record id="data_product_view_tree" model="ir.ui.view">
+      <field name="name">data_product.tree</field>
+      <field name="model">data_product</field>
+      <field name="arch" type="xml">
+          <tree string="Data Product">
+              <field name="name"/>
+              <field name="price"/>
+              <field name="description"/>
+          </tree>
+      </field>
+    </record>
+
+    <record id="data_product_form" model="ir.ui.view">
+      <field name="name">data_product.form</field>
+      <field name="model">data_product</field>
+      <field name="arch" type="xml">
+          <form string="Data Product">
+              <sheet>
+                  <group>
+                    <field name="name"/>
+                    <field name="price"/>
+                    <field name="description"/>
+                  </group>
+              </sheet>
+          </form>
+      </field>
+    </record>
+
+    <!-- Action for the Tree View -->
+    <record id="action_data_product_tree" model="ir.actions.act_window">
+        <field name="name">Data Product</field>
+        <field name="res_model">data_product</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu for the Tree View -->
+    <menuitem id="menu_data_product" name="Data Product" />
+    <menuitem id="menu_data_product_tree" name="Data Product" parent="menu_data_product" action="action_data_product_tree"/>
+  </data>
+</odoo>

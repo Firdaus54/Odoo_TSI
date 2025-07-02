@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_keluarga,keluarga.keluarga,model_keluarga,base.group_user,1,1,1,1
+access_skema_food,skema.food,model_skema_food,base.group_user,1,1,1,1
+access_skema_ict,skema.ict,model_skema_ict,base.group_user,1,1,1,1
+access_skema_sustainability,skema.sustainability,model_skema_sustainability,base.group_user,1,1,1,1
+access_sustainability_skema,sustainability.skema,model_sustainability_skema,base.group_user,1,1,1,1
+access_skema_xms,skema.xms,model_skema_xms,base.group_user,1,1,1,1
+access_skema_lvv,skema.lvv,model_skema_lvv,base.group_user,1,1,1,1
+access_tsi_manual,tsi.manual,model_tsi_manual,base.group_user,1,1,1,1
+access_tsi_manual_17065,tsi.manual.17065,model_tsi_manual_17065,base.group_user,1,1,1,1
+access_tsi_manual_others,tsi.manual.others,model_tsi_manual_others,base.group_user,1,1,1,1
+access_tsi_prosedur,tsi.prosedur,model_tsi_prosedur,base.group_user,1,1,1,1
+access_tsi_prosedur_17065,tsi.prosedur.17065,model_tsi_prosedur_17065,base.group_user,1,1,1,1
+access_tsi_prosedur_others,tsi.prosedur.others,model_tsi_prosedur_others,base.group_user,1,1,1,1
+access_tsi_form,tsi.form,model_tsi_form,base.group_user,1,1,1,1
+access_tsi_form_17065,tsi.form.17065,model_tsi_form_17065,base.group_user,1,1,1,1
+access_tsi_form_others,tsi.form.others,model_tsi_form_others,base.group_user,1,1,1,1

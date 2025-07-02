@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <report
+        id="action_report_quotation"
+        string="Quotation"
+        model="sale.order"
+        report_type="qweb-pdf"
+        name="v15_tsi.report_quotation"
+        file="v15_tsi.report_quotation"/>
+</odoo>

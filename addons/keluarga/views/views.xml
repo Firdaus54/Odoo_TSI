@@ -1,0 +1,31 @@
+<odoo>
+  <data>
+
+    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="tsi_document_menu_root" name="Document Control" web_icon="keluarga,static/description/document-file.png"/>
+
+    <menuitem id="tsi_document_management_root" name="Document Control" />
+
+    <menuitem id="tsi_document_management_menu" name="Standard ISO dan Dokumen Perundangan" parent="tsi_document_management_root"/>
+    <menuitem id="tsi_sistem_document_menu" name="Dokumen Sistem Manajemen" parent="tsi_document_management_root"/>
+
+
+    <menuitem id="tsi_document_management_act" name="Food" parent="tsi_document_management_menu" action="tsi_skema_food_action"/>
+    <menuitem id="tsi_document_management_act1" name="ICT" parent="tsi_document_management_menu" action="tsi_skema_ict_action"/>
+    <!-- <menuitem id="tsi_document_management_act2" name="Skema Sustainability" parent="tsi_document_management_menu" action="tsi_skema_sustainability_action"/> -->
+    <menuitem id="tsi_document_management_act2" name="Sustainability" parent="tsi_document_management_menu" action="tsi_sustainability_skema_action"/>
+    <menuitem id="tsi_document_management_act3" name="XMS" parent="tsi_document_management_menu" action="tsi_skema_xms_action"/>
+    <menuitem id="tsi_document_management_act4" name="LVV" parent="tsi_document_management_menu" action="tsi_skema_lvv_action"/>
+
+    <menuitem id="tsi_sistem_document1" name="Manual" parent="tsi_sistem_document_menu"/>
+    <menuitem id="tsi_sistem_document3" name="Form" parent="tsi_sistem_document_menu"/>
+    <menuitem id="tsi_sistem_document2" name="Prosedur" parent="tsi_sistem_document_menu"/>
+
+    <menuitem id="tsi_sistem_document2_1" name="Prosedur 17021" parent="tsi_sistem_document2" action="tsi_prosedur_action"/>
+    <menuitem id="tsi_sistem_document2_2" name="Prosedur 17065" parent="tsi_sistem_document2" action="tsi_prosedur_17065_action"/>
+
+    <menuitem id="tsi_sistem_document3_1" name="Form 17021" parent="tsi_sistem_document3" action="tsi_form_action"/>
+    <menuitem id="tsi_sistem_document3_2" name="Form 17065" parent="tsi_sistem_document3" action="tsi_form_17065_action"/>
+    <menuitem id="tsi_sistem_document3_3" name="Form Others" parent="tsi_sistem_document3" action="tsi_form_others_action"/>
+  </data>
+</odoo>

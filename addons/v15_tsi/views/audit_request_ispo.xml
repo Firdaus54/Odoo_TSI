@@ -1,0 +1,132 @@
+<odoo>
+    <data>
+
+        <!-- tsi.audit.request tree view -->
+        <record id="tsi_audit_request_ispo_view_tree" model="ir.ui.view">
+            <field name="name">tsi.audit.request.ispo.view.tree</field>
+            <field name="model">tsi.audit.request.ispo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button string="Create Quotation" name="create_quotation" type="object" class="btn-primary"/>
+                    </header>
+                    <field name="name"/>
+                    <field name="audit_stage"/>
+                    <field name="partner_id"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                    <field name="telp"/>
+                    <field name="email"/>
+                    <field name="website"/>
+                    <field name="cellular"/>
+                    <field name="mandays"/>
+                    <field name="state" widget="badge" decoration-success = "state in ['approve_so','approve_quot']" decoration-danger = "state == 'reject'"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi_audit_request form view -->
+        <record id="tsi_audit_request_ispo_view_form" model="ir.ui.view">
+            <field name="name">tsi.audit.request.ispo.view.form</field>
+            <field name="model">tsi.audit.request.ispo</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="set_reject" string="Reject"   states="request" type="object" class="oe_highlight" />
+                        <button name="set_approve" string="Approve" states="request" type="object" class="oe_highlight" groups="v15_tsi.group_iso_review_manager"/>
+                        <button name="set_request" string="Request" states="reject" type="object" class="oe_highlight" groups="v15_tsi.group_iso_review_manager"/>
+                        <!-- <button name="create_sales" states="approve" string="Create Sales Order" type="object" class="oe_highlight" /> -->
+                        <button name="generate_ops" states="approve" string="Create Quotation" type="object" class="oe_highlight" groups="v15_tsi.group_menu_line_initial"/>
+                        <field name="state" widget="statusbar" statusbar_visible="request,reject,approve,approve_quot"/>
+
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <field name="audit_stage" widget="radio" options="{'horizontal': true}"/>
+                            <field name="partner_id"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                            <field name="office_address"/>
+                            <field name="invoicing_address"/>
+                            <field name="no_kontrak" required="1" groups="v15_tsi.group_menu_line_initial"/>
+                            <field name="telp"/>
+                            <field name="email"/>
+                            <field name="website"/>
+                            <field name="cellular"/>
+                            <field name="scope"/>
+                            <field name="boundaries"/>
+                            <field name="number_site"/>
+                            <field name="total_emp"/>
+                            <field name="mandays"/>
+                            <field name="tipe_pembayaran"/>
+                            <field name="is_amendment"/>
+					        <field name="contract_type" attrs="{'invisible': [('is_amendment', '=', False)]}" groups="v15_tsi.group_menu_line_initial"/>
+                        </group>
+                        <notebook>
+                            <page string="Audit Request Lines" groups="v15_tsi.group_menu_line_initial">
+                                <group>
+                                    <field name="lines_audit_request_ispo" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="product_id"/>
+                                            <field name="audit_tahapan"/>
+                                            <field name="tahun"/>
+                                            <field name="price"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="audit_tahapan"/>
+                                                <field name="tahun"/>
+                                                <field name="price"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                            <page name="Reference" string="Reference">
+                                <group col="4">
+                                    <!-- <field name="crm_reference"/> -->
+                                    <field name="iso_reference"/>
+                                    <field name="sales_reference"/>
+                                    <field name="review_reference"  widget="many2many_tags"/>
+                                    <!-- <field name="iso_notification"/> -->
+                                </group>
+                            </page>
+                        </notebook>                        
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.audit.request action window -->
+        <record id="tsi_audit_request_ispo_action" model="ir.actions.act_window">
+            <field name="name">Audit Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.audit.request.ispo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="audit_request_seq">
+            <field name="name">Request</field>
+            <field name="code">tsi.audit.request</field>
+            <field name="prefix">REQ</field>
+            <field name="padding">7</field>
+            <field name="company_id" eval="False" />
+        </record>
+    </data>
+</odoo>

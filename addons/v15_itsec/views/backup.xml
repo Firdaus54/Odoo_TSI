@@ -1,0 +1,218 @@
+<odoo>
+  <data>
+
+    <!-- itsec.backup tree view -->
+    <record id="itsec_backup_view_tree" model="ir.ui.view">
+        <field name="name">itsec.backup.view.tree</field>
+        <field name="model">itsec.backup</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="doc_no"/>
+                <field name="rev_no"/>
+                <field name="pelaksana"/>
+                <field name="atasan"/>
+                <field name="saksi"/>                
+                <field name="tanggal"/>                
+                <field name="jenis"/>                
+            </tree>
+        </field>
+    </record>
+
+    <!-- itsec.backup action window -->
+    <record id="itsec_backup_action" model="ir.actions.act_window">
+        <field name="name">Backup</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">itsec.backup</field>
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+
+    <!-- itsec.backup form view -->
+    <record id="itsec_backup_view_form" model="ir.ui.view">
+        <field name="name">itsec.backup.view.form</field>
+        <field name="model">itsec.backup</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group col="4">
+                        <field name="doc_no"/>
+                        <field name="rev_no"/>
+                        <field name="pelaksana"/>
+                        <field name="atasan"/>
+                        <field name="saksi"/>                
+                        <field name="tanggal"/>                                        
+                    </group>
+                    <group col="4" string="Informasi">
+                        <field name="hari"/>
+                        <field name="tanggal_backup"/>
+                        <field name="lokasi"/>
+                        <field name="perihal"/>
+                    </group>
+                    <group col="4" string="Sumber backup">
+                        <field name="server"/>
+                        <field name="kegunaan"/>
+                        <field name="no_inventaris"/>
+                        <field name="data"/>
+                        <field name="ukuran"/>
+                        <field name="frekuensi"/>
+                        <field name="metode"/>
+                        <field name="enkripsi"/>
+                    </group>
+                    <group col="4" string="Media backup">
+                        <field name="jenis"/>
+                        <field name="size"/>
+                        <field name="berlaku"/>
+                        <field name="no_media"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- itsec.restore tree view -->
+    <record id="itsec_restore_view_tree" model="ir.ui.view">
+        <field name="name">itsec.restore.view.tree</field>
+        <field name="model">itsec.restore</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="doc_no"/>
+                <field name="rev_no"/>
+                <field name="pelaksana"/>
+                <field name="atasan"/>
+                <field name="saksi"/>                
+                <field name="tanggal"/>                
+                <field name="jenis"/>                
+            </tree>
+        </field>
+    </record>
+
+    <!-- itsec.restore action window -->
+    <record id="itsec_restore_action" model="ir.actions.act_window">
+        <field name="name">Restore</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">itsec.restore</field>
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+
+    <!-- itsec.restore form view -->
+    <record id="itsec_restore_view_form" model="ir.ui.view">
+        <field name="name">itsec.restore.view.form</field>
+        <field name="model">itsec.restore</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group col="4">
+                        <field name="doc_no"/>
+                        <field name="rev_no"/>
+                        <field name="pelaksana"/>
+                        <field name="atasan"/>
+                        <field name="saksi"/>                
+                        <field name="tanggal"/>                                        
+                    </group>
+                    <group col="4" string="Informasi">
+                        <field name="hari"/>
+                        <field name="tanggal_restore"/>
+                        <field name="lokasi"/>
+                        <field name="perihal"/>
+                    </group>
+                    <group col="4" string="Media restore">
+                        <field name="jenis"/>
+                        <field name="size"/>
+                        <field name="berlaku"/>
+                        <field name="no_media"/>
+                        <field name="metode"/>
+                    </group>
+                    <group col="4" string="Sumber restore">
+                        <field name="server"/>
+                        <field name="kegunaan"/>
+                        <field name="no_inventaris"/>
+                        <field name="data"/>
+                        <field name="ukuran"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- itsec.change tree view -->
+    <record id="itsec_change_view_tree" model="ir.ui.view">
+        <field name="name">itsec.change.view.tree</field>
+        <field name="model">itsec.change</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="doc_no"/>
+                <field name="rev_no"/>
+                <field name="requestor"/>
+                <field name="manager"/>
+                <field name="implementator"/>                
+                <field name="tanggal"/>                
+            </tree>
+        </field>
+    </record>
+
+    <!-- itsec.change action window -->
+    <record id="itsec_change_action" model="ir.actions.act_window">
+        <field name="name">Change</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">itsec.change</field>
+        <field name="view_mode">tree,form</field>
+        
+    </record>
+
+    <!-- itsec.change form view -->
+    <record id="itsec_change_view_form" model="ir.ui.view">
+        <field name="name">itsec.change.view.form</field>
+        <field name="model">itsec.change</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group col="4">
+                        <field name="doc_no"/>
+                        <field name="rev_no"/>
+                        <field name="tanggal"/>                                        
+                    </group>
+                    <group col="4" string="Change Requestor">
+                        <field name="requestor"/>
+                        <field name="bagian"/>
+                        <field name="uraian"/>
+                        <field name="justifikasi"/>
+                        <field name="penerapan"/>
+                    </group>
+                    <group col="4" string="Change Manager">
+                        <field name="change_type"/>
+                        <field name="change_cat"/>
+                        <field name="affected"/>
+                        <field name="impact"/>
+                        <field name="manager"/>
+                    </group>
+                    <group col="4" string="Change Implementator">
+                        <field name="asset_name"/>
+                        <field name="estimated_time"/>
+                        <field name="rollback_plan"/>
+                        <field name="implementator"/>
+                    </group>
+                    <group string="Otorisasi Perubahan">
+                        <field name="authorized"/>
+                        <field name="catatan"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+  </data>
+</odoo>  

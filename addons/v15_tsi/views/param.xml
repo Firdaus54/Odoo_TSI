@@ -1,0 +1,176 @@
+<odoo>
+    <data>
+
+        <!-- tsi.hazard form view -->
+        <record id="tsi_hazard_view_form" model="ir.ui.view">
+            <field name="name">tsi.hazard.view.form</field>
+            <field name="model">tsi.hazard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.hazard tree view -->
+        <record id="tsi_hazard_view_tree" model="ir.ui.view">
+            <field name="name">tsi.hazard.view.tree</field>
+            <field name="model">tsi.hazard</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.hazard action window -->
+        <record id="tsi_hazard_action" model="ir.actions.act_window">
+            <field name="name">Hazard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.hazard</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="tsi_env_aspect_view_form" model="ir.ui.view">
+            <field name="name">tsi.env_aspect.view.form</field>
+            <field name="model">tsi.env_aspect</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.env_aspect tree view -->
+        <record id="tsi_env_aspect_view_tree" model="ir.ui.view">
+            <field name="name">tsi.env_aspect.view.tree</field>
+            <field name="model">tsi.env_aspect</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.env_aspect action window -->
+        <record id="tsi_env_aspect_action" model="ir.actions.act_window">
+            <field name="name">Env Aspect</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.env_aspect</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+
+
+        <!-- tsi.hazard form view -->
+        <record id="tsi_hazard_view_form" model="ir.ui.view">
+            <field name="name">tsi.hazard.view.form</field>
+            <field name="model">tsi.hazard</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.alt_scope tree view -->
+        <record id="tsi_alt_scope_view_tree" model="ir.ui.view">
+            <field name="name">tsi.alt_scope.view.tree</field>
+            <field name="model">tsi.alt_scope</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.alt_scope action window -->
+        <record id="tsi_alt_scope_action" model="ir.actions.act_window">
+            <field name="name">Alt Scope</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.alt_scope</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.ispo.peta form view -->
+        <record id="tipe_peta_ispo_form" model="ir.ui.view">
+            <field name="name">tipe.peta.ispo.view.form</field>
+            <field name="model">tipe.peta.ispo</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.alt_scope tree view -->
+        <record id="tipe_peta_ispo_view_tree" model="ir.ui.view">
+            <field name="name">tsi.alt_scope.view.tree</field>
+            <field name="model">tipe.peta.ispo</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tipe.peta.ispo action window -->
+        <record id="tipe_peta_ispo_action" model="ir.actions.act_window">
+            <field name="name">Tipe Peta</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tipe.peta.ispo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="tsi_ispo_menu_act_3" name="Tipe Peta" parent="tsi_ispo_menu_categ" action="tipe_peta_ispo_action"/>
+
+    </data>
+</odoo>

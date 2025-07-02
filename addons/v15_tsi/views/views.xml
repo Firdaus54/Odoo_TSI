@@ -1,0 +1,105 @@
+<odoo>
+  <data>
+
+    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="tsi_ispo_menu_root" name="SUSTAINABILTY" web_icon="v15_tsi,static/description/logo_ispo.png" groups="v15_tsi.group_admin_ispo"/>
+    <menuitem id="tsi_iso_menu_root" name="ISO" web_icon="v15_itsec,static/description/icon.png" groups="v15_tsi.group_admin_iso"/>
+    <menuitem id="tsi_crm_menu_root" name="CRM" web_icon="v15_tsi,static/description/icon.png" groups="v15_tsi.group_admin_crm"/>
+    <menuitem id="tsi_ops_menu_root" name="Operation ISO" web_icon="v15_tsi,static/description/stats.png" groups="v15_tsi.group_admin_operation_iso"/>
+    <menuitem id="tsi_ops_ispo_menu_root" name="Operation ISPO" web_icon="v15_tsi,static/description/stats.png" groups="v15_tsi.group_admin_operation_ispo"/>
+    <menuitem id="tsi_ops_ows_menu_root" name="Operation OWS" web_icon="v15_tsi,static/description/stats.png"/>
+    <menuitem id="tsi_task_pd_menu_root" name="Task Quality Control" web_icon="v15_tsi,static/description/quality-control.png" groups="v15_tsi.group_admin_pd"/>
+    <menuitem id="tsi_task_project_plan_menu_root" name="Project Plan" web_icon="v15_tsi,static/description/project.png" groups="v15_tsi.group_head_pd"/>
+    <menuitem id="tsi_document_management_root" name="Document Control" web_icon="v15_tsi,static/description/document-file.png" groups="v15_tsi.group_pd_dc"/>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="tsi_ispo_menu_categ" name="ISPO" parent="tsi_ispo_menu_root" groups="v15_tsi.group_menu_admin_ispo"/>
+    <menuitem id="tsi_ispo_review_menu_categ" name="Review" parent="tsi_ispo_menu_root"/>
+    <menuitem id="tsi_ispo_menu_request" name="Audit Request" parent="tsi_ispo_menu_root"/>
+    
+
+    <menuitem id="tsi_crm_menu_categ" name="CRM" parent="tsi_crm_menu_root"/>
+    <menuitem id="tsi_crm_menus_categ_1" name="Customer Lanjut" parent="tsi_crm_menu_root" sequence="10" action="tsi_crm_lanjut_action"/>
+    <menuitem id="tsi_crm_menus_categ_2" name="Customer Lost" parent="tsi_crm_menu_root" sequence="10" action="tsi_crm_loss_action"/>
+    <menuitem id="tsi_crm_menus_categ_3" name="Customer Suspen" parent="tsi_crm_menu_root" sequence="10" action="tsi_crm_suspen_action"/>
+    <menuitem id="tsi_crm_menus_partner_feedback" name="Partner Feedback" parent="tsi_crm_menu_root" sequence="10" action="action_tsi_partner_feedback"/>
+
+
+
+
+    <menuitem id="tsi_iso_menu_categ" name="Application" parent="tsi_iso_menu_root" groups="v15_tsi.group_menu_admin"/>
+    <menuitem id="tsi_iso_review_menu_categ" name="Review" parent="tsi_iso_menu_root" groups="v15_tsi.group_menu_review"/>
+    <menuitem id="tsi_iso_menu_request" name="Audit Request" parent="tsi_iso_menu_root" groups="v15_tsi.group_menu_audit_request"/>
+    <menuitem id="tsi_iso_menu_configuration" name="Configuration" parent="tsi_iso_menu_root" groups="v15_tsi.group_iso_form_admin"/>
+
+    <!-- <menuitem id="tsi_ops_notificatioon" name="Audit Status" parent="tsi_ops_menu_root" action="audit_notification_action" sequence="10"/> -->
+    <menuitem id="tsi_ops_menu_categ" name="Operation" parent="tsi_ops_menu_root" sequence="20"/>
+    <menuitem id="tsi_ops_menu_categ_2" name="Master" parent="tsi_ops_menu_root" sequence="30"/>
+
+    <menuitem id="tsi_ops_ispo_notificatioon" name="Audit Status" parent="tsi_ops_ispo_menu_root" sequence="10" action="audit_notification_ispo_action"/>
+    <menuitem id="tsi_ops_ispo_menu_categ" name="Operation" parent="tsi_ops_ispo_menu_root" sequence="20"/>
+    <menuitem id="tsi_ops_ispo_menu_categ_2" name="Master" parent="tsi_ops_ispo_menu_root" sequence="30"/>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <!-- <menuitem id="tsi_ispo_menu_act" name="Formulir" parent="tsi_ispo_menu_categ" action="tsi_ispo_action"/> -->
+    <menuitem id="tsi_ispo_menu_act_1" name="Application Form" parent="tsi_ispo_menu_categ" action="tsi_ispo_action"/>
+    <menuitem id="tsi_ispo_menu_act_2" name="ISO Standard" parent="tsi_ispo_menu_categ" action="tsi_iso_standard_action"/>
+    <!-- <menuitem id="tsi_ispo_menu_act_3" name="Review" parent="tsi_ispo_review_menu_categ" action="tsi_isporeview_action"/> -->
+
+    <menuitem id="tsi_iso_menu_act" name="Application Form" parent="tsi_iso_menu_categ" action="tsi_iso_action" groups="v15_tsi.group_menu_admin"/>
+    <menuitem id="tsi_iso_menu_configuration_1" name="ISO Standard" parent="tsi_iso_menu_configuration" action="tsi_iso_standard_action"/>
+    <!-- <menuitem id="tsi_iso_menu_configuration_2" name="Tahapan Audit" parent="tsi_iso_menu_configuration" action="tsi_iso_tahapan_action"/> -->
+    <menuitem id="tsi_iso_menu_configuration_3" name="Tahapan Audit" parent="tsi_iso_menu_configuration" action="tsi_iso_tahapan_action"/>
+    <menuitem id="tsi_iso_menu_configuration_4" name="Akreditasi" parent="tsi_iso_menu_configuration" action="tsi_iso_accreditation_action"/>
+    <menuitem id="tsi_iso_menu_configuration_5" name="Boundaries" parent="tsi_iso_menu_configuration" action="tsi_iso_boundaries_action"/>
+    <menuitem id="tsi_iso_menu_configuration_6" name="ISO Risk" parent="tsi_iso_menu_configuration" action="tsi_iso_risk_action"/>
+    <menuitem id="tsi_iso_menu_configuration_7" name="EA Code" parent="tsi_iso_menu_configuration" action="tsi_ea_code_action"/>
+    <menuitem id="tsi_iso_menu_configuration_8" name="Food Category" parent="tsi_iso_menu_configuration" action="tsi_food_category_action"/>
+    <menuitem id="tsi_iso_menu_configuration_9" name="Hazard" parent="tsi_iso_menu_configuration" action="tsi_hazard_action"/>
+    <menuitem id="tsi_iso_menu_configuration_10" name="Environmental Aspect" parent="tsi_iso_menu_configuration" action="tsi_env_aspect_action"/>
+    <menuitem id="tsi_iso_menu_configuration_11" name="Alt Scope" parent="tsi_iso_menu_configuration" action="tsi_alt_scope_action"/>
+    <!-- <menuitem id="tsi_iso_menu_configuration_12" name="Review" parent="tsi_iso_menu_categ" action="tsi_isoreview_action"/> -->
+    <menuitem id="tsi_iso_menu_configuration_13" name="Audit Request" parent="tsi_iso_menu_request" action="tsi_audit_request_action"/>
+
+    <menuitem id="tsi_ispo_menu_act_4" name="Review" parent="tsi_ispo_review_menu_categ" action="tsi_isporeview_action"/>
+    <menuitem id="tsi_ispo_menu_act_5" name="Audit Request" parent="tsi_ispo_menu_request" action="tsi_audit_request_ispo_action"/>
+    <!-- <menuitem id="tsi_ispo_menu_act_3" name="Audit Request" parent="tsi_ispo_menu_request" action="tsi_audit_request_action"/> -->
+
+    
+
+    <menuitem id="tsi_iso_menu_act_2" name="Application Review" parent="tsi_iso_review_menu_categ" action="tsi_iso_review_action"/>
+
+    <!-- <menuitem id="tsi_crm_menu_categ_action_1" name="TSI CRM" parent="tsi_crm_menu_categ" action="tsi_crm_action"/> -->
+    <menuitem id="tsi_crm_menu_categ_action_2" name="History Kontrak" parent="tsi_crm_menu_categ" action="tsi_history_kontrak_action"/>
+
+    <!-- <menuitem id="tsi_crm_menus_act1" name="Lanjut" parent="tsi_crm_menus_categ" action="tsi_crm_lanjut_action"/>
+    <menuitem id="tsi_crm_menus_act2" name="Lost" parent="tsi_crm_menus_categ" action="tsi_crm_loss_action"/>
+    <menuitem id="tsi_crm_menus_act3" name="Suspen" parent="tsi_crm_menus_categ" action="tsi_crm_suspen_action"/> -->
+
+
+    <menuitem id="tsi_ops_menu_1" name="Audit Program" parent="tsi_ops_menu_categ" action="ops_program_action"/>
+    <menuitem id="tsi_ops_menu_2" name="Audit Plan" parent="tsi_ops_menu_categ" action="ops_plan_action"/>
+    <menuitem id="tsi_ops_menu_3" name="Audit Report" parent="tsi_ops_menu_categ" action="ops_report_action"/>
+    <menuitem id="tsi_ops_menu_4" name="Audit Recommendation" parent="tsi_ops_menu_categ" action="ops_review_action"/>
+    <menuitem id="tsi_ops_menu_5" name="Audit Certificate" parent="tsi_ops_menu_categ" action="ops_sertifikat_action"/>
+    <menuitem id="tsi_ops_menu_6" name="Audit Status" parent="tsi_ops_menu_categ" action="audit_notification_action"/>
+    <menuitem id="tsi_ops_menu_7" name="Audit Objectives" parent="tsi_ops_menu_categ_2" action="ops_objectives_action"/>
+    <menuitem id="tsi_ops_menu_8" name="Audit Function" parent="tsi_ops_menu_categ_2" action="ops_plan_function_action"/>
+    <menuitem id="tsi_ops_menu_9" name="Audit Agenda" parent="tsi_ops_menu_categ_2" action="ops_plan_agenda_action"/>
+    <!-- <menuitem id="tsi_ops_menu_9" name="Certificate Delivery" parent="tsi_ops_menu_categ" action="sertifikat_delivery_action"/> -->
+
+    <menuitem id="tsi_ops_ispo_menu_1" name="Audit Program" parent="tsi_ops_ispo_menu_categ" action="ops_program_ispo_action"/>
+    <menuitem id="tsi_ops_ispo_menu_2" name="Audit Plan" parent="tsi_ops_ispo_menu_categ" action="ops_plan_ispo_action"/>
+    <menuitem id="tsi_ops_ispo_menu_3" name="Audit Report" parent="tsi_ops_ispo_menu_categ" action="ops_report_ispo_action"/>
+    <menuitem id="tsi_ops_ispo_menu_4" name="Audit Recommendation" parent="tsi_ops_ispo_menu_categ" action="ops_review_ispo_action"/>
+    <menuitem id="tsi_ops_ispo_menu_5" name="Audit Certificate" parent="tsi_ops_ispo_menu_categ" action="ops_sertifikat_ispo_action"/>
+    <menuitem id="tsi_ops_ispo_menu_7" name="Audit Objectives" parent="tsi_ops_ispo_menu_categ_2" action="ops_objectives_action"/>
+    <menuitem id="tsi_ops_ispo_menu_8" name="Audit Function" parent="tsi_ops_ispo_menu_categ_2" action="ops_plan_function_action"/>
+    <menuitem id="tsi_ops_ispo_menu_9" name="Audit Agenda" parent="tsi_ops_ispo_menu_categ_2" action="ops_plan_agenda_action"/>
+
+    <menuitem id="tsi_ops_ows_menu" name="Audit Management" parent="tsi_ops_ows_menu_root" sequence="10"/>
+
+    <menuitem id="mandays_audiotr_menu_act" name="Mandays Auditor" parent="account.menu_finance" action="mandyas_audiotr_action"/>
+
+  </data>
+</odoo>

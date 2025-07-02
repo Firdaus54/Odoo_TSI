@@ -1,0 +1,153 @@
+<odoo>
+  <data>
+
+    <!-- Kontrak -->
+    <record model="ir.actions.act_window" id="act_kontrak_window">
+      <field name="name">Kontrak</field>
+      <field name="res_model">cis.kontrak</field>
+      <field name="view_mode">tree,form,pivot,graph</field>
+    </record>
+
+    <record model="ir.ui.view" id="kontrak_pivot_view">
+        <field name="name">cis.kontrak.pivot</field>
+        <field name="model">cis.kontrak</field>
+        <field name="arch" type="xml">
+            <pivot string="kontrak" disable_linking="True" display_quantity="true">
+                <field name="name"  type="row"/>
+                <field name="state" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="kontrak_graph_view">
+        <field name="name">cis.kontrak.graph</field>
+        <field name="model">cis.kontrak</field>
+        <field name="arch" type="xml">
+            <graph string="kontrak" type="pie">
+                <field name="name"  type="row"/>
+                <field name="state" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="kontrak_tree">
+      <field name="name">cis.kontrak.tree</field>
+      <field name="model">cis.kontrak</field>
+      <field name="arch" type="xml">
+        <tree string="Form">
+            <field name="name"/>
+            <field name="customer"/>
+            <field name="from_date"/>
+            <field name="to_date"/>
+            <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_kontrak_form">
+        <field name="name">cis.kontrak.form</field>
+        <field name="model">cis.kontrak</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <header>            
+                    <button  name="set_to_running"  states="draft"      string="Set to Running" type="object" class="oe_highlight" />
+                    <button  name="set_to_draft"    states="running"    string="Reset"          type="object" />
+                    <button  name="set_to_closed"   states="running"    string="Set to Closed"  type="object" />
+                    <field   name="state" widget="statusbar" statusbar_visible="draft,running,closed"/>
+                </header>            
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Nama Kontrak"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="Customer"> 
+                            <field name="customer"/>
+                            <field name="user_contact"/>
+                            <field name="pic"/>
+                        </group>
+                        <group string="Contract">
+                            <field name="from_date"/>
+                            <field name="to_date"/>
+                            <field name="contract_type"/>
+                            <field name="client_tag_type"/>
+                        </group>
+                        <field name="description"/>
+                    </group>                        
+                    <notebook position="inside">
+                        <page string="Petugas">
+                            <field name="pic_lines"
+                                context="{
+                                            'default_partner_id' : customer,
+                                        }"
+                            >
+                                <tree string="Petugas" 
+                                    decoration-success="posisi=='komandan'" 
+                                    decoration-info="posisi=='petugas'"
+                                    editable="bottom">
+                                    <field name="partner_id" invisible="1"/>
+                                    <field name="petugas"/>
+                                    <field name="posisi"/>
+                                    <field name="aktif"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="partner_id" invisible="1"/>
+                                        <field name="petugas"/>
+                                        <field name="posisi"/>
+                                        <field name="aktif"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Patrol Checkpoint">
+                            <field name="check_lines">
+                                <tree string="Checkpoint" 
+                                    decoration-success="aktif=='aktif'" 
+                                    decoration-danger="aktif=='inaktif'">
+                                    <field name="object_ssid"/>
+                                    <field name="lokasi"/>
+                                    <field name="keterangan"/>
+                                    <field name="aktif"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="object_ssid"/>
+                                        <field name="lokasi"/>
+                                        <field name="keterangan"/>
+                                        <field name="aktif"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Activity">
+                            <field name="activity_lines">
+                                <tree string="Activity" 
+                                    decoration-success="aktif=='aktif'" 
+                                    decoration-danger="aktif=='inaktif'">
+                                    <field name="name"/>
+                                    <field name="keterangan"/>
+                                    <field name="aktif"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="keterangan"/>
+                                        <field name="aktif"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>                     
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+  </data>
+</odoo>

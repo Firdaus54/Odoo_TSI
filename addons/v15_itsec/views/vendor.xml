@@ -1,0 +1,320 @@
+<odoo>
+  <data>
+
+    <!-- VENDOR SELECTION -->
+    <record model="ir.ui.view" id="list_vendor_selection">
+      <field name="name">vendor.vendor_selection.tree</field>
+      <field name="model">vendor.vendor_selection</field>
+      <field name="arch" type="xml">
+        <tree string="Vendor Selection List">
+          <field name="name"        string="Name"/>
+          <field name="description" string="Description"/>
+          <field name="file_bin"   />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vendor_selection_window">
+      <field name="name">Vendor Selection</field>
+      <field name="res_model">vendor.vendor_selection</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="vendor_selection_form">
+        <field name="name">vendor.vendor_selection.form</field>
+        <field name="model">vendor.vendor_selection</field>
+        <field name="arch" type="xml">
+            <form string="Compolicy Form">
+                <sheet>
+                    <group>
+                        <field name="name"        string="Name" style="width:40%%"/>
+                        <field name="description" string="Description" style="width:40%%"/>
+                        <field name="file_bin" style="width:40%%"  />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- VENDOR APPROVAL -->
+    <record model="ir.ui.view" id="list_vendor_approval">
+      <field name="name">vendor.vendor_approval.tree</field>
+      <field name="model">vendor.vendor_approval</field>
+      <field name="arch" type="xml">
+        <tree string="Vendor Approval List">
+          <field name="name"        string="Name"/>
+          <field name="description" string="Description"/>
+          <field name="file_bin"   />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vendor_approval_window">
+      <field name="name">Vendor Approval</field>
+      <field name="res_model">vendor.vendor_approval</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="vendor_approval_form">
+        <field name="name">vendor.vendor_approval.form</field>
+        <field name="model">vendor.vendor_approval</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"        string="Name" style="width:40%%"/>
+                        <field name="description" string="Description" style="width:40%%"/>
+                        <field name="file_bin" style="width:40%%"  />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- VENDOR EVALUATION -->
+    <record model="ir.ui.view" id="list_vendor_evaluation">
+      <field name="name">vendor.vendor_evaluation.tree</field>
+      <field name="model">vendor.vendor_evaluation</field>
+      <field name="arch" type="xml">
+        <tree >
+          <field name="name"            string="Name"/>
+          <field name="service_name"    string="Service Name"/>
+          <field name="quality"         string="Quality"/>
+          <field name="total_point"     string="Total Point"/>
+          <field name="status"          string="Status"/>
+          <field name="evaluation_date" string="Evaluation Date"/>
+          <field name="evaluated_by"    string="Evaluated By"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vendor_evaluation_window">
+      <field name="name">Vendor Evaluation</field>
+      <field name="res_model">vendor.vendor_evaluation</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="vendor_evaluation_form">
+        <field name="name">vendor.vendor_evaluation.form</field>
+        <field name="model">vendor.vendor_evaluation</field>
+        <field name="arch" type="xml">
+            <form string="Compolicy Form">
+                <sheet>
+                    <group col="4">
+                      <field name="name"            string="Name"/>
+                      <field name="address"         string="Address"/>
+                      <field name="service_name"    string="Service Name"/>
+                      <field name="quality"         string="Quality"/>
+                      <field name="cost"            string="Cost"/>
+                      <field name="delivery"        string="Delivery"/>
+                      <field name="service"         string="Service"/>
+                      <field name="hse_compliance"  string="HSE compliance"/>
+                      <field name="communication"   string="Communication"/>
+                      <field name="operator_skill"  string="Operator Skill"/>
+                      <field name="total_point"     string="Total Point"/>
+                      <field name="status"          string="Status"/>
+                      <field name="evaluation_date" string="Evaluation Date"/>
+                      <field name="evaluated_by"    string="Evaluated By"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   <!-- VENDOR MONITORING -->
+    <record model="ir.ui.view" id="list_vendor_monitoring">
+      <field name="name">vendor.vendor_monitoring.tree</field>
+      <field name="model">vendor.vendor_monitoring</field>
+      <field name="arch" type="xml">
+        <tree >
+          <field name="name"            string="Name"/>
+          <field name="service_name"    string="Service Name"/>
+          <field name="quality"         string="Quality"/>
+          <field name="on_time"         string="On Time"/>
+          <field name="after_sales"     string="After Sales"/>
+          <field name="hse_compliance"  string="HSE Compliance"/>
+          <field name="evaluation_date" string="Evaluation Date"/>
+          <field name="evaluated_by"    string="Evaluated By"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vendor_monitoring_window">
+      <field name="name">Vendor Monitoring</field>
+      <field name="res_model">vendor.vendor_monitoring</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="vendor_monitoring_form">
+        <field name="name">vendor.vendor_monitoring.form</field>
+        <field name="model">vendor.vendor_monitoring</field>
+        <field name="arch" type="xml">
+            <form string="Compolicy Form">
+                <sheet>
+                    <group col="4">
+                      <field name="name"            string="Name"/>
+                      <field name="address"         string="Address"/>
+                      <field name="service_name"    string="Service Name"/>
+                      <field name="quality"         string="Quality"/>
+                      <field name="on_time"         string="On Time"/>
+                      <field name="after_sales"     string="After Sales"/>
+                      <field name="hse_compliance"  string="HSE Compliance"/>
+                      <field name="evaluation_date" string="Evaluation Date"/>
+                      <field name="evaluated_by"    string="Evaluated By"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- CUSTOMER CONTRACT -->
+    <record model="ir.ui.view" id="list_cust_contract">
+      <field name="name">contract.cust_contract.tree</field>
+      <field name="model">contract.cust_contract</field>
+      <field name="arch" type="xml">
+        <tree string="Customer Contract List">
+          <field name="nomor"         string="No"/>
+          <field name="cust_name"     string="Curtomer"/>
+          <field name="contract_date" string="Date"/>
+          <field name="expired_date"  string="Expired"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="cust_contract_window">
+      <field name="name">Customer Contract</field>
+      <field name="res_model">contract.cust_contract</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="cust_contract_form">
+        <field name="name">contract.cust_contract.form</field>
+        <field name="model">contract.cust_contract</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="nomor"           string="No"/>
+                      <field name="cust_name"       string="Customer"/>
+                      <field name="contract_title"  string="Title"/>
+                      <field name="contract_date"   string="Date"/>
+                      <field name="expired_date"    string="Expired"/>
+                      <field name="file_bin"        filename="file_name"/>
+                      <field name="file_name"       invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vendor CONTRACT -->
+    <record model="ir.ui.view" id="list_vendor_contract">
+      <field name="name">contract.vendor_contract.tree</field>
+      <field name="model">contract.vendor_contract</field>
+      <field name="arch" type="xml">
+        <tree string="Vendor Contract List">
+          <field name="nomor"         string="No"/>
+          <field name="cust_name"     string="Name"/>
+          <field name="contract_date" string="Date"/>
+          <field name="expired_date"  string="Expired"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="vendor_contract_window">
+      <field name="name">Vendor Contract</field>
+      <field name="res_model">contract.vendor_contract</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="vendor_contract_form">
+        <field name="name">contract.vendor_contract.form</field>
+        <field name="model">contract.vendor_contract</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="nomor"           string="No"/>
+                      <field name="cust_name"       string="Name"/>
+                      <field name="contract_title"  string="Title"/>
+                      <field name="contract_date"   string="Date"/>
+                      <field name="expired_date"    string="Expired"/>
+                      <field name="file_bin"        filename="file_name"/>
+                      <field name="file_name"       invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- SUBCONT CONTRACT -->
+    <record model="ir.ui.view" id="list_subcont_contract">
+      <field name="name">contract.subcont_contract.tree</field>
+      <field name="model">contract.subcont_contract</field>
+      <field name="arch" type="xml">
+        <tree string="Subcont Contract List">
+          <field name="nomor"         string="No"/>
+          <field name="cust_name"     string="Name"/>
+          <field name="contract_date" string="Date"/>
+          <field name="expired_date"  string="Expired"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="subcont_contract_window">
+      <field name="name">Subcont Contract</field>
+      <field name="res_model">contract.subcont_contract</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="subcont_contract_form">
+        <field name="name">contract.subcont_contract.form</field>
+        <field name="model">contract.subcont_contract</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group>
+                      <field name="nomor"           string="No"/>
+                      <field name="cust_name"       string="Name"/>
+                      <field name="contract_title"  string="Title"/>
+                      <field name="contract_date"   string="Date"/>
+                      <field name="expired_date"    string="Expired"/>
+                      <field name="file_bin"        filename="file_name"/>
+                      <field name="file_name"       invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+   </data>
+</odoo>

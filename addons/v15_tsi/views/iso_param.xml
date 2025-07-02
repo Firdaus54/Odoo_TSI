@@ -1,0 +1,439 @@
+<odoo>
+    <data>
+
+        <!-- tsi.iso.standard action window -->
+        <record id="tsi_iso_standard_action" model="ir.actions.act_window">
+            <field name="name">ISO Standard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.iso.standard</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.iso.standard tree view -->
+        <record id="tsi_iso_standard_view_tree" model="ir.ui.view">
+            <field name="name">tsi.iso.standard.view.tree</field>
+            <field name="model">tsi.iso.standard</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.iso.standard.filter action window -->
+        <record id="iso_filter_crm" model="ir.actions.act_window">
+            <field name="name">ISO</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.iso.standard</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'reference': active_id}</field>
+            <field name="domain">[('reference', 'in', [active_id])]</field>
+
+        </record>
+
+        <!-- tsi.iso.standard form view -->
+        <record id="tsi_iso_standard_view_form" model="ir.ui.view">
+            <field name="name">tsi.iso.standard.view.form</field>
+            <field name="model">tsi.iso.standard</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="standard"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tsi_iso_tahapan_action" model="ir.actions.act_window">
+            <field name="name">Tahapan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.iso.tahapan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="tsi_iso_tahapan_view_tree" model="ir.ui.view">
+            <field name="name">tsi.iso.tahapan.view.tree</field>
+            <field name="model">tsi.iso.tahapan</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_iso_tahapan_view_form" model="ir.ui.view">
+            <field name="name">tsi.iso.tahapan.view.form</field>
+            <field name="model">tsi.iso.tahapan</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tsi_tahapan_audit_action" model="ir.actions.act_window">
+            <field name="name">Tahapan Audit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.tahapan.audit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="tsi_tahapan_audit_view_tree" model="ir.ui.view">
+            <field name="name">tsi.tahapan.audit.view.tree</field>
+            <field name="model">tsi.tahapan.audit</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nama"/>
+                    <field name="deskripsi"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_tahapan_audit_view_form" model="ir.ui.view">
+            <field name="name">tsi.tahapan.audit.view.form</field>
+            <field name="model">tsi.tahapan.audit</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="nama"/>
+                    <field name="deskripsi"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tsi_iso_accreditation_action" model="ir.actions.act_window">
+            <field name="name">Akreditasi</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.iso.accreditation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="tsi_iso_accreditation_view_tree" model="ir.ui.view">
+            <field name="name">tsi.iso.accreditation.view.tree</field>
+            <field name="model">tsi.iso.accreditation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_iso_accreditation_view_form" model="ir.ui.view">
+            <field name="name">tsi.iso.accreditation.view.form</field>
+            <field name="model">tsi.iso.accreditation</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tsi_iso_boundaries_action" model="ir.actions.act_window">
+            <field name="name">Boundaries</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.iso.boundaries</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="tsi_iso_boundaries_view_tree" model="ir.ui.view">
+            <field name="name">tsi.iso.boundaries.view.tree</field>
+            <field name="model">tsi.iso.boundaries</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_iso_boundaries_view_form" model="ir.ui.view">
+            <field name="name">tsi.iso.boundaries.view.form</field>
+            <field name="model">tsi.iso.boundaries</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- EA Code -->
+
+        <!-- tsi.ea_code action window -->
+        <record id="tsi_ea_code_action" model="ir.actions.act_window">
+            <field name="name">EA Code</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.ea_code</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <function model="ir.model.fields" name="formbuilder_whitelist">
+            <value>tsi.ea_code</value>
+            <value eval="['name','description','iso_standard_ids']"/>
+        </function>
+
+
+
+        <!-- tsi.ea_code tree view -->
+        <record id="tsi_ea_code_view_tree" model="ir.ui.view">
+            <field name="name">tsi.ea_code.view.tree</field>
+            <field name="model">tsi.ea_code</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.ea_code form view -->
+        <record id="tsi_ea_code_view_form" model="ir.ui.view">
+            <field name="name">tsi.ea_code.view.form</field>
+            <field name="model">tsi.ea_code</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.food_category action window -->
+        <record id="tsi_food_category_action" model="ir.actions.act_window">
+            <field name="name">Food Category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.food_category</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <function model="ir.model.fields" name="formbuilder_whitelist">
+            <value>tsi.food_category</value>
+            <value eval="['name','description','iso_standard_ids']"/>
+        </function>
+
+
+
+        <!-- tsi.food_category tree view -->
+        <record id="tsi_food_category_view_tree" model="ir.ui.view">
+            <field name="name">tsi.food_category.view.tree</field>
+            <field name="model">tsi.food_category</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="iso_standard_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.food_category form view -->
+        <record id="tsi_food_category_view_form" model="ir.ui.view">
+            <field name="name">tsi.food_category.view.form</field>
+            <field name="model">tsi.food_category</field>
+            <field name="arch" type="xml">
+                <form string="">
+
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="description"/>
+                            <field name="iso_standard_ids" widget="many2many_tags"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tsi.mandays.auditor action window -->
+        <record id="mandyas_audiotr_action" model="ir.actions.act_window">
+            <field name="name">Mandyas Auditor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mandays.auditor</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- tsi.mandays.auditor tree view -->
+        <record id="mandyas_audiotr_view_tree" model="ir.ui.view">
+            <field name="name">mandays.auditor.view.tree</field>
+            <field name="model">mandays.auditor</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name_auditor"/>
+                    <field name="auditor_ir"/>
+                    <field name="auditor_er"/>
+                    <field name="harga_mandays"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tsi.mandays.auditor form view -->
+        <record id="mandyas_audiotr_view_form" model="ir.ui.view">
+            <field name="name">mandays.auditor.view.form</field>
+            <field name="model">mandays.auditor</field>
+            <field name="arch" type="xml">
+                <form string="Mandays Auditor">
+                    <sheet>
+                        <group>
+                            <div class="oe_title">
+                                <table class="table table-sm table-bordered" style="border: 2px solid #000; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="font-weight: bold; border: 2px solid #000; width: 30%;">Field</th>
+                                            <th style="font-weight: bold; border: 2px solid #000;">Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-weight: bold; border: 2px solid #000; width: 30%;">
+                                                <label for="name_auditor">Auditor Name</label>
+                                            </td>
+                                            <td style="border: 2px solid #000;">
+                                                <field name="name_auditor"
+                                                    domain="[('department_id.name', 'in', ['OPERATION ICT', 'OPERATION XMS', 'Auditor Subcont'])]"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; border: 2px solid #000; width: 30%;">
+                                                <label for="auditor_ir">Auditor IR</label>
+                                            </td>
+                                            <td style="border: 2px solid #000;">
+                                                <field name="auditor_ir"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; border: 2px solid #000; width: 30%;">
+                                                <label for="auditor_er">Auditor ER</label>
+                                            </td>
+                                            <td style="border: 2px solid #000;">
+                                                <field name="auditor_er"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: bold; border: 2px solid #000; width: 30%;">
+                                                <label for="harga_mandays">Harga Mandays</label>
+                                            </td>
+                                            <td style="border: 2px solid #000;">
+                                                <field name="harga_mandays"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+
+
+

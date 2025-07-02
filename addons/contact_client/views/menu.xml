@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <!-- Menu item -->
+        <menuitem id="menu_custom_contact_root" name="Contacts Client" web_icon="contact_client,static/description/icon_client.png" groups="contact_client.group_contact_client_admin"/>
+        <menuitem id="menu_custom_contact" name="Contacts Client" parent="menu_custom_contact_root" action="action_client_contact"/>
+    </data>
+</odoo>

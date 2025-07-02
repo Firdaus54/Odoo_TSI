@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="view_sale_advance_payment_inv_form_inherited" model="ir.ui.view">
+            <field name="name">Invoice Orders</field>
+            <field name="model">sale.advance.payment.inv</field>
+            <field name="inherit_id" ref="sale.view_sale_advance_payment_inv"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//group" position="after">
+                        <group>
+                            <field name="termin_2_amount" attrs="{'required': [('advance_payment_method', '=', 'termin_2')], 'invisible': [('advance_payment_method', '!=','termin_2')]}" class="oe_inline"/>
+                            <field name="termin_3_amount" attrs="{'required': [('advance_payment_method', '=', 'termin_3')], 'invisible': [('advance_payment_method', '!=','termin_3')]}" class="oe_inline"/>
+                            <field name="termin_4_amount" attrs="{'required': [('advance_payment_method', '=', 'termin_4')], 'invisible': [('advance_payment_method', '!=','termin_4')]}" class="oe_inline"/>
+                            <field name="termin_5_amount" attrs="{'required': [('advance_payment_method', '=', 'termin_5')], 'invisible': [('advance_payment_method', '!=','termin_5')]}" class="oe_inline"/>
+                        </group>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

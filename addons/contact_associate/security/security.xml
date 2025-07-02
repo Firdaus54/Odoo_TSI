@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record model="ir.module.category" id="module_category_contact_associate">
+            <field name="name">TSI Contact Associate</field>
+            <field name="description">TSI Security</field>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="group_tsi_user" model="res.groups">
+            <field name="name">Modul Contact Client</field>
+            <field name="category_id" ref="module_category_contact_associate"/>
+        </record>
+
+        <record id="group_contact_associate_admin" model="res.groups">
+            <field name="name">Contact Associate Admin</field>
+            <field name="category_id" ref="module_category_contact_associate"/>
+            <field name="implied_ids" eval="[(4, ref('group_tsi_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

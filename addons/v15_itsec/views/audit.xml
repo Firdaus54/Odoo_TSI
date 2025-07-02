@@ -1,0 +1,198 @@
+<odoo>
+  <data>
+
+    <!-- AUDIT PROGRAM -->
+    <record model="ir.ui.view" id="list_audit_program">
+      <field name="name">audit.audit_program.tree</field>
+      <field name="model">audit.audit_program</field>
+      <field name="arch" type="xml">
+        <tree string="Audit Program List">
+          <field name="audit_no"  string="Audit No"/>
+          <field name="periode"   string="Periode"/>
+          <field name="activity"  string="Activity"/>
+          <field name="plan_date" string="Plan Date"/>
+          <field name="audit_pic" string="PIC"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="audit_program_window">
+      <field name="name">Internal Audit Program</field>
+      <field name="res_model">audit.audit_program</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="audit_program_form">
+        <field name="name">audit.audit_program.form</field>
+        <field name="model">audit.audit_program</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="audit_no"  string="Audit No"/>
+                      <field name="periode"   string="Periode"/>
+                      <field name="activity"  string="Activity"/>
+                      <field name="plan_date" string="Plan Date"/>
+                      <field name="audit_pic" string="PIC"/>
+                      <field name="file_bin"      filename="file_name"/>
+                      <field name="file_name"     invisible="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- EXTERNAL AUDIT REPORT  -->
+    <record model="ir.ui.view" id="list_audit_report">
+     <field name="name">audit.audit_report.tree</field>
+     <field name="model">audit.audit_report</field>
+     <field name="arch" type="xml">
+       <tree string="Audit Report List">
+         <field name="auditor_id"        string="Auditor"/>
+         <field name="audit_period"      string="Periode"/>
+         <field name="audit_date"        string="Date"/>
+         <field name="subject_id"        string="Process"/>
+         <field name="pic_auditee_id"    string="Auditee"/>
+       </tree>
+     </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="audit_report_window">
+     <field name="name">Audit Report</field>
+     <field name="res_model">audit.audit_report</field>
+     <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="audit_report_form">
+       <field name="name">audit.audit_report.form</field>
+       <field name="model">audit.audit_report</field>
+       <field name="arch" type="xml">
+           <form string="Form">
+               <sheet>
+                   <group col="4">
+                     <field name="auditor_id"        string="Auditor"/>
+                     <field name="audit_period"      string="Periode"/>
+                     <field name="audit_date"        string="Date"/>
+                     <field name="subject_id"        string="Process"/>
+                     <field name="pic_auditee_id"    string="Auditee"/>
+                   </group>
+                   <notebook position="inside">
+                     <page string="Documents">
+                       <field name="document_ids">
+                           <tree string="Documents" >
+                             <field name="finding_no"    string="No"/>
+                             <field name="description"   string="Description"/>
+                             <field name="file_name"     string="Filename"/>
+                           </tree>
+                           <form >
+                             <sheet string="Documents">
+                                 <group>
+                                   <field name="finding_no"    string="No"/>
+                                   <field name="description"   string="Description"/>
+                                   <field name="file_bin"      string="Filename" filename="file_name"/>
+                                   <field name="file_name"     invisible="1"/>
+                                 </group>
+                             </sheet>
+                           </form>
+                       </field>
+                     </page>
+                   </notebook>
+               </sheet>
+               <div class="oe_chatter">
+                   <field name="message_follower_ids" widget="mail_followers"/>
+                   <field name="message_ids" widget="mail_thread"/>
+               </div>
+           </form>
+       </field>
+    </record>
+
+   <!-- AUDIT PLAN  -->
+    <record model="ir.ui.view" id="list_audit_plan">
+      <field name="name">audit.audit_plan.tree</field>
+      <field name="model">audit.audit_plan</field>
+      <field name="arch" type="xml">
+        <tree string="Audit Plan List">
+          <field name="periode"     string="Periode"/>
+          <field name="tanggal"     string="Date"/>
+          <field name="waktu"       string="Time"/>
+          <field name="proses_id"   string="Process"/>
+          <field name="auditor_id"  string="Auditor"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="audit_plan_window">
+      <field name="name">Audit Plan</field>
+      <field name="res_model">audit.audit_plan</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="audit_plan_form">
+        <field name="name">audit.audit_plan.form</field>
+        <field name="model">audit.audit_plan</field>
+        <field name="arch" type="xml">
+            <form string="Form">
+                <sheet>
+                    <group col="4">
+                      <field name="periode"     string="Periode"/>
+                      <field name="tanggal"     string="Date"/>
+                      <field name="waktu"       string="Time"/>
+                      <field name="proses_id"   string="Process"/>
+                      <field name="auditor_id"  string="Auditor"/>
+                      <field name="standard"    string="Standard"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- AUDIT SUBJECT  -->
+     <record model="ir.ui.view" id="list_audit_subject">
+       <field name="name">audit.audit_subject.tree</field>
+       <field name="model">audit.audit_subject</field>
+       <field name="arch" type="xml">
+         <tree string="Audit Subject List">
+           <field name="name"         string="Name"/>
+           <field name="penanggung"   string="PIC"/>
+           <field name="departemen"   string="Department"/>
+         </tree>
+       </field>
+     </record>
+
+     <record model="ir.actions.act_window" id="audit_subject_window">
+       <field name="name">Audit Subject</field>
+       <field name="res_model">audit.audit_subject</field>
+       <field name="view_mode">tree,form</field>
+     </record>
+
+     <record model="ir.ui.view" id="audit_subject_form">
+         <field name="name">audit.audit_subject.form</field>
+         <field name="model">audit.audit_subject</field>
+         <field name="arch" type="xml">
+             <form string="Form">
+                 <sheet>
+                     <group>
+                       <field name="name"         string="Name"/>
+                       <field name="penanggung"   string="PIC"/>
+                       <field name="departemen"   string="Department"/>
+
+                     </group>
+                 </sheet>
+                 <div class="oe_chatter">
+                     <field name="message_follower_ids" widget="mail_followers"/>
+                     <field name="message_ids" widget="mail_thread"/>
+                 </div>
+             </form>
+         </field>
+     </record>
+
+   </data>
+</odoo>

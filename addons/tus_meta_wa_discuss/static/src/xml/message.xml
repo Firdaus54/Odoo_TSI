@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template_ext" xml:space="preserve">
+    <t t-name="MessageExt" t-inherit="mail.Message" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@t-if='isActive and messageView.messageActionList']" position="replace">
+             <div t-if="isActive and messageView.messageActionList and messageView.threadView and messageView.threadView.thread and !messageView.threadView.thread.isWaMsgs" class="o_Message_actionListContainer pl-5 pr-3" t-att-class="{ 'o-squashed': messageView.isSquashed }">
+                <MessageActionList messageActionListLocalId="messageView.messageActionList.localId"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//t[@t-if='messageView.message.failureNotifications.length > 0']//.." position="before">
+            <!-- When Message is Failed, Showing Error Message -->
+            <t t-if="messageView.message.wa_delivery_status == 'failed'">
+                <button class="btn" t-att-data-tooltip="messageView.message.wa_error_message" style="color:red;">
+                <span class="fa fa-warning" aria-label="Error Message"/> This Message was not sent
+            </button>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('o_Message')]" position="attributes">
+            <attribute name="t-att-class">
+                {'o_Message_active': isActive and threadView and threadView.thread and !threadView.thread.isWaMsgs,
+                'o_Message_whatsapp': threadView and threadView.thread and threadView.thread.isWaMsgs,
+                'o-clicked': state.isClicked,
+                'o-discussion': messageView and (messageView.message.is_discussion or messageView.message.is_notification),
+                'o-has-message-selection': threadView and threadView.replyingToMessageView,
+                'o-highlighted': messageView and !messageView.message.message_type === 'wa_msgs' and (messageView.message.isHighlighted or messageView.isHighlighted),
+                'o-mobile': messaging and messaging.device.isMobile,
+                'o-not-discussion': messageView and !(messageView.message.is_discussion or messageView.message.is_notification),
+                'o-notification': messageView and messageView.message.message_type === 'notification',
+                'o-selected': isSelected,
+                'o-squashed': messageView and messageView.isSquashed,
+                'o-starred': messageView and messageView.message.isStarred,
+                'mt-3': messageView and !messageView.isSquashed}
+            </attribute>
+        </xpath>
+
+        <!-- Add Sent, Delivered, Received, Read Status in WhatsApp for Every Message in Discuss, Chatter, Not in Chat Window/Sidebar -->
+        <xpath expr="//div[hasclass('o_Message_content')]//t[@t-if='!messageView.composerViewInEditing']" position="after">
+            <t t-if ="messageView.message.wp_status == 'sent'">
+                <div class="o_Message_seenIndicator me-1" t-att-data-tooltip="messageView.message.wp_status">
+                    <i class="o_MessageSeenIndicator_icon o-first fa fa-check ps-1"/>
+                </div>
+            </t>
+            <t t-if ="messageView.message.wp_status == 'delivered'">
+                <div class="o_Message_seenIndicator me-1" t-att-data-tooltip="messageView.message.wp_status">
+                    <i class="o_MessageSeenIndicator_icon o-first fa fa-check ps-1"/>
+                     <i class="o_MessageSeenIndicator_icon o-second fa fa-check position-absolute"/>
+                </div>
+            </t>
+            <t t-if ="messageView.message.wp_status == 'read'">
+                <div class="o_Message_seenIndicator o_icon_read me-1" t-att-data-tooltip="messageView.message.wp_status">
+                    <i class="o_MessageSeenIndicator_icon o-first fa fa-check ps-1"/>
+                    <i class="o_MessageSeenIndicator_icon o-second fa fa-check position-absolute"/>
+                </div>
+            </t>
+        </xpath>
+
+    </t>
+</templates>

@@ -1,0 +1,79 @@
+<odoo>
+
+	<record id="tsi_wizard_audit_view" model="ir.ui.view">
+		<field name="name">Request for Audit</field>
+		<field name="model">tsi.wizard_audit</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="audit_stage" widget="radio" options="{'horizontal': true}"/>
+					<field name="partner_id"/>
+					<field name="iso_standard_ids" widget="many2many_tags"/>
+					<field name="office_address"/>
+					<field name="invoicing_address"/>
+					<field name="no_kontrak"/>
+					<field name="telp"/>
+					<field name="email"/>
+					<field name="website"/>
+					<field name="cellular"/>
+					<field name="scope"/>
+					<field name="boundaries"/>
+					<field name="number_site"/>
+					<field name="total_emp"/>
+					<field name="mandays"/>
+					<field name="accreditation"/>
+				</group>
+				<group>
+					<field name="is_amendment"/>
+					<field name="contract_type" attrs="{'invisible': [('is_amendment', '=', False)]}"/>
+				</group>
+				<notebook>
+					<page string="Lines Audit Request">
+						<group>
+							<field name="line_ids" nolabel="1">
+								<tree editable="bottom">
+									<field name="product_id"/>
+									<field name="audit_tahapan"/>
+									<field name="tahun"/>
+									<field name="price_lama"/>
+									<field name="price_baru"/>
+									<field name="up_value"/>
+									<field name="loss_value"/>
+									<field name="fee"/>
+									<field name="percentage"/>
+								</tree>
+								<form>
+									<group>
+										<field name="product_id"/>
+										<field name="audit_tahapan"/>
+										<field name="tahun"/>
+										<field name="price_lama"/>
+										<field name="price_baru"/>
+										<field name="up_value"/>
+										<field name="loss_value"/>
+										<field name="fee"/>
+										<field name="percentage"/>
+									</group>
+								</form>
+							</field>
+						</group>
+					</page>
+					<page name="Reference" string="Reference">
+						<group col="4">
+							<field name="iso_reference"/>
+							<field name="crm_reference"/>
+							<field name="sales_reference"/>
+							<field name="review_reference" widget="many2many_tags"/>
+						</group>
+					</page>
+				</notebook>
+				<footer>
+					<button name="send" string="Confirm" class="btn-primary" type="object" />
+					<button string="Cancel" class="btn-secondary" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+</odoo>

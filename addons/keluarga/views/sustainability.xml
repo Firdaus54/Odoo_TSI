@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="skema_sustainability_view_tree" model="ir.ui.view">
+            <field name="name">skema.sustainability.view.tree</field>
+            <field name="model">skema.sustainability</field>
+            <field name="arch" type="xml">
+                <tree string="Data Sekma Sustainability">
+                        <field name="id_dokumen"/>
+                        <field name="name"/>
+                        <field name="nomor_dokumen"/>
+                        <field name="attachment"/>
+                        <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                        <field name="upload_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="skema_sustainability_view_form" model="ir.ui.view">
+            <field name="name">skema.sustainability.view.form</field>
+            <field name="model">skema.sustainability</field>
+            <field name="arch" type="xml">
+                <form string="Data Skema SustainabilityT">
+                    <sheet>
+                        <group>
+                            <field name="id_dokumen"/>
+                            <field name="name"/>
+                            <field name="nomor_dokumen"/>
+                            <field name="document_type"/>
+                            <field name="attachment" filename="file_name"/>
+                            <field name="file_name"   invisible="1"/>
+                            <field name="user_id" domain="[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]" optional="show" widget="many2one_avatar_user"/>
+                            <field name="upload_date"/>
+                            <field name="company_id" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="tsi_skema_sustainability_action" model="ir.actions.act_window">
+            <field name="name">Skema Sustainability</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">skema.sustainability</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    
+                </p>
+                <p>
+                    
+                </p>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

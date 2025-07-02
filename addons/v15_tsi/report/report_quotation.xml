@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <template id="report_quotation">
+            <t t-call="web.html_container">
+                    <t t-foreach="docs" t-as="doc">
+                        <t t-call="web.basic_layout">
+                            <style>
+                                table {
+                                    border-collapse: collapse;
+                                }     
+                                tr.border-bottom {
+                                    border-bottom: 1px solid black;
+                                }
+                                tr.border-top {
+                                    border-top: 1px solid black;
+                                }
+                                
+                            </style>
+                            <div class="header">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="vertical-align: top;"><img class="img img-responsive"
+                                            src="/v15_tsi/static/description/logo_tsi.png"
+                                            style="height: 100px;width:100px;float:left;"
+                                            /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                        </t>
+                    </t>
+            </t>
+        </template>
+    </data>
+</odoo>

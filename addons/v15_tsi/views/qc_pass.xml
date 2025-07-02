@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+            <!-- Tree View -->
+            <record id="view_qc_pass_iso_tree" model="ir.ui.view">
+                <field name="name">qc.pass.iso.tree</field>
+                <field name="model">qc.pass.iso</field>
+                <field name="arch" type="xml">
+                    <tree string="Quplity Control Pass">
+                        <field name="customer"/>
+                        <field name="iso_reference"/>
+                        <field name="iso_reference_check"/>
+                        <field name="application_review_ids" widget="many2many_tags"/>
+                        <field name="application_review_check"/>
+                        <field name="sale_order_id"/>
+                        <field name="sale_order_check"/>
+                        <field name="program_id" widget="many2many_tags"/>
+                        <field name="program_check"/>
+                        <field name="plan_id" widget="many2many_tags"/>
+                        <field name="plan_check"/>
+                        <field name="report_id" widget="many2many_tags"/>
+                        <field name="report_check"/>
+                        <field name="review_id" widget="many2many_tags"/>
+                        <field name="review_check"/>
+                        <field name="sertifikat_id" widget="many2many_tags"/>
+                        <field name="sertifikat_check"/>
+                    </tree>
+                </field>
+            </record>
+
+            <record id="view_qc_pass_iso_form" model="ir.ui.view">
+            <field name="name">qc.pass.iso.form</field>
+            <field name="model">qc.pass.iso</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="customer"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="iso_reference"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso"/>
+                                <field name="iso_reference_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="application_review_ids"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_review"/>
+                                <field name="application_review_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="sale_order_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_sales"/>
+                                <field name="sale_order_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="program_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_program"/>
+                                <field name="program_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="plan_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_plan"/>
+                                <field name="plan_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="report_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_report"/>
+                                <field name="report_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="review_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_ops_review"/>
+                                <field name="review_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="sertifikat_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_sertifikat"/>
+                                <field name="sertifikat_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for the Tree View -->
+        <record id="qc_pass_iso_action" model="ir.actions.act_window">
+            <field name="name">Quality Control Pass ISO</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">qc.pass.iso</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="qc_pass_iso_view_search" model="ir.ui.view">
+			<field name="name">qc.pass.iso.view.search</field>
+			<field name="model">qc.pass.iso</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<search string="ISO Filter">
+					<field name="customer"/>
+				</search>
+			</field>
+		</record>
+
+        <!-- Tree View -->
+        <record id="view_qc_pass_iso_surveillance_tree" model="ir.ui.view">
+            <field name="name">qc.pass.iso.surveillance.tree</field>
+            <field name="model">qc.pass.iso.surveillance</field>
+            <field name="arch" type="xml">
+                <tree string="Quplity Control Pass">
+                    <field name="customer"/>
+                    <field name="audit_request_iso" widget="many2many_tags"/>
+                    <field name="audit_request_iso_reference_check"/>
+                    <field name="sale_order_id"/>
+                    <field name="sale_order_check"/>
+                    <field name="program_id" widget="many2many_tags"/>
+                    <field name="program_check"/>
+                    <field name="plan_id" widget="many2many_tags"/>
+                    <field name="plan_check"/>
+                    <field name="report_id" widget="many2many_tags"/>
+                    <field name="report_check"/>
+                    <field name="review_id" widget="many2many_tags"/>
+                    <field name="review_check"/>
+                    <field name="sertifikat_id" widget="many2many_tags"/>
+                    <field name="sertifikat_check"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_qc_pass_iso_surveillance_form" model="ir.ui.view">
+            <field name="name">qc.pass.iso.surveillance.form</field>
+            <field name="model">qc.pass.iso.surveillance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="customer"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="audit_request_iso"/>
+                            </group>
+                            <group col="4">
+                                <field name="audit_request_noted_iso"/>
+                                <field name="audit_request_iso_reference_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="sale_order_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_sales"/>
+                                <field name="sale_order_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="program_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_program"/>
+                                <field name="program_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="plan_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_plan"/>
+                                <field name="plan_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="report_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_report"/>
+                                <field name="report_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="review_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_ops_review"/>
+                                <field name="review_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="sertifikat_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_sertifikat"/>
+                                <field name="sertifikat_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for the Tree View -->
+        <record id="qc_pass_iso_surveillance_action" model="ir.actions.act_window">
+            <field name="name">Quality Control Pass ISO Surveillance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">qc.pass.iso.surveillance</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="qc_pass_iso_surveillance_view_search" model="ir.ui.view">
+			<field name="name">qc.pass.iso.surveillance.view.search</field>
+			<field name="model">qc.pass.iso.surveillance</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<search string="ISO Filter">
+					<field name="customer"/>
+				</search>
+			</field>
+		</record>
+
+        <!-- Tree View -->
+            <record id="view_qc_pass_ispo_tree" model="ir.ui.view">
+                <field name="name">qc.pass.ispo.tree</field>
+                <field name="model">qc.pass.ispo</field>
+                <field name="arch" type="xml">
+                    <tree string="Quplity Control Pass">
+                        <field name="customer"/>
+                        <field name="ispo_reference"/>
+                        <field name="ispo_reference_check" widget="boolean_button" class="o_field_boolean"/>
+                        <field name="application_review_ispo_ids" widget="many2many_tags"/>
+                        <field name="application_review_ispo_check" widget="boolean_button" class="o_field_boolean"/>
+                        <field name="sale_order_id"/>
+                        <field name="sale_order_check" widget="boolean_button" class="o_field_boolean"/>
+                        <field name="program_ispo_id" widget="many2many_tags"/>
+                        <field name="program_check" widget="boolean_button" class="o_field_boolean"/>
+                        <field name="plan_ispo_id" widget="many2many_tags"/>
+                        <field name="plan_check" widget="boolean_button" class="o_field_boolean"/>
+                        <field name="report_ispo_id" widget="many2many_tags"/>
+                        <field name="report_check" widget="boolean_button" class="o_field_boolean"/>
+                        <field name="review_ispo_id" widget="many2many_tags"/>
+                        <field name="review_check" widget="boolean_button" class="o_field_boolean"/>
+                        <field name="sertifikat_ispo_id" widget="many2many_tags"/>
+                        <field name="sertifikat_check" widget="boolean_button" class="o_field_boolean"/>
+                    </tree>
+                </field>
+            </record>
+
+            <record id="view_qc_pass_ispo_form" model="ir.ui.view">
+            <field name="name">qc.pass.ispo.form</field>
+            <field name="model">qc.pass.ispo</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="customer"/>
+                            </group>
+                            <group col="10">
+                                <field name="ispo_reference"/>
+                                <field name="ispo_reference_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                            <group col="10">
+                                <field name="application_review_ispo_ids" widget="many2many_tags"/>
+                                <field name="application_review_ispo_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                            <group col="10">
+                                <field name="sale_order_id"/>
+                                <field name="sale_order_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                            <group col="10">
+                                <field name="program_ispo_id"/>
+                                <field name="program_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                            <group col="10">
+                                <field name="plan_ispo_id"/>
+                                <field name="plan_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                            <group col="10">
+                                <field name="report_ispo_id"/>
+                                <field name="report_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                            <group col="10">
+                                <field name="review_ispo_id"/>
+                                <field name="review_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                            <group col="10">
+                                <field name="sertifikat_ispo_id"/>
+                                <field name="sertifikat_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for the Tree View -->
+        <record id="qc_pass_ispo_action" model="ir.actions.act_window">
+            <field name="name">Quality Control Pass ISPO</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">qc.pass.ispo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="qc_pass_ispo_view_search" model="ir.ui.view">
+			<field name="name">qc.pass.ispo.view.search</field>
+			<field name="model">qc.pass.ispo</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<search string="ISPO Filter">
+					<field name="customer"/>
+				</search>
+			</field>
+		</record>
+
+        <!-- Tree View -->
+        <record id="view_qc_pass_ispo_surveillance_tree" model="ir.ui.view">
+            <field name="name">qc.pass.ispo.surveillance.tree</field>
+            <field name="model">qc.pass.ispo.surveillance</field>
+            <field name="arch" type="xml">
+                <tree string="Quplity Control Pass">
+                    <field name="customer"/>
+                    <field name="audit_request_ispo" widget="many2many_tags"/>
+                    <field name="audit_request_ispo_reference_check"/>
+                    <field name="sale_order_id"/>
+                    <field name="sale_order_check"/>
+                    <field name="program_ispo_id" widget="many2many_tags"/>
+                    <field name="program_check"/>
+                    <field name="plan_ispo_id" widget="many2many_tags"/>
+                    <field name="plan_check"/>
+                    <field name="report_ispo_id" widget="many2many_tags"/>
+                    <field name="report_check"/>
+                    <field name="review_ispo_id" widget="many2many_tags"/>
+                    <field name="review_check"/>
+                    <field name="sertifikat_ispo_id" widget="many2many_tags"/>
+                    <field name="sertifikat_check"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_qc_pass_ispo_surveillance_form" model="ir.ui.view">
+            <field name="name">qc.pass.ispo.surveillance.form</field>
+            <field name="model">qc.pass.ispo.surveillance</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="customer"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="audit_request_ispo"/>
+                            </group>
+                            <group col="4">
+                                <field name="audit_request_noted_iso"/>
+                                <field name="audit_request_ispo_reference_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="sale_order_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_sales"/>
+                                <field name="sale_order_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="program_ispo_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_program"/>
+                                <field name="program_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="plan_ispo_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_plan"/>
+                                <field name="plan_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="report_ispo_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_report"/>
+                                <field name="report_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="review_ispo_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_ops_review"/>
+                                <field name="review_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="sertifikat_ispo_id"/>
+                            </group>
+                            <group col="4">
+                                <field name="noted_iso_sertifikat"/>
+                                <field name="sertifikat_check" widget="boolean_button" class="o_field_boolean"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for the Tree View -->
+        <record id="qc_pass_ispo_surveillance_action" model="ir.actions.act_window">
+            <field name="name">Quality Control Pass ISPO Surveillance</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">qc.pass.ispo.surveillance</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="qc_pass_ispo_surveillance_view_search" model="ir.ui.view">
+			<field name="name">qc.pass.ispo.surveillance.view.search</field>
+			<field name="model">qc.pass.ispo.surveillance</field>
+			<field name="priority" eval="15"/>
+			<field name="arch" type="xml">
+				<search string="ISO Filter">
+					<field name="customer"/>
+				</search>
+			</field>
+		</record>
+
+        <menuitem id="qc_pass_management_root" name="Quality Controll Pass" web_icon="v15_tsi,static/description/quality-control-ceklis.png" groups="v15_tsi.group_admin_pd"/>
+
+        <menuitem id="qc_pass_initial" name="Initial Audit" parent="qc_pass_management_root" sequence="10"/>
+        <menuitem id="qc_pass_surveillance" name="Surveillance" parent="qc_pass_management_root" sequence="10"/>
+
+        <menuitem id="qc_pass_initial_iso" name="ISO" parent="qc_pass_initial" action="qc_pass_iso_action"/>
+        <menuitem id="qc_pass_initial_ispo" name="ISPO" parent="qc_pass_initial" action="qc_pass_ispo_action"/>
+
+        <menuitem id="qc_pass_surveillance_iso" name="ISO" parent="qc_pass_surveillance" action="qc_pass_iso_surveillance_action"/>
+        <menuitem id="qc_pass_surveillance_ispo" name="ISPO" parent="qc_pass_surveillance" action="qc_pass_ispo_surveillance_action"/>
+    </data>
+</odoo>

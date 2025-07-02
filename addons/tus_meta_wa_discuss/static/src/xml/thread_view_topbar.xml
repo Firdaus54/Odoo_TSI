@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template_ext" xml:space="preserve">
+    <t t-name="ThreadViewTopbarExt" t-inherit="mail.ThreadViewTopbar" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_ThreadViewTopbar_actions')]" position="replace">
+            <div class="o_ThreadViewTopbar_actions d-flex align-items-center ml-1" t-if="threadViewTopbar and threadViewTopbar.thread and !threadViewTopbar.thread.isWaMsgs">
+                <t t-if="threadViewTopbar.thread and threadViewTopbar.thread === messaging.inbox">
+                    <button class="o_ThreadViewTopbar_markAllReadButton btn btn-secondary" t-att-disabled="threadViewTopbar.threadView.messages.length === 0" t-on-click="threadViewTopbar.onClickInboxMarkAllAsRead">Mark all read</button>
+                </t>
+                <t t-if="threadViewTopbar.thread and threadViewTopbar.thread === messaging.starred">
+                    <button class="o_ThreadViewTopbar_unstarAllButton btn btn-secondary" t-att-disabled="threadViewTopbar.threadView.messages.length === 0" t-on-click="threadViewTopbar.onClickUnstarAll">Unstar all</button>
+                </t>
+                <t t-if="threadViewTopbar.thread and threadViewTopbar.thread.model === 'mail.channel' and threadViewTopbar.thread.rtcSessions.length === 0">
+                    <button class="o_ThreadViewTopbar_callButton o_ThreadViewTopbar_button o-active" t-att-disabled="threadViewTopbar.thread.hasPendingRtcRequest" title="Start a Call" t-on-click="_onClickPhone">
+                        <i class="fa fa-lg fa-phone"/>
+                    </button>
+                    <button class="o_ThreadViewTopbar_callButton o_ThreadViewTopbar_button o-active" t-att-disabled="threadViewTopbar.thread.hasPendingRtcRequest" title="Start a Video Call" t-on-click="_onClickCamera">
+                        <i class="fa fa-lg fa-video-camera"/>
+                    </button>
+                </t>
+                <t t-if="threadViewTopbar.thread and threadViewTopbar.thread.hasInviteFeature">
+                    <button class="o_ThreadViewTopbar_inviteButton o_ThreadViewTopbar_button" t-att-class="{ 'o-active': threadViewTopbar.invitePopoverView }" title="Add users" t-on-click="threadViewTopbar.onClickInviteButton" t-ref="inviteButton">
+                        <i class="fa fa-lg fa-user-plus"/>
+                    </button>
+                    <t t-if="threadViewTopbar.invitePopoverView">
+                        <PopoverView class="o_ThreadViewTopbar_invitePopoverView" popoverViewLocalId="threadViewTopbar.invitePopoverView.localId"/>
+                    </t>
+                </t>
+                <!-- FIXME: guests should be able to see members but there currently is no route for it, so hide it for now -->
+                <t t-if="!messaging.isCurrentUserGuest and threadViewTopbar.thread and threadViewTopbar.thread.hasMemberListFeature and threadViewTopbar.threadView.hasMemberList and !threadViewTopbar.threadView.isMemberListOpened">
+                    <button class="o_ThreadViewTopbar_showMemberListButton o_ThreadViewTopbar_button" title="Show Member List" t-on-click="threadViewTopbar.onClickShowMemberList">
+                        <i class="fa fa-lg fa-users"/>
+                    </button>
+                </t>
+                <t t-if="threadViewTopbar.thread and threadViewTopbar.thread.hasMemberListFeature and threadViewTopbar.threadView.hasMemberList and threadViewTopbar.threadView.isMemberListOpened">
+                    <button class="o_ThreadViewTopbar_hideMemberListButton o_ThreadViewTopbar_button o-active" title="Hide Member List" t-on-click="threadViewTopbar.onClickHideMemberList">
+                        <i class="fa fa-lg fa-users"/>
+                    </button>
+                </t>
+            </div>
+         </xpath>
+    </t>
+</templates>

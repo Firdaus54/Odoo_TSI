@@ -1,0 +1,92 @@
+<odoo>
+    <data>
+
+        <!-- ops.sertifikat form view -->
+        <record id="sertifikat_delivery_view_form" model="ir.ui.view">
+            <field name="name">sertifikat.delivery.view.form</field>
+            <field name="model">sertifikat.delivery</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button name="set_to_confirm" states="new" string="Confirm" type="object" class="oe_highlight" />
+                        <button name="set_to_done" states="confirm" string="Done" type="object" class="oe_highlight"/>
+                        <button name="set_to_draft" states="confirm,done" string="Reset" type="object" />
+                        <field name="state" widget="statusbar" statusbar_visible="new,confirm,done"/>
+                    </header>                
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="iso_reference"/>
+                            <field name="criteria"/>
+                        </group>
+
+                        <notebook>
+                            <page name="objectives" string="Objectives">
+                                <group>
+                                    <field name="objectives"    nolabel="1"/>
+                                </group>
+                            </page>                        
+                            <page name="sertifikat_summary" string="Details">
+                                <group>
+                                    <field name="sertifikat_summary" nolabel="1">
+                                        <tree editable="bottom">
+                                            <field name="summary"/>
+                                            <field name="status"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="summary"/>
+                                                <field name="status"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- sertifikat.delivery tree view -->
+        <record id="sertifikat_delivery_view_tree" model="ir.ui.view">
+            <field name="name">sertifikat.delivery.view.tree</field>
+            <field name="model">sertifikat.delivery</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="iso_reference"/>
+                    <field name="criteria"/>
+                    <field name="objectives"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- sertifikat.delivery action window -->
+        <record id="sertifikat_delivery_action" model="ir.actions.act_window">
+            <field name="name">Sertifikat Delivery</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sertifikat.delivery</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="sertifikat_delivery_seq">
+            <field name="name">sertifikat</field>
+            <field name="code">sertifikat.delivery</field>
+            <field name="prefix">CER</field>
+            <field name="padding">7</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+    </data>
+</odoo>

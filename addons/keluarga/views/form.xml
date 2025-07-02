@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record id="tsi_form_view_tree" model="ir.ui.view">
+            <field name="name">tsi.form.view.tree</field>
+            <field name="model">tsi.form</field>
+            <field name="arch" type="xml">
+                <tree string="Data Form 17021">
+                    <field name="id_dokumen"/>
+                    <field name="name"/>
+                    <field name="nomor_dokumen"/>
+                    <field name="attachment"/>
+                    <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                    <field name="original_date"/>
+                    <field name="revisi_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_form_view_form" model="ir.ui.view">
+            <field name="name">tsi.form.view.form</field>
+            <field name="model">tsi.form</field>
+            <field name="arch" type="xml">
+                <form string="Data Form 17021">
+                    <sheet>
+                        <group col='4'>
+                            <field name="id_dokumen"/>
+                            <field name="name"/>
+                            <field name="nomor_dokumen"/>
+                            <field name="edition_number"/>
+                            <field name="revisi_number"/>
+                            <field name="original_date"/>
+                            <field name="revisi_date"/>
+                            <!-- <field name="initial_date"/>
+                            <field name="upload_date"/> -->
+                            <field name="approval_by"/>
+                            <field name="approval_date"/>
+                            <field name="user_id" domain="[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]" optional="show" widget="many2one_avatar_user"/>
+                            <field name="attachment" filename="file_name" widget="pdf_viewer"/>
+                            <field name="file_name"   attrs="{'invisible':True}"/>
+                            <field name="company_id" attrs="{'invisible':True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for the Tree View -->
+         <record id="tsi_form_action" model="ir.actions.act_window">
+            <field name="name">Form 17021</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="tsi_form_17065_view_tree" model="ir.ui.view">
+            <field name="name">tsi.form.17065.view.tree</field>
+            <field name="model">tsi.form.17065</field>
+            <field name="arch" type="xml">
+                <tree string="Data Form 17065">
+                    <field name="id_dokumen"/>
+                    <field name="name"/>
+                    <field name="nomor_dokumen"/>
+                    <field name="attachment"/>
+                    <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                    <field name="original_date"/>
+                    <field name="revisi_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_form_17065_view_form" model="ir.ui.view">
+            <field name="name">tsi.form.17065.view.form</field>
+            <field name="model">tsi.form.17065</field>
+            <field name="arch" type="xml">
+                <form string="Data Form 17065">
+                    <sheet>
+                        <group col='4'>
+                            <field name="id_dokumen"/>
+                            <field name="name"/>
+                            <field name="nomor_dokumen"/>
+                            <field name="edition_number"/>
+                            <field name="revisi_number"/>
+                            <field name="original_date"/>
+                            <field name="revisi_date"/>
+                            <!-- <field name="initial_date"/>
+                            <field name="upload_date"/> -->
+                            <field name="approval_by"/>
+                            <field name="approval_date"/>
+                            <field name="user_id" domain="[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]" optional="show" widget="many2one_avatar_user"/>
+                            <field name="attachment" filename="file_name" widget="pdf_viewer"/>
+                            <field name="file_name"   attrs="{'invisible':True}"/>
+                            <field name="company_id" attrs="{'invisible':True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for the Tree View -->
+         <record id="tsi_form_17065_action" model="ir.actions.act_window">
+            <field name="name">Form 17065</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.form.17065</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="tsi_form_others_view_tree" model="ir.ui.view">
+            <field name="name">tsi.form.others.view.tree</field>
+            <field name="model">tsi.form.others</field>
+            <field name="arch" type="xml">
+                <tree string="Data Form Others">
+                    <field name="id_dokumen"/>
+                    <field name="name"/>
+                    <field name="nomor_dokumen"/>
+                    <field name="attachment"/>
+                    <field name="user_id" optional="show" widget="many2one_avatar_user"/>
+                    <field name="original_date"/>
+                    <field name="revisi_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tsi_form_others_view_form" model="ir.ui.view">
+            <field name="name">tsi.form.others.view.form</field>
+            <field name="model">tsi.form.others</field>
+            <field name="arch" type="xml">
+                <form string="Data Form Others">
+                    <sheet>
+                        <group col='4'>
+                            <field name="id_dokumen"/>
+                            <field name="name"/>
+                            <field name="nomor_dokumen"/>
+                            <field name="edition_number"/>
+                            <field name="revisi_number"/>
+                            <field name="original_date"/>
+                            <field name="revisi_date"/>
+                            <!-- <field name="initial_date"/>
+                            <field name="upload_date"/> -->
+                            <field name="approval_by"/>
+                            <field name="approval_date"/>
+                            <field name="user_id" domain="[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]" optional="show" widget="many2one_avatar_user"/>
+                            <field name="attachment" filename="file_name" widget="pdf_viewer"/>
+                            <field name="file_name"   attrs="{'invisible':True}"/>
+                            <field name="company_id" attrs="{'invisible':True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for the Tree View -->
+         <record id="tsi_form_others_action" model="ir.actions.act_window">
+            <field name="name">Form 17021</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tsi.form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+        
+        <!-- <menuitem id="tsi_document_management_root" name="Document Management" />
+        <menuitem id="tsi_sistem_document_menu" name="Document Sistem Managemen" parent="tsi_document_management_root"/> -->
+        <!-- <menuitem id="tsi_sistem_document3_1" name="Form 17021" parent="tsi_sistem_document3" action="tsi_form_action"/>
+        <menuitem id="tsi_sistem_document3_2" name="Form 17065" parent="tsi_sistem_document3" action="tsi_form_17065_action"/>
+        <menuitem id="tsi_sistem_document3_3" name="Form Others" parent="tsi_sistem_document3" action="tsi_form_others_action"/> -->
+
+    </data>
+</odoo>

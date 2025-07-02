@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="whatsapp_history_view_form_inherit" model="ir.ui.view">
+            <field name="name">whatsapp.history.form.view.inherited</field>
+            <field name="model">whatsapp.history</field>
+            <field
+                name="inherit_id"
+                ref="tus_meta_whatsapp_base.whatsapp_history_form_view"
+            />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="channel_id" />
+                    <field name="wa_chatbot_id" invisible="1" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

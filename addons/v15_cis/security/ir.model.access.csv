@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cis_kontrak,access_cis_kontrak,model_cis_kontrak,base.group_user,1,1,1,1
+access_cis_petugas,access_cis_petugas,model_cis_petugas,base.group_user,1,1,1,1
+access_cis_checkpoint,access_cis_checkpoint,model_cis_checkpoint,base.group_user,1,1,1,1
+access_cis_incident,access_cis_incident,model_cis_incident,base.group_user,1,1,1,1
+access_cis_tapscan,access_cis_tapscan,model_cis_tapscan,base.group_user,1,1,1,1
+access_cis_job_order,access_cis_job_order,model_cis_job_order,base.group_user,1,1,1,1
+v15_cis.access_cis_activity,access_cis_activity,v15_cis.model_cis_activity,base.group_user,1,1,1,1
+v15_cis.access_cis_cleaning_activity,access_cis_cleaning_activity,v15_cis.model_cis_cleaning_activity,base.group_user,1,1,1,1

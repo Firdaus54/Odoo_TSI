@@ -1,0 +1,130 @@
+<odoo>
+  <data>
+  
+    <!-- Top menu item -->   
+    <menuitem name="Perencanaan"                        id="v15_itsec.menu_root_1" groups="v15_itsec.group_manager"/>
+    <menuitem name="Implementasi"  id="v15_itsec.menu_root_2" groups="v15_itsec.group_manager"/>
+    <menuitem name="Evaluasi"                           id="v15_itsec.menu_root_3" groups="v15_itsec.group_manager"/>
+    <menuitem name="Perbaikan"                          id="v15_itsec.menu_root_4" groups="v15_itsec.group_manager"/>
+   
+    <!-- menu categories -->    
+    <menuitem name="Risk Management"        id="v15_itsec.menu_1_1"   parent="v15_itsec.menu_root_1"  sequence="10"/>
+    <menuitem name="Asset Management"       id="v15_itsec.menu_1_2"   parent="v15_itsec.menu_root_1"  sequence="20"/>
+    <menuitem name="Refference"             id="v15_itsec.menu_1_4"   parent="v15_itsec.menu_root_1"  sequence="40"/>
+    <menuitem name="Informasi"              id="v15_itsec.menu_1_5"   parent="v15_itsec.menu_root_1"  sequence="50"/>
+    <menuitem name="Human Resource"         id="v15_itsec.menu_5_1"   parent="hr.menu_hr_root"  />
+    <menuitem name="Worker Representative"  id="v15_itsec.menu_5_2"   parent="hr.menu_hr_root"  />
+    <menuitem name="Kinerja Keamanan"       id="v15_itsec.menu_2_1"   parent="v15_itsec.menu_root_1"/>
+    <menuitem name="Guidelines"             id="v15_itsec.menu_4_4"   parent="v15_itsec.menu_root_1"/>
+
+    <menuitem name="Incident Management"  id="v15_itsec.menu_2_5"   parent="v15_itsec.menu_root_2"/>
+    <menuitem name="Planning"             id="v15_itsec.menu_2_6"   parent="v15_itsec.menu_root_2"/>
+    <menuitem name="BCP"                  id="v15_itsec.menu_3_3"   parent="v15_itsec.menu_root_2"/>
+    <menuitem name="Vendor Management"    id="v15_itsec.menu_3_1"   parent="v15_itsec.menu_root_2"/>
+    <menuitem name="Communication"        id="v15_itsec.menu_4_2"   parent="v15_itsec.menu_root_2"/>
+
+    <menuitem name="Change Management"    id="v15_itsec.menu_14"    parent="v15_itsec.menu_root_3"/>
+    <menuitem name="Management Review"    id="v15_itsec.menu_2_3"   parent="v15_itsec.menu_root_3"/>
+    <menuitem name="Contract Management"  id="v15_itsec.menu_3_4"   parent="v15_itsec.menu_root_3"/>
+    <menuitem name="Audit Management"     id="v15_itsec.menu_4_1"   parent="v15_itsec.menu_root_3"/>
+    <menuitem name="Pentest Repot"        id="v15_itsec.menu_4_3"   parent="v15_itsec.menu_root_3"/>
+    <menuitem name="Backup / Restore"     id="v15_itsec.menu_4_5"   parent="v15_itsec.menu_root_3"/>
+
+    <menuitem name="Action Tracking"      id="v15_itsec.menu_5"   parent="v15_itsec.menu_root_4"/>
+
+
+    <!-- actions -->    
+    <menuitem name="Risk Register"  id="v15_itsec.menu_1_1_list_1" parent="v15_itsec.menu_1_1" action="risk_register_action"/>
+    <menuitem name="Identifikasi"   id="v15_itsec.menu_1_1_list_2" parent="v15_itsec.menu_1_1" action="ident_identifikasi_action"/>
+    <menuitem name="Kategori"       id="v15_itsec.menu_1_1_list_3" parent="v15_itsec.menu_1_1" action="risk_kategori_action"/>
+
+    <menuitem name="Assets Register"      id="v15_itsec.menu_1_2_list_1" parent="v15_itsec.menu_1_2" action="assets_register_action"/>
+    <menuitem name="Access Matrix"        id="v15_itsec.menu_1_2_list_2" parent="v15_itsec.menu_1_2" action="access_action"/>
+    <menuitem name="Formulir Kehilangan"  id="v15_itsec.menu_1_2_list_3" parent="v15_itsec.menu_1_2" action="itsec_kehilangan_action"/>
+    <menuitem name="Formulir Peminjaman"  id="v15_itsec.menu_1_2_list_4" parent="v15_itsec.menu_1_2" action="itsec_peminjaman_action"/>
+    <menuitem name="Formulir Permintaan"  id="v15_itsec.menu_1_2_list_5" parent="v15_itsec.menu_1_2" action="itsec_permintaan_action"/>
+    <menuitem name="Access List"          id="v15_itsec.menu_1_2_list_6" parent="v15_itsec.menu_1_2" action="def_asset_action"/>
+
+    <menuitem name="Planning"     id="v15_itsec.menu_2_6_list_1" parent="v15_itsec.menu_2_6" action="kinerja_planning_action"/>
+    <menuitem name="Monitoring"   id="v15_itsec.menu_2_6_list_2" parent="v15_itsec.menu_2_6" action="kinerja_monitoring_action"/>
+   
+    <menuitem name="Refference"     id="v15_itsec.menu_1_4_list_1" parent="v15_itsec.menu_1_4" action="reff_first_action"/>
+    <menuitem name="Sub Refference" id="v15_itsec.menu_1_4_list_2" parent="v15_itsec.menu_1_4" action="reff_second_action"/>
+    <menuitem name="Control"        id="v15_itsec.menu_1_4_list_3" parent="v15_itsec.menu_1_4" action="reff_third_action"/>
+
+    <menuitem name="Matrix Klasifikasi" id="v15_itsec.menu_1_5_list_1" parent="v15_itsec.menu_1_5" action="klas_matrix_action"/>
+    <menuitem name="Penanggung Jawab"   id="v15_itsec.menu_1_5_list_2" parent="v15_itsec.menu_1_5" action="klas_pic_action"/>
+    <menuitem name="Penanganan"         id="v15_itsec.menu_1_5_list_3" parent="v15_itsec.menu_1_5" action="klas_penanganan_action"/>
+
+    <menuitem name="Kinerja Keamanan" id="v15_itsec.menu_2_1_list_1" parent="v15_itsec.menu_2_1" action="kinerja_kinerja_action"/>
+
+    <menuitem name="Invitation" id="v15_itsec.menu_2_3_list_1" parent="v15_itsec.menu_2_3" action="undangan_window"/>
+    <menuitem name="Notulen"    id="v15_itsec.menu_2_3_list_2" parent="v15_itsec.menu_2_3" action="notulen_window"/>
+    <menuitem name="Report"     id="v15_itsec.menu_2_3_list_3" parent="v15_itsec.menu_2_3" action="mgtreport_window"/>
+
+    <!-- <menuitem name="Customer Survey"        id="v15_itsec.menu_4_2_list_1" parent="v15_itsec.menu_4_2" action="cust_survey_window"/>
+    <menuitem name="Customer Complaint"     id="v15_itsec.menu_4_2_list_2" parent="v15_itsec.menu_4_2" action="cust_complaint_window"/>
+    <menuitem name="Customer Relation"      id="v15_itsec.menu_4_2_list_3" parent="v15_itsec.menu_4_2" action="cust_relation_window"/> -->
+    <menuitem name="Internal Communication" id="v15_itsec.menu_4_2_list_4" parent="v15_itsec.menu_4_2" action="internalcomm_window"/>
+    <menuitem name="External Communication" id="v15_itsec.menu_4_2_list_5" parent="v15_itsec.menu_4_2" action="eksternalcomm_window"/>
+
+    <menuitem name="Nonconformity"      id="v15_itsec.menu_2_5_list_1" parent="v15_itsec.menu_2_5" action="audit_nonconform_window"/>
+    <menuitem name="Incident Report"    id="v15_itsec.menu_2_5_list_2" parent="v15_itsec.menu_2_5" action="incident_window"/>
+    <menuitem name="Incident Category"  id="v15_itsec.menu_2_5_list_3" parent="v15_itsec.menu_2_5" action="incident_cat_window"/>
+
+    <menuitem name="Vendor Selection"   id="v15_itsec.menu_3_1_list_1" parent="v15_itsec.menu_3_1" action="vendor_selection_window"/>
+    <menuitem name="Vendor Approval"    id="v15_itsec.menu_3_1_list_2" parent="v15_itsec.menu_3_1" action="vendor_approval_window"/>
+    <menuitem name="Vendor Evaluation"  id="v15_itsec.menu_3_1_list_3" parent="v15_itsec.menu_3_1" action="vendor_evaluation_window"/>
+    <menuitem name="Vendor Monitoring"  id="v15_itsec.menu_3_1_list_4" parent="v15_itsec.menu_3_1" action="vendor_monitoring_window"/>
+
+    <menuitem name="Audit Program"  id="v15_itsec.menu_4_1_list_1" parent="v15_itsec.menu_4_1" action="audit_program_window"/>
+    <menuitem name="Audit Plan"     id="v15_itsec.menu_4_1_list_2" parent="v15_itsec.menu_4_1" action="audit_plan_window"/>
+    <menuitem name="Audit Subject"  id="v15_itsec.menu_4_1_list_3" parent="v15_itsec.menu_4_1" action="audit_subject_window"/>
+    <menuitem name="Audit Report"   id="v15_itsec.menu_4_1_list_4" parent="v15_itsec.menu_4_1" action="audit_report_window"/>
+
+    <menuitem name="Pentest Report" id="v15_itsec.menu_4_3_list_1" parent="v15_itsec.menu_4_3" action="pentest_pentest_action"/>
+
+    <menuitem name="Company Policy"       id="v15_itsec.menu_4_4_list_1" parent="v15_itsec.menu_4_4" action="itsec_policy_window"/>
+    <menuitem name="Manual"               id="v15_itsec.menu_4_4_list_2" parent="v15_itsec.menu_4_4" action="itsec_manual_window"/>
+    <menuitem name="Procedure"            id="v15_itsec.menu_4_4_list_3" parent="v15_itsec.menu_4_4" action="itsec_prosedur_window"/>
+    <menuitem name="Working Instruction"  id="v15_itsec.menu_4_4_list_4" parent="v15_itsec.menu_4_4" action="itsec_instruksi_window"/>
+    <!-- <menuitem name="Drawing"              id="v15_itsec.menu_4_4_list_5" parent="v15_itsec.menu_4_4" action="v15_itsec_drawing_window"/> -->
+    <menuitem name="Standard"             id="v15_itsec.menu_4_4_list_6" parent="v15_itsec.menu_4_4" action="itsec_standard_window"/>
+    <menuitem name="Form"                 id="v15_itsec.menu_4_4_list_7" parent="v15_itsec.menu_4_4" action="itsec_form_window"/>
+    <menuitem name="Quality Plan"         id="v15_itsec.menu_4_4_list_8" parent="v15_itsec.menu_4_4" action="itsec_quality_plan_window"/>
+
+    <menuitem name="Backup"         id="v15_itsec.menu_4_5_list_1" parent="v15_itsec.menu_4_5" action="itsec_backup_action"/>
+    <menuitem name="Restore"        id="v15_itsec.menu_4_5_list_2" parent="v15_itsec.menu_4_5" action="itsec_restore_action"/>
+
+    <menuitem name="Change Management" id="v15_itsec.menu_14_list_1" parent="v15_itsec.menu_14" action="itsec_change_action"/>
+
+    <menuitem name="Response Team"    id="v15_itsec.menu_3_3_list_1" parent="v15_itsec.menu_3_3" action="emergency_window"/>
+    <menuitem name="Number"           id="v15_itsec.menu_3_3_list_2" parent="v15_itsec.menu_3_3" action="emergency_number_window"/>
+    <menuitem name="Equipment"        id="v15_itsec.menu_3_3_list_3" parent="v15_itsec.menu_3_3" action="emergency_tools_window"/>
+    <menuitem name="Drill Plan"       id="v15_itsec.menu_3_3_list_4" parent="v15_itsec.menu_3_3" action="emergency_drill_plan_window"/>
+    <menuitem name="Dril Scenario"    id="v15_itsec.menu_3_3_list_5" parent="v15_itsec.menu_3_3" action="emergency_drill_sec_window"/>
+    <menuitem name="Drill Evaluation" id="v15_itsec.menu_3_3_list_6" parent="v15_itsec.menu_3_3" action="emergency_drill_eval_window"/>
+    <menuitem name="Recovery Plan"    id="v15_itsec.menu_3_3_list_7" parent="v15_itsec.menu_3_3" action="recovery_plan_window"/>
+
+    <menuitem name="Customer Contract"  id="v15_itsec.menu_3_4_list_1" parent="v15_itsec.menu_3_4" action="cust_contract_window"/>
+    <menuitem name="Vendor Contract"    id="v15_itsec.menu_3_4_list_2" parent="v15_itsec.menu_3_4" action="vendor_contract_window"/>
+    <menuitem name="Subcont Contract"   id="v15_itsec.menu_3_4_list_3" parent="v15_itsec.menu_3_4" action="subcont_contract_window"/>
+
+    <menuitem name="Assesment Competency General"  id="v15_itsec.menu_5_1_list_1" parent="v15_itsec.menu_5_1" action="itsec_kompetensi_window"/>
+    <menuitem name="Assesment Competency Spesifik" id="v15_itsec.menu_5_1_list_2" parent="v15_itsec.menu_5_1" action="itsec_comp_values_window"/>
+    <menuitem name="Assesment Competency Scope"    id="v15_itsec.menu_5_1_list_3" parent="v15_itsec.menu_5_1"/>
+    <menuitem name="Assesment Competency Scope QHSE" id="v15_itsec.menu_5_1_list_3_1" parent="v15_itsec.menu_5_1_list_3" action="itsec_jobdesc_window"/>
+    <menuitem name="Assesment Competency Scope FSMS" id="v15_itsec.menu_5_1_list_3_2" parent="v15_itsec.menu_5_1_list_3" action="itsec_assesment_scope_food_window_22000"/>
+    <menuitem name="Assesment Competency Scope HAACP" id="v15_itsec.menu_5_1_list_3_3" parent="v15_itsec.menu_5_1_list_3" action="itsec_assesment_scope_food_haccp_window"/>
+    <menuitem name="Assesment Competency Scope EOMS" id="v15_itsec.menu_5_1_list_3_4" parent="v15_itsec.menu_5_1_list_3" action="itsec_assesment_scope_eoms_window"/>
+
+    <menuitem name="Representative" id="v15_itsec.menu_5_2_list_1" parent="v15_itsec.menu_5_2"  action="itsec_qms_worker_rep_window"/>
+    <menuitem name="Contract"       id="v15_itsec.menu_5_2_list_2" parent="v15_itsec.menu_5_2"  action="itsec_qms_worker_rep_contract_window"/>
+    <menuitem name="Meeting"        id="v15_itsec.menu_5_2_list_3" parent="v15_itsec.menu_5_2"  action="itsec_qms_worker_rep_meet_window"/>
+    <menuitem name="Standards"      id="v15_itsec.menu_5_2_list_4" parent="v15_itsec.menu_5_2"  action="tsi_iso_standard_employee_action"/>
+    <menuitem name="Ea Codes"       id="v15_itsec.menu_5_2_list_5" parent="v15_itsec.menu_5_2"  action="tsi_employee_ea_code_action"/>
+    <menuitem name="Job Position"   id="v15_itsec.menu_5_2_list_6" parent="v15_itsec.menu_5_2"  action="itsec_position_action"/>
+    <menuitem name="Standard Kompetensi"   id="v15_itsec.menu_5_2_list_7" parent="v15_itsec.menu_5_2"  action="standard_kompetensi_action"/>
+
+  </data>
+</odoo>

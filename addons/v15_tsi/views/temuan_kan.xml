@@ -1,0 +1,148 @@
+<odoo>
+    <data>
+        <!-- Tree View for Audit Task Food-->
+        <record id="view_temuan_kan_line_tree" model="ir.ui.view">
+            <field name="name">temuan.kan.line.tree</field>
+            <field name="model">temuan.kan.line</field>
+            <field name="arch" type="xml">
+                <tree string="Inernal Audit">
+                    <field name="name_project"/>
+                    <field name="progress" decoration-success="progress == 'done'" decoration-info="progress == 'in_progress'" decoration-danger="progress == 'not_started'"/>
+                    <!-- <field name="assignee"/>
+                    <field name="tanggal"/>
+                    <field name="sla"/>
+                    <field name="amount_percentage" sum="Total Percentage"/>
+                    <field name="progress" decoration-success="progress == 'done'" decoration-info="progress == 'in_progress'" decoration-danger="progress == 'pending'"/>
+                    <field name="status"/> -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_temuan_kan_line_form" model="ir.ui.view">
+            <field name="name">temuan.kan.line.form</field>
+            <field name="model">temuan.kan.line</field>
+            <field name="arch" type="xml">
+                <form string="Internal Audit">
+                    <sheet>
+                        <group col="4">
+                            <field name="name_project"/>
+                        </group>
+                        <!-- One2many field for Inconsistencies -->
+                        <notebook>
+                             <page name="Info" string="Laporan Ketidaksesuaian">
+                                <group>
+                                    <field name="inconsistency_ids" nolabel="1">
+                                        <tree string="Inconsistencies" editable="bottom">
+                                            <field name="nomor"/>
+                                            <field name="ketidaksesuaian" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="assignee" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="skema" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="tanggal" />
+                                            <field name="sla" />
+                                            <field name="kategori" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="pic" />
+                                            <field name="percentage" />
+                                            <field name="analisis" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="koreksi" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="tindakan" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="status" />
+                                            <field name="progress" decoration-success="progress == 'done'" decoration-info="progress == 'in_progress'" decoration-danger="progress == 'not_started'"/>
+                                            <field name="upload_dokumen" filename="file_name" widget="binary"/>
+                                            <field name="file_name"   invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Audit Task Food -->
+        <record id="action_internal_audit" model="ir.actions.act_window">
+            <field name="name">Internal Audit</field>
+            <field name="res_model">temuan.kan.line</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Tree View for Audit Task Food-->
+        <record id="view_temuan_kan_eksternal_line_tree" model="ir.ui.view">
+            <field name="name">temuan.kan.eksternal.line.tree</field>
+            <field name="model">temuan.kan.eksternal.line</field>
+            <field name="arch" type="xml">
+                <tree string="Inernal Audit">
+                    <field name="name_project"/>
+                    <field name="progress" decoration-success="progress == 'done'" decoration-info="progress == 'in_progress'" decoration-danger="progress == 'not_started'"/>
+                    <!-- <field name="assignee"/>
+                    <field name="tanggal"/>
+                    <field name="sla"/>
+                    <field name="amount_percentage" sum="Total Percentage"/>
+                    <field name="progress" decoration-success="progress == 'done'" decoration-info="progress == 'in_progress'" decoration-danger="progress == 'pending'"/>
+                    <field name="status"/> -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_temuan_kan_eksternal_line_form" model="ir.ui.view">
+            <field name="name">temuan.kan.eksternal.line.form</field>
+            <field name="model">temuan.kan.eksternal.line</field>
+            <field name="arch" type="xml">
+                <form string="Eksternal Audit">
+                    <sheet>
+                        <group col="4">
+                            <field name="name_project"/>
+                        </group>
+                        <!-- One2many field for Inconsistencies -->
+                        <notebook>
+                            <page name="Info" string="Laporan Ketidaksesuaian">
+                                <group>
+                                    <field name="inconsistency_ids" nolabel="1">
+                                        <tree string="Inconsistencies" editable="bottom">
+                                            <field name="nomor"/>
+                                            <field name="ketidaksesuaian" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="assignee" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="skema" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="tanggal" />
+                                            <field name="sla" />
+                                            <field name="kategori" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="pic" />
+                                            <field name="percentage" />
+                                            <field name="analisis" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="koreksi" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="tindakan" style="max-width: 200px; white-space: normal; word-wrap: break-word;" />
+                                            <field name="status" />
+                                            <field name="progress" decoration-success="progress == 'done'" decoration-info="progress == 'in_progress'" decoration-danger="progress == 'not_started'"/>
+                                            <field name="upload_dokumen" filename="file_name" widget="binary"/>
+                                            <field name="file_name"   invisible="1"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Audit Task Food -->
+        <record id="action_eksternal_audit" model="ir.actions.act_window">
+            <field name="name">Eksternal Audit</field>
+            <field name="res_model">temuan.kan.eksternal.line</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="tsi_control_audit_management_root" name="Control Audit" web_icon="v15_tsi,static/description/logo_audit.png" groups="v15_tsi.group_pd_ca"/>
+
+        <menuitem id="tsi_control_audit_management_root1" name="Internal Audit" parent="tsi_control_audit_management_root" action="action_internal_audit"/>
+        <menuitem id="tsi_control_audit_management_root2" name="Eksternal Audit" parent="tsi_control_audit_management_root" action="action_eksternal_audit"/>
+    </data>
+</odoo>

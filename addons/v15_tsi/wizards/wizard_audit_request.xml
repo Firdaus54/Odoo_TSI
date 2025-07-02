@@ -1,0 +1,36 @@
+<odoo>
+
+	<record id="tsi_wizard_audit_request_view" model="ir.ui.view">
+		<field name="name">Create Quotation</field>
+		<field name="model">tsi.wizard_audit_request</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="partner_id"/>
+					<field name="iso_reference"/>
+					<field name="no_kontrak"/>
+					<field name="iso_standard_ids" widget="many2many_tags"/>
+                    <field name="tipe_pembayaran"/>
+					<field name="is_amendment"/>
+					<field name="contract_type" attrs="{'invisible': [('is_amendment', '=', False)]}"/>
+					<field name="request_ids" widget="many2many_list" readonly="1">
+						<tree string="Audit Request Line">
+                            <field name="product_id"/>
+							<field name="audit_tahapan"/>
+							<field name="tahun"/>
+							<field name="price"/>
+							<field name="fee"/>
+							<field name="percentage"/>
+						</tree>
+					</field>
+				</group>
+				<footer>
+					<button name="send" string="Confirm" class="btn-primary" type="object" />
+					<button string="Cancel" class="btn-secondary" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+</odoo>

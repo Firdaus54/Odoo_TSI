@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Action menu -->
+    <record id="action_client_contact" model="ir.actions.act_window">
+        <field name="name">Contacts Client</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" ref="base.res_partner_kanban_view"/>
+        <field name="domain">[('is_company', '=', True),('contact_franchise_ids', '=', False)]</field>
+        <field name="context">{'default_company_type': 'company'}</field>
+    </record>
+
+    <record id="rule_contact_company" model="ir.rule">
+        <field name="name">Access for Company Contacts</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="domain_force">[('is_company', '=', True)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Inherit the contact form view -->
+    <record id="view_contact_form_client" model="ir.ui.view">
+        <field name="name">contact.form.client</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[position()=2]" position="before">
+                <page string="Associate" attrs="{'invisible': ['|',('is_company', '=', False),('hide_contact_franchise','!=', False)]}">
+                    <xpath expr="//sheet" position="inside">
+                        <field name="hide_contact_franchise" invisible="1"/>
+                    </xpath>
+                    <button name="open_contact_client_wizard" type="object" string="Add" class="oe_highlight"/>
+                    <separator string="" colspan="2"/>
+                    <!-- <separator string="Associate &amp; Address" colspan="4"/> -->
+                    <field name="contact_client_ids" string="" nolabel="1">
+                        <tree editable="bottom" create="false">
+                            <field name="name_client"/>
+                            <field name="phone_client"/>
+                            <field name="email_client"/>
+                            <field name="jabatan"/>
+                            <field name="address_client"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name_client"/>
+                                <field name="phone_client"/>
+                                <field name="email_client"/>
+                                <field name="jabatan"/>
+                                <field name="address_client"/>
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Wizard view -->
+    <record id="view_contact_client_wizard_form" model="ir.ui.view">
+        <field name="name">contact.client.wizard.form</field>
+        <field name="model">contact.client.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Associate &amp; Address">
+                <group>
+                    <field name="associate_id"/>
+                    <field name="phone_client"/>
+                    <field name="email_client"/>
+                    <field name="address_client"/>
+                </group>
+                <footer>
+                    <button string="Save" type="object" name="action_save" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open wizard -->
+    <record id="action_contact_client_wizard" model="ir.actions.act_window">
+        <field name="name">Add Associate &amp; Address</field>
+        <field name="res_model">contact.client.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
