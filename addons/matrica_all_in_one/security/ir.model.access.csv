@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_segment_product,segment.product,model_segment_product,,1,1,1,1
+access_crm_lead_task,crm.lead.task,model_crm_lead_task,,1,1,1,1
+access_siswa,sekolah.siswa,model_sekolah_siswa,,1,1,1,1
+access_kelas,sekolah.kelas,model_sekolah_kelas,,1,1,1,1
+access_mapel,sekolah.mapel,model_sekolah_mapel,,1,1,1,1
+access_guru,sekolah.guru,model_sekolah_guru,,1,1,1,1

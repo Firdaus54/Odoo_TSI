@@ -1,0 +1,47 @@
+<odoo>
+    <!-- Action -->
+    <record id="action_kelas" model="ir.actions.act_window">
+        <field name="name">Kelas</field>
+        <field name="res_model">sekolah.kelas</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Pastikan menu_root_sekolah sudah dideklarasikan di siswa_views.xml -->
+    <!-- Menu -->
+    <menuitem id="menu_kelas" name="Kelas" parent="menu_root_sekolah" action="action_kelas"/>
+
+    <!-- Tree View -->
+    <record id="view_kelas_tree" model="ir.ui.view">
+        <field name="name">sekolah.kelas.tree</field>
+        <field name="model">sekolah.kelas</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="guru_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_kelas_form" model="ir.ui.view">
+        <field name="name">sekolah.kelas.form</field>
+        <field name="model">sekolah.kelas</field>
+        <field name="arch" type="xml">
+            <form string="Kelas">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="guru_id"/>
+                        <field name="siswa_ids">
+                            <tree editable="bottom">
+                                <field name="nm_siswa"/>
+                                <field name="nis"/>
+                                <field name="jns_kelamin"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

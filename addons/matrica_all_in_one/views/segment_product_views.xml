@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_segment_product_form" model="ir.ui.view">
+        <field name="name">segment.product.form</field>
+        <field name="model">segment.product</field>
+        <field name="arch" type="xml">
+            <form string="Segment Product">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_segment_product_tree" model="ir.ui.view">
+        <field name="name">segment.product.tree</field>
+        <field name="model">segment.product</field>
+        <field name="arch" type="xml">
+            <tree string="Segment Products">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_segment_product" model="ir.actions.act_window">
+        <field name="name">Segment Product</field>
+        <field name="res_model">segment.product</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_segment_product" name="Segment Product" parent="crm.crm_menu_config" action="action_segment_product"/>
+</odoo>

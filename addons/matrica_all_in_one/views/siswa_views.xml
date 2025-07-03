@@ -1,0 +1,51 @@
+<odoo>
+    <!-- Action -->
+    <record id="action_siswa" model="ir.actions.act_window">
+        <field name="name">Siswa</field>
+        <field name="res_model">sekolah.siswa</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Parent menu -->
+    <menuitem id="menu_root_sekolah" name="Sekolah" web_icon="matrica_all_in_one,static/description/school.png"/>
+
+    <!-- Child menu -->
+    <menuitem id="menu_siswa" name="Siswa" parent="menu_root_sekolah" action="action_siswa"/>
+
+    <!-- Views -->
+    <record id="view_siswa_tree" model="ir.ui.view">
+        <field name="name">sekolah.siswa.tree</field>
+        <field name="model">sekolah.siswa</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nm_siswa"/>
+                <field name="nis"/>
+                <field name="jns_kelamin"/>
+                <field name="kelas_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_siswa_form" model="ir.ui.view">
+        <field name="name">sekolah.siswa.form</field>
+        <field name="model">sekolah.siswa</field>
+        <field name="arch" type="xml">
+            <form string="Siswa">
+                <sheet>
+                    <group>
+                        <field name="nm_siswa"/>
+                        <field name="nis"/>
+                        <field name="jns_kelamin"/>
+                        <field name="tgl_lahir"/>
+                        <field name="agama"/>
+                        <field name="nm_ayah"/>
+                        <field name="nm_ibu"/>
+                        <field name="usia"/>
+                        <field name="alamat"/>
+                        <field name="kelas_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

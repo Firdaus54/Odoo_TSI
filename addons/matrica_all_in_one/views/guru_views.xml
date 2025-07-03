@@ -1,0 +1,45 @@
+<odoo>
+    <!-- Action -->
+    <record id="action_guru" model="ir.actions.act_window">
+        <field name="name">Guru</field>
+        <field name="res_model">sekolah.guru</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_guru" name="Guru" parent="menu_root_sekolah" action="action_guru"/>
+
+    <!-- Tree View -->
+    <record id="view_guru_tree" model="ir.ui.view">
+        <field name="name">sekolah.guru.tree</field>
+        <field name="model">sekolah.guru</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nip"/>
+                <field name="nm_guru"/>
+                <field name="mata_pelajaran"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_guru_form" model="ir.ui.view">
+        <field name="name">sekolah.guru.form</field>
+        <field name="model">sekolah.guru</field>
+        <field name="arch" type="xml">
+            <form string="Guru">
+                <sheet>
+                    <group>
+                        <field name="nip"/>
+                        <field name="nm_guru"/>
+                        <field name="jns_kelamin"/>
+                        <field name="mata_pelajaran"/>
+                        <field name="usia"/>
+                        <field name="no_telp"/>
+                        <field name="alamat"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
